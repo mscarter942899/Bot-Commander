@@ -52,12 +52,11 @@ function startUptimeServer() {
 }
 
 async function selfPing() {
-    const replSlug = process.env.REPL_SLUG;
-    const replOwner = process.env.REPL_OWNER;
+    const replitDomain = process.env.REPLIT_DEV_DOMAIN;
     
     let url;
-    if (replSlug && replOwner) {
-        url = `https://${replSlug}.${replOwner}.repl.co`;
+    if (replitDomain) {
+        url = `https://${replitDomain}`;
     } else {
         url = `http://localhost:5000`;
     }
