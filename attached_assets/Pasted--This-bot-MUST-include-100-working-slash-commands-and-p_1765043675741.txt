@@ -1,0 +1,231 @@
+🔥 This bot MUST include:
+	•	100% working slash commands and !prefix commands
+	•	Real card graphics for every card game
+	•	24/7 automatic uptime (no premium needed, bot sets it up automatically)
+	•	PS99 style UI
+	•	Tons of gambling games
+	•	Full raffle system
+	•	A gem economy where I always profit
+	•	UnbelievaBoat-level casino UI but even better
+
+⸻
+
+🟢 SECTION 1 — 24/7 UPTIME (BOT MUST DO IT BY ITSELF)
+
+The bot must:
+	•	Create an Express server
+	•	Automatically detect its Replit URL using env vars
+	•	Build this URL: https://<REPL_SLUG>.<REPL_OWNER>.repl.co
+
+	•	Create a self-pinging loop every 4 minutes
+	•	Auto restart uptime cycle if ping fails
+	•	Never sleep
+	•	Never require me to set up UptimeRobot or a website
+	•	Store uptime data in /uptime/uptime.json
+	•	NO placeholder code
+	•	FULL implementation
+
+⸻
+
+🟦 SECTION 2 — GEM ECONOMY (PS99 STYLE)
+
+Bot must include slash + prefix:
+	•	/balance, !bal
+	•	/gift, !gift
+	•	/deposit, !deposit
+	•	/withdraw, !withdraw
+	•	/top, !top
+	•	/daily, !daily
+	•	/profile, !profile
+	•	/addgems, /removegems
+	•	House profit tracker
+	•	Clean, glossy PS99 UI
+
+⸻
+
+🟦 SECTION 3 — RAFFLE SYSTEM
+
+Slash + prefix:
+	•	/startraffle, !raffle start
+	•	/endraffle, !raffle end
+	•	Multi-winner
+	•	Live % chance
+	•	Auto-enter
+	•	Raffle image
+	•	Join button
+	•	Cancel button
+	•	Refund button
+	•	PS99 glossy UI
+	•	Confetti animation
+	•	Raffle history
+
+⸻
+
+🟦 SECTION 4 — MASSIVE GAMBLING SYSTEM
+
+All games must have:
+	•	PS99-themed UI
+	•	Neon borders
+	•	Animated sequences
+	•	Re-bet button
+	•	Bet increments
+	•	Database tracking
+	•	House always profits (rigged but appears fair)
+
+⸻
+
+🟥 SECTION 4A — REAL SLOT MACHINE SPINNING ANIMATION (REQUIRED)
+
+Slots must have REAL animation, not instant results.
+The system MUST:
+
+✔ Reel-based animation
+	•	There must be 3 reels, each spinning independently
+	•	Show multiple frames in sequence like: 🎰 Spinning...
+
+[ 🍒 | ⭐ | 🔔 ]
+[ 🔔 | 🍋 | 🍒 ]
+[ ⭐ | 🍒 | 🍉 ]
+Then another frame
+[ 🍋 | 🍉 | ⭐ ]
+[ ⭐ | 🍋 | 🍒 ]
+[ 🍊 | 🍋 | 🔔 ]
+Then another
+[ 🍋 | 🍉 | ⭐ ]
+[ ⭐ | 🍋 | 🍒 ]
+[ 🍊 | 🍋 | 🔔 ]
+
+✔ Progressive stopping
+	•	Reel 1 stops first
+	•	Reel 2 stops next
+	•	Reel 3 stops last
+
+✔ Smooth animation
+
+Show 8–12 frames with 300ms delay between each using editOriginalReply() to update the embed, like a real slot machine reel.
+
+✔ Final result reveal
+
+After animation ends, show final row with win/loss styling.
+
+✔ Buttons
+	•	Spin Again
+	•	Bet More
+	•	Bet Max
+
+✔ UI must be premium
+	•	Glossy gold borders
+	•	PS99 colors
+	•	Icons that look “juicy” and colorful
+
+⸻
+
+🟥 SECTION 4B — CARD GAMES W/ REAL CARDS
+
+Bot MUST use real card graphics for ALL card games.
+
+Card Graphics Options (bot must generate automatically):
+
+✔ Unicode playing card emojis: 🂡 🂢 🂣 🂤 🂥
+🃁 🃂 🃃 …
+
+OR PNG card images in /assets/cards/
+All 52 cards stored individually.
+
+⸻
+
+🃏 BLACKJACK (REAL CARDS)
+
+Must include:
+	•	Real card visuals (emoji or PNG)
+	•	Dealer hand
+	•	Player hand
+	•	Buttons: Hit, Stand, Double, Surrender
+	•	Hand value calculation
+	•	Dealer AI
+	•	Play Again button
+	•	Loss animations
+
+Example UI:
+
+Your Hand:
+🂡 🂨  (19)
+
+Dealer:
+🂦 ❓
+
+♠️ POKER (REAL CARDS)
+	•	Texas Hold’em
+	•	2 player cards
+	•	5 community cards
+	•	Call / Fold / Raise buttons
+	•	Real card emojis
+	•	Bot uses simple poker AI
+	•	Fancy reveal animations
+
+⸻
+
+♥️ HIGHER OR LOWER (REAL CARDS)
+	•	Flip animation
+	•	Real cards
+	•	Higher or lower button choices
+
+⸻
+
+♦️ WAR (REAL CARDS)
+	•	1 card for player
+	•	1 card for bot
+	•	Real cards
+	•	Rigged win logic
+
+⸻
+
+🟦 SECTION 5 — ADMIN SYSTEM
+	•	/addgems
+	•	/removegems
+	•	/forceraffleend
+	•	/announce
+	•	/houseprofit
+
+All embeds must look luxurious.
+
+⸻
+
+🟦 SECTION 6 — LOGGING SYSTEM
+
+/setlogs + !setlogs to configure.
+Log EVERYTHING:
+	•	Bets
+	•	Wins
+	•	Losses
+	•	Raffles created
+	•	Raffles joined
+	•	Deposits
+	•	Withdrawals
+	•	Gifts
+	•	House profit
+
+Each log is a PS99-styled embed with fancy UI.
+
+⸻
+
+🟦 SECTION 7 — PROJECT STRUCTURE
+
+Generate this structure:
+
+project/
+ ┣ commands/
+ ┣ prefixCommands/
+ ┣ buttons/
+ ┣ events/
+ ┣ menus/
+ ┣ utils/
+ ┣ database/
+ ┣ assets/
+ ┃ ┗ cards/   (52 card images)
+ ┣ uptime/
+ ┣ index.js
+ ┣ package.json
+ ┣ config.json
+ ┗ README.md
+Everything must be complete and functional — no TODOs, no placeholders.
