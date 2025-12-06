@@ -87,6 +87,11 @@ function createSlotButtons(bet, disabled = false) {
             .setCustomId(`slots_max_${bet}`)
             .setLabel('🔥 Max Bet')
             .setStyle(ButtonStyle.Danger)
+            .setDisabled(disabled),
+        new ButtonBuilder()
+            .setCustomId('slots_payouts')
+            .setLabel('📊 Payouts')
+            .setStyle(ButtonStyle.Success)
             .setDisabled(disabled)
     );
 }
