@@ -23,7 +23,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node index.js"
+args = "LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/nix/store/*-libuuid-*/lib node index.js"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
