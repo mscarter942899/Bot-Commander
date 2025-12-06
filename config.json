@@ -1,0 +1,31 @@
+{
+  "prefix": "!",
+  "embedColors": {
+    "primary": "#FFD700",
+    "success": "#00FF88",
+    "error": "#FF4444",
+    "info": "#00BFFF",
+    "purple": "#9B59B6",
+    "neon": "#39FF14"
+  },
+  "economy": {
+    "dailyAmount": 1000,
+    "startingBalance": 500,
+    "houseEdge": 0.05
+  },
+  "slots": {
+    "symbols": ["🍒", "🍋", "🍊", "🍉", "⭐", "🔔", "💎", "7️⃣"],
+    "payouts": {
+      "💎💎💎": 50,
+      "7️⃣7️⃣7️⃣": 25,
+      "⭐⭐⭐": 10,
+      "🔔🔔🔔": 8,
+      "🍉🍉🍉": 5,
+      "🍊🍊🍊": 4,
+      "🍋🍋🍋": 3,
+      "🍒🍒🍒": 2,
+      "any2": 0.5
+    }
+  },
+  "adminIds": []
+}
