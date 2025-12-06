@@ -9,6 +9,16 @@ module.exports = {
         .setDescription('Claim your daily gems'),
     
     async execute(interaction) {
+        if (!db.isDailyEnabled()) {
+            const embed = createPS99Embed({
+                title: '🚫 Daily Rewards Disabled',
+                color: PS99_COLORS.error,
+                description: 'Daily rewards are currently disabled by an administrator.',
+                footer: 'Check back later!'
+            });
+            return interaction.reply({ embeds: [embed], ephemeral: true });
+        }
+        
         const user = db.getUser(interaction.user.id, interaction.user.username);
         const now = Date.now();
         const lastDaily = user.lastDaily || 0;

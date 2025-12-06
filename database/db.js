@@ -28,7 +28,7 @@ function saveJSON(filepath, data) {
 let users = loadJSON(DB_PATH, {});
 let raffles = loadJSON(RAFFLES_PATH, { active: null, history: [] });
 let logs = loadJSON(LOGS_PATH, { entries: [], channelId: null });
-let settings = loadJSON(SETTINGS_PATH, { houseProfit: 0, adminIds: [] });
+let settings = loadJSON(SETTINGS_PATH, { houseProfit: 0, adminIds: [], dailyEnabled: true });
 
 function getUser(userId, username = 'Unknown') {
     if (!users[userId]) {
@@ -290,6 +290,15 @@ function addAdmin(userId) {
     }
 }
 
+function isDailyEnabled() {
+    return settings.dailyEnabled !== false;
+}
+
+function setDailyEnabled(enabled) {
+    settings.dailyEnabled = enabled;
+    saveSettings();
+}
+
 function saveUsers() {
     saveJSON(DB_PATH, users);
 }
@@ -328,5 +337,7 @@ module.exports = {
     cancelRaffle,
     getRaffleHistory,
     isAdmin,
-    addAdmin
+    addAdmin,
+    isDailyEnabled,
+    setDailyEnabled
 };
