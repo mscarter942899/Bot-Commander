@@ -1,30 +1,34 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
-const { createDeck, getCardEmoji, compareCards } = require('../utils/cards');
+const { createDeck, getCardEmoji, getSingleBigCard, compareCards } = require('../utils/cards');
 
 function createHighLowEmbed(currentCard, bet, status = 'playing', result = null, nextCard = null) {
     let color = PS99_COLORS.gold;
-    let description = `**Current Card:**\n# ${getCardEmoji(currentCard)}\n\nWill the next card be **Higher** or **Lower**?`;
+    let statusText = '🔮 Will the next card be **Higher** or **Lower**?';
+    let cardsDisplay = `**Current Card:**\n${getSingleBigCard(currentCard)}`;
     
     if (status === 'win' && nextCard) {
         color = PS99_COLORS.success;
-        description = `**Your Card:** ${getCardEmoji(currentCard)}\n**Next Card:** ${getCardEmoji(nextCard)}\n\n🎉 **Correct! You WIN!**`;
+        statusText = '🎉 **Correct! You WIN!**';
+        cardsDisplay = `**Your Card:**\n${getSingleBigCard(currentCard)}\n**Next Card:**\n${getSingleBigCard(nextCard)}`;
     } else if (status === 'lose' && nextCard) {
         color = PS99_COLORS.error;
-        description = `**Your Card:** ${getCardEmoji(currentCard)}\n**Next Card:** ${getCardEmoji(nextCard)}\n\n😢 **Wrong! You LOSE!**`;
+        statusText = '😢 **Wrong! You LOSE!**';
+        cardsDisplay = `**Your Card:**\n${getSingleBigCard(currentCard)}\n**Next Card:**\n${getSingleBigCard(nextCard)}`;
     } else if (status === 'tie' && nextCard) {
         color = PS99_COLORS.info;
-        description = `**Your Card:** ${getCardEmoji(currentCard)}\n**Next Card:** ${getCardEmoji(nextCard)}\n\n🤝 **It's a TIE! Bet returned.**`;
+        statusText = '🤝 **It\'s a TIE! Bet returned.**';
+        cardsDisplay = `**Your Card:**\n${getSingleBigCard(currentCard)}\n**Next Card:**\n${getSingleBigCard(nextCard)}`;
     }
     
     const embed = new EmbedBuilder()
         .setTitle('🔮 ═══ HIGHER OR LOWER ═══ 🔮')
         .setColor(color)
-        .setDescription(description)
+        .setDescription(`${statusText}\n\n${cardsDisplay}`)
         .addFields(
             { name: '💰 Bet', value: `\`${bet.toLocaleString()}\` gems`, inline: true },
-            { name: '📊 Multiplier', value: status === 'win' ? '2x' : '0x', inline: true }
+            { name: '📊 Multiplier', value: status === 'win' ? '**2x**' : '0x', inline: true }
         )
         .setFooter({ text: '💎 PS99 Casino 💎' })
         .setTimestamp();

@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
-const { createDeck, calculateHandValue, handToString, getCardEmoji } = require('../utils/cards');
+const { createDeck, calculateHandValue, handToString, handToLargeString, getCardEmoji } = require('../utils/cards');
 
 function createBlackjackEmbed(playerHand, dealerHand, bet, hideDealer = true, status = 'playing') {
     const playerValue = calculateHandValue(playerHand);
@@ -27,24 +27,24 @@ function createBlackjackEmbed(playerHand, dealerHand, bet, hideDealer = true, st
         statusText = '💥 BUST! Over 21!';
     }
     
+    const playerCards = handToLargeString(playerHand);
+    const dealerCards = handToLargeString(dealerHand, hideDealer);
+    
     const embed = new EmbedBuilder()
         .setTitle('🃏 ═══ BLACKJACK ═══ 🃏')
         .setColor(color)
-        .setDescription(`**${statusText}**`)
+        .setDescription(`**${statusText}**\n\n💰 **Bet:** \`${bet.toLocaleString()}\` gems`)
         .addFields(
             { 
-                name: '🎴 Your Hand', 
-                value: `${handToString(playerHand)}\n**Value: ${playerValue}**`, 
-                inline: true 
+                name: `🎴 Your Hand (Value: ${playerValue})`, 
+                value: playerCards, 
+                inline: false 
             },
             { 
-                name: '🎴 Dealer Hand', 
-                value: hideDealer 
-                    ? `${handToString(dealerHand, true)}\n**Value: ?**`
-                    : `${handToString(dealerHand)}\n**Value: ${calculateHandValue(dealerHand)}**`, 
-                inline: true 
-            },
-            { name: '💰 Bet', value: `\`${bet.toLocaleString()}\` gems`, inline: false }
+                name: `🎴 Dealer Hand (Value: ${hideDealer ? '?' : calculateHandValue(dealerHand)})`, 
+                value: dealerCards, 
+                inline: false 
+            }
         )
         .setFooter({ text: '💎 PS99 Casino 💎' })
         .setTimestamp();

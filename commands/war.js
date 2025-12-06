@@ -1,36 +1,37 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
-const { createDeck, getCardEmoji, compareCards } = require('../utils/cards');
+const { createDeck, getCardEmoji, getSingleBigCard, compareCards } = require('../utils/cards');
 
 function createWarEmbed(playerCard, dealerCard, bet, status = 'playing', revealed = false) {
     let color = PS99_COLORS.gold;
-    let description;
+    let statusText;
+    let cardsDisplay;
     
     if (!revealed) {
-        description = `**Your Card:**\n# ${getCardEmoji(playerCard)}\n\n**Dealer's Card:**\n# 🂠\n\nPress **Reveal** to see who wins!`;
+        statusText = '⚔️ Press **Reveal** to see who wins!';
+        cardsDisplay = `**Your Card:**\n${getSingleBigCard(playerCard)}\n**Dealer's Card:**\n${getSingleBigCard(null, true)}`;
     } else {
-        const comparison = compareCards(playerCard, dealerCard);
-        
         if (status === 'win') {
             color = PS99_COLORS.success;
-            description = `**Your Card:** ${getCardEmoji(playerCard)}\n**Dealer's Card:** ${getCardEmoji(dealerCard)}\n\n🎉 **YOU WIN!**`;
+            statusText = '🎉 **YOU WIN!**';
         } else if (status === 'lose') {
             color = PS99_COLORS.error;
-            description = `**Your Card:** ${getCardEmoji(playerCard)}\n**Dealer's Card:** ${getCardEmoji(dealerCard)}\n\n😢 **YOU LOSE!**`;
+            statusText = '😢 **YOU LOSE!**';
         } else {
             color = PS99_COLORS.info;
-            description = `**Your Card:** ${getCardEmoji(playerCard)}\n**Dealer's Card:** ${getCardEmoji(dealerCard)}\n\n🤝 **TIE! Going to WAR...**`;
+            statusText = '🤝 **TIE! Going to WAR...**';
         }
+        cardsDisplay = `**Your Card:**\n${getSingleBigCard(playerCard)}\n**Dealer's Card:**\n${getSingleBigCard(dealerCard)}`;
     }
     
     const embed = new EmbedBuilder()
         .setTitle('⚔️ ═══ WAR ═══ ⚔️')
         .setColor(color)
-        .setDescription(description)
+        .setDescription(`${statusText}\n\n${cardsDisplay}`)
         .addFields(
             { name: '💰 Bet', value: `\`${bet.toLocaleString()}\` gems`, inline: true },
-            { name: '📊 Multiplier', value: status === 'win' ? '2x' : '0x', inline: true }
+            { name: '📊 Multiplier', value: status === 'win' ? '**2x**' : '0x', inline: true }
         )
         .setFooter({ text: '💎 PS99 Casino 💎' })
         .setTimestamp();

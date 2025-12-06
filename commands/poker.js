@@ -1,11 +1,11 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
-const { createDeck, handToString, getPokerHandRank } = require('../utils/cards');
+const { createDeck, handToString, handToLargeString, getCardEmoji, getPokerHandRank } = require('../utils/cards');
 
 function createPokerEmbed(playerCards, communityCards, bet, pot, stage = 'preflop', status = 'playing', result = null) {
     let color = PS99_COLORS.gold;
-    let statusText = 'Make your move!';
+    let statusText = '🎯 Make your move!';
     
     if (status === 'win') {
         color = PS99_COLORS.success;
@@ -23,11 +23,11 @@ function createPokerEmbed(playerCards, communityCards, bet, pot, stage = 'preflo
     const visibleCards = stages[stage] || 0;
     
     if (visibleCards > 0) {
-        const visible = communityCards.slice(0, visibleCards).map(c => handToString([c])).join(' ');
-        const hidden = '🂠 '.repeat(5 - visibleCards).trim();
-        communityDisplay = `${visible} ${hidden}`.trim();
+        const visible = communityCards.slice(0, visibleCards).map(c => getCardEmoji(c)).join('  ');
+        const hidden = Array(5 - visibleCards).fill('**`[  ?  ]`**').join('  ');
+        communityDisplay = `${visible}  ${hidden}`.trim();
     } else {
-        communityDisplay = '🂠 🂠 🂠 🂠 🂠';
+        communityDisplay = Array(5).fill('**`[  ?  ]`**').join('  ');
     }
     
     const embed = new EmbedBuilder()
@@ -35,9 +35,8 @@ function createPokerEmbed(playerCards, communityCards, bet, pot, stage = 'preflo
         .setColor(color)
         .setDescription(`**${statusText}**`)
         .addFields(
-            { name: '🎴 Your Hand', value: handToString(playerCards), inline: true },
-            { name: '🃏 Community Cards', value: communityDisplay, inline: true },
-            { name: '\u200B', value: '\u200B', inline: true },
+            { name: '🎴 Your Hand', value: handToString(playerCards), inline: false },
+            { name: '🃏 Community Cards', value: communityDisplay, inline: false },
             { name: '💰 Your Bet', value: `\`${bet.toLocaleString()}\``, inline: true },
             { name: '🏆 Pot', value: `\`${pot.toLocaleString()}\``, inline: true },
             { name: '📍 Stage', value: stage.toUpperCase(), inline: true }
