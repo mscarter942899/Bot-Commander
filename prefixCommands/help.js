@@ -3,7 +3,7 @@ const { PS99_COLORS } = require('../utils/embedBuilder');
 
 module.exports = {
     name: 'help',
-    aliases: ['commands', 'h'],
+    aliases: ['commands', 'h', 'cmds'],
     description: 'View all commands',
     
     async execute(message, args, client) {
@@ -18,17 +18,22 @@ module.exports = {
                     inline: false
                 },
                 {
-                    name: '🎰 Games',
-                    value: '`!slots <bet>` - Slot machine\n`!bj <bet>` - Blackjack\n`!poker <bet>` - Texas Hold\'em\n`!hl <bet>` - Higher or Lower\n`!war <bet>` - Card War',
+                    name: '🎰 Gambling Games',
+                    value: '`!slots <bet>` - Slot machine\n`!bj <bet>` - Blackjack\n`!poker <bet>` - Texas Hold\'em\n`!hl <bet>` - Higher or Lower\n`!war <bet>` - Card War\n`!roulette <bet> <color>` - Roulette\n`!coinflip <bet> <h/t>` - Coinflip\n`!dice <bet> <type>` - Dice',
+                    inline: false
+                },
+                {
+                    name: '🛒 Shop & Inventory',
+                    value: '`!shop` - View shop\n`!shop buy <id>` - Buy item\n`!inv` - View inventory',
                     inline: false
                 },
                 {
                     name: '🎟️ Raffle',
-                    value: '`!raffle` - View active raffle\n`!raffle start` - Start raffle (Admin)\n`!raffle end` - End raffle (Admin)',
+                    value: '`!raffle` - View active raffle',
                     inline: false
                 }
             )
-            .setFooter({ text: '💎 PS99 Casino 💎' })
+            .setFooter({ text: '💎 Use /help for full list! 💎' })
             .setTimestamp();
         
         await message.reply({ embeds: [embed] });

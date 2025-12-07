@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
 const { PS99_COLORS } = require('../utils/embedBuilder');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('View all available commands'),
     
     async execute(interaction) {
-        const embed = new EmbedBuilder()
+        const mainEmbed = new EmbedBuilder()
             .setTitle('🎰 ═══ PS99 CASINO COMMANDS ═══ 🎰')
             .setColor(PS99_COLORS.gold)
             .setDescription('Welcome to PS99 Casino! Here are all available commands:')
@@ -19,28 +19,33 @@ module.exports = {
                 },
                 {
                     name: '🎰 Gambling Games',
-                    value: '`/slots` - Play slot machine\n`/blackjack` - Play blackjack\n`/poker` - Texas Hold\'em\n`/highlow` - Higher or Lower\n`/war` - Card War',
+                    value: '`/slots` - Slot machine\n`/blackjack` - Blackjack 21\n`/poker` - Texas Hold\'em\n`/highlow` - Higher or Lower\n`/war` - Card War\n`/roulette` - Roulette wheel\n`/baccarat` - Baccarat\n`/crash` - Crash game\n`/dice` - Dice roll\n`/mines` - Minesweeper\n`/coinflip` - Coin flip',
                     inline: false
                 },
                 {
-                    name: '🎟️ Raffle',
-                    value: '`/raffle view` - View active raffle\n`/raffle history` - View past raffles',
+                    name: '🛒 Shop & Inventory',
+                    value: '`/shop browse` - Browse shop items\n`/shop buy <id>` - Buy an item\n`/inventory view` - View your items\n`/inventory gift` - Gift items to others',
+                    inline: false
+                },
+                {
+                    name: '🎟️ Raffles',
+                    value: '**Gem Raffles:**\n`/raffle view` - View gem raffle\n`/raffle history` - Past gem raffles\n\n**Item Raffles:**\n`/itemraffle view` - View item raffle\n`/itemraffle history` - Past item raffles',
                     inline: false
                 },
                 {
                     name: '🛡️ Admin Commands',
-                    value: '`/addgems` - Add gems to user\n`/removegems` - Remove gems from user\n`/raffle start` - Start a raffle\n`/raffle end` - End raffle\n`/raffle cancel` - Cancel raffle\n`/announce` - Make announcement\n`/houseprofit` - View house stats\n`/setlogs` - Set log channel',
+                    value: '`/addgems` `/removegems` - Manage user gems\n`/admin games` - Configure game settings\n`/admin economy` - Economy management\n`/admin inventory` - Grant/clear items\n`/admin fun` - Fun commands\n`/shop add/edit/remove` - Manage shop\n`/raffle start/end` - Manage gem raffles\n`/itemraffle start/end` - Manage item raffles',
                     inline: false
                 },
                 {
                     name: '📝 Prefix Commands',
-                    value: 'All commands also work with `!` prefix:\n`!bal`, `!daily`, `!gift`, `!deposit`, `!withdraw`, `!top`, `!profile`, `!slots`, `!bj`, `!poker`, `!hl`, `!war`, `!raffle`, `!help`',
+                    value: 'All commands work with `!` prefix:\n`!bal`, `!daily`, `!slots`, `!bj`, `!poker`, `!hl`, `!war`, `!roulette`, `!coinflip`, `!dice`, `!shop`, `!inv`, `!help`',
                     inline: false
                 }
             )
             .setFooter({ text: '💎 PS99 Casino - Good luck! 💎' })
             .setTimestamp();
         
-        await interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [mainEmbed] });
     }
 };
