@@ -71,7 +71,7 @@ project/
 - Shop management
 - Inventory management (grant/clear items)
 
-### Fun Admin Events (NEW!)
+### Fun Admin Events
 - `/admin fun makeitrain` - Give gems to all reactors
 - `/admin fun guesscolor` - Color guessing game for gems
 - `/admin fun guessnumber` - Number guessing with hints
@@ -80,6 +80,34 @@ project/
 - `/admin fun mysterybox` - Drop mystery boxes (Common/Rare/Epic/Legendary)
 - `/admin fun jackpot` - Random user jackpot
 - `/admin fun rigged` - Fun rigged coinflip
+
+### Invite Rewards System
+- Automatic gem rewards when members invite new users
+- Anti-exploit protection:
+  - Account age requirement (configurable, default 60 days)
+  - First-join tracking (rejoining members don't trigger rewards)
+- Channel notifications for invite rewards
+- `/inviterewards` - Configure invite reward settings (admin)
+- `/invites` - Check your invite count and earnings
+
+### Bank Interest System
+- Automatic interest on bank balances
+- Supports decimal rates (e.g., 0.5%, 2.75%)
+- Configurable interval (hours between interest payments)
+- `/interest` - Configure interest settings (admin)
+
+### Big Wins Notification
+- Automatic announcements for big wins above threshold
+- Integrated with all major games (slots, blackjack, poker, crash, coinflip, etc.)
+- Premium embed styling with multiplier display
+- `/bigwins` - Configure big wins channel and threshold (admin)
+
+### Deposit/Withdraw Notifications
+- Separate channels for deposit and withdraw announcements
+- Real-time balance reporting
+- Premium UI with styled embeds
+- `/setdepositchannel` - Set deposit notification channel (admin)
+- `/setwithdrawchannel` - Set withdraw notification channel (admin)
 
 ## Premium UI Features
 - ANSI color codes for vibrant embeds
@@ -95,8 +123,9 @@ project/
 - `raffles.json` - Gem raffle data
 - `itemRaffles.json` - Item raffle data
 - `gameSettings.json` - Game configuration
-- `settings.json` - Bot settings
+- `settings.json` - Bot settings (includes bigwins, deposit/withdraw channels, interest, invite settings)
 - `logs.json` - Activity logs
+- `invites.json` - Invite tracking data (first joins, invite counts)
 
 ## Tech Stack
 - Node.js 20
@@ -130,6 +159,10 @@ The bot runs on PORT (env) or 5000 with an Express server for uptime monitoring.
 The self-ping loop runs every 4 minutes to maintain activity.
 
 ## Recent Changes (December 2025)
+- **NEW** Invite rewards system with anti-exploit protection
+- **NEW** Bank interest system with decimal rate support
+- **NEW** Big wins notification channel system
+- **NEW** Deposit/withdraw channel notifications
 - Added Railway deployment support (Procfile, railway.json, nixpacks.toml)
 - Added 6 new fun admin event commands
 - Premium UI overhaul with ANSI colors and tier system
