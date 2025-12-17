@@ -9,6 +9,7 @@ const SHOP_PATH = path.join(__dirname, 'shop.json');
 const ITEM_RAFFLES_PATH = path.join(__dirname, 'itemRaffles.json');
 const GAME_SETTINGS_PATH = path.join(__dirname, 'gameSettings.json');
 const INVITES_PATH = path.join(__dirname, 'invites.json');
+const TRANSACTIONS_PATH = path.join(__dirname, 'transactions.json');
 
 function loadJSON(filepath, defaultValue = {}) {
     try {
@@ -57,6 +58,14 @@ let gameSettings = loadJSON(GAME_SETTINGS_PATH, {
     dice: { minBet: 10, maxBet: 100000, enabled: true },
     mines: { minBet: 10, maxBet: 100000, enabled: true, gridSize: 25, maxMines: 24 },
     coinflip: { minBet: 10, maxBet: 100000, enabled: true }
+});
+
+let transactions = loadJSON(TRANSACTIONS_PATH, {
+    pendingDeposits: [],
+    pendingWithdrawals: [],
+    completedDeposits: [],
+    completedWithdrawals: [],
+    nextId: 1
 });
 
 function getUser(userId, username = 'Unknown') {
@@ -775,6 +784,177 @@ function saveGameSettings() {
     saveJSON(GAME_SETTINGS_PATH, gameSettings);
 }
 
+function saveTransactions() {
+    saveJSON(TRANSACTIONS_PATH, transactions);
+}
+
+function createDepositRequest(userId, username, amount, robloxUsername = null) {
+    const request = {
+        id: transactions.nextId++,
+        type: 'deposit',
+        userId,
+        username,
+        amount,
+        robloxUsername,
+        status: 'pending',
+        createdAt: Date.now(),
+        completedAt: null,
+        completedBy: null
+    };
+    transactions.pendingDeposits.push(request);
+    saveTransactions();
+    return request;
+}
+
+function createWithdrawRequest(userId, username, amount, robloxUsername) {
+    const request = {
+        id: transactions.nextId++,
+        type: 'withdrawal',
+        userId,
+        username,
+        amount,
+        robloxUsername,
+        status: 'pending',
+        createdAt: Date.now(),
+        completedAt: null,
+        completedBy: null
+    };
+    transactions.pendingWithdrawals.push(request);
+    saveTransactions();
+    return request;
+}
+
+function getPendingDeposits() {
+    return transactions.pendingDeposits;
+}
+
+function getPendingWithdrawals() {
+    return transactions.pendingWithdrawals;
+}
+
+function getPendingDepositById(id) {
+    return transactions.pendingDeposits.find(d => d.id === id);
+}
+
+function getPendingWithdrawalById(id) {
+    return transactions.pendingWithdrawals.find(w => w.id === id);
+}
+
+function confirmDeposit(id, staffId, staffUsername, actualAmount = null) {
+    const idx = transactions.pendingDeposits.findIndex(d => d.id === id);
+    if (idx === -1) return null;
+    
+    const deposit = transactions.pendingDeposits[idx];
+    const finalAmount = actualAmount !== null ? actualAmount : deposit.amount;
+    
+    const user = getUser(deposit.userId);
+    user.balance += finalAmount;
+    saveUsers();
+    
+    deposit.status = 'completed';
+    deposit.completedAt = Date.now();
+    deposit.completedBy = { id: staffId, username: staffUsername };
+    deposit.finalAmount = finalAmount;
+    
+    transactions.pendingDeposits.splice(idx, 1);
+    transactions.completedDeposits.push(deposit);
+    
+    if (transactions.completedDeposits.length > 100) {
+        transactions.completedDeposits = transactions.completedDeposits.slice(-50);
+    }
+    
+    saveTransactions();
+    return deposit;
+}
+
+function cancelDeposit(id, staffId, staffUsername, reason = null) {
+    const idx = transactions.pendingDeposits.findIndex(d => d.id === id);
+    if (idx === -1) return null;
+    
+    const deposit = transactions.pendingDeposits[idx];
+    deposit.status = 'cancelled';
+    deposit.completedAt = Date.now();
+    deposit.completedBy = { id: staffId, username: staffUsername };
+    deposit.cancelReason = reason;
+    
+    transactions.pendingDeposits.splice(idx, 1);
+    transactions.completedDeposits.push(deposit);
+    
+    saveTransactions();
+    return deposit;
+}
+
+function processWithdrawal(id, staffId, staffUsername) {
+    const idx = transactions.pendingWithdrawals.findIndex(w => w.id === id);
+    if (idx === -1) return { success: false, reason: 'Withdrawal request not found' };
+    
+    const withdrawal = transactions.pendingWithdrawals[idx];
+    const user = getUser(withdrawal.userId);
+    
+    if (user.balance < withdrawal.amount) {
+        return { success: false, reason: 'User no longer has sufficient balance' };
+    }
+    
+    user.balance -= withdrawal.amount;
+    saveUsers();
+    
+    withdrawal.status = 'completed';
+    withdrawal.completedAt = Date.now();
+    withdrawal.completedBy = { id: staffId, username: staffUsername };
+    
+    transactions.pendingWithdrawals.splice(idx, 1);
+    transactions.completedWithdrawals.push(withdrawal);
+    
+    if (transactions.completedWithdrawals.length > 100) {
+        transactions.completedWithdrawals = transactions.completedWithdrawals.slice(-50);
+    }
+    
+    saveTransactions();
+    return { success: true, withdrawal };
+}
+
+function cancelWithdrawal(id, staffId, staffUsername, reason = null) {
+    const idx = transactions.pendingWithdrawals.findIndex(w => w.id === id);
+    if (idx === -1) return null;
+    
+    const withdrawal = transactions.pendingWithdrawals[idx];
+    withdrawal.status = 'cancelled';
+    withdrawal.completedAt = Date.now();
+    withdrawal.completedBy = { id: staffId, username: staffUsername };
+    withdrawal.cancelReason = reason;
+    
+    transactions.pendingWithdrawals.splice(idx, 1);
+    transactions.completedWithdrawals.push(withdrawal);
+    
+    saveTransactions();
+    return withdrawal;
+}
+
+function getUserPendingDeposits(userId) {
+    return transactions.pendingDeposits.filter(d => d.userId === userId);
+}
+
+function getUserPendingWithdrawals(userId) {
+    return transactions.pendingWithdrawals.filter(w => w.userId === userId);
+}
+
+function getTransactionHistory(userId, limit = 10) {
+    const deposits = transactions.completedDeposits
+        .filter(d => d.userId === userId)
+        .map(d => ({ ...d, transactionType: 'deposit' }));
+    const withdrawals = transactions.completedWithdrawals
+        .filter(w => w.userId === userId)
+        .map(w => ({ ...w, transactionType: 'withdrawal' }));
+    
+    return [...deposits, ...withdrawals]
+        .sort((a, b) => b.completedAt - a.completedAt)
+        .slice(0, limit);
+}
+
+function getTotalPendingWithdrawals() {
+    return transactions.pendingWithdrawals.reduce((sum, w) => sum + w.amount, 0);
+}
+
 module.exports = {
     getUser,
     updateUser,
@@ -839,5 +1019,19 @@ module.exports = {
     hasJoinedBefore,
     markAsJoined,
     getInviteCount,
-    applyInterest
+    applyInterest,
+    createDepositRequest,
+    createWithdrawRequest,
+    getPendingDeposits,
+    getPendingWithdrawals,
+    getPendingDepositById,
+    getPendingWithdrawalById,
+    confirmDeposit,
+    cancelDeposit,
+    processWithdrawal,
+    cancelWithdrawal,
+    getUserPendingDeposits,
+    getUserPendingWithdrawals,
+    getTransactionHistory,
+    getTotalPendingWithdrawals
 };

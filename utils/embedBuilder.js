@@ -70,7 +70,9 @@ const ICONS = {
     brain: '🧠',
     potato: '🥔',
     bomb: '💣',
-    guess: '🔮'
+    guess: '🔮',
+    success: '✅',
+    error: '❌'
 };
 
 function createPremiumEmbed(options = {}) {
