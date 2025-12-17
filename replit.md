@@ -109,6 +109,35 @@ project/
 - `/setdepositchannel` - Set deposit notification channel (admin)
 - `/setwithdrawchannel` - Set withdraw notification channel (admin)
 
+### PS99 Gem Banking System (Mailbox-Based)
+Connects real Pet Simulator 99 gems with Discord-tracked balance. Every Discord balance is backed 1:1 by real in-game gems stored on the bank account.
+
+**Bank Account:** `GemBank46` (Roblox username)
+
+**User Commands:**
+- `/requestdeposit` - Request a gem deposit (specify amount + Roblox username)
+- `/requestwithdraw` - Request a withdrawal (20M minimum, Roblox username required)
+- `/mypending` - View your pending deposit/withdrawal requests
+- `/transactionhistory` - View your completed transactions
+
+**Staff Commands (Manage Guild permission required):**
+- `/confirmdeposit <id>` - Confirm a deposit after verifying mailbox
+- `/processwithdraw <id>` - Process a withdrawal (mark as sent)
+- `/pendingtransactions` - View all pending deposits and withdrawals
+- `/canceldeposit <id>` - Cancel a pending deposit request
+- `/cancelwithdraw <id>` - Cancel a pending withdrawal request
+
+**Workflow:**
+1. **Deposit:** User sends gems via PS99 mailbox to GemBank46 → Creates request → Staff verifies → Confirms → Balance credited
+2. **Withdrawal:** User requests withdrawal (20M min) → Staff sends gems from GemBank46 → Processes → Balance deducted
+
+**Security:**
+- No negative balances allowed
+- Cannot withdraw more than available balance
+- All transactions logged with timestamps
+- DM notifications to users on approval/cancellation
+- Maximum 3 pending deposits, 2 pending withdrawals per user
+
 ## Premium UI Features
 - ANSI color codes for vibrant embeds
 - Tier-based styling (Bronze to Diamond)
@@ -126,6 +155,7 @@ project/
 - `settings.json` - Bot settings (includes bigwins, deposit/withdraw channels, interest, invite settings)
 - `logs.json` - Activity logs
 - `invites.json` - Invite tracking data (first joins, invite counts)
+- `transactions.json` - PS99 gem banking transactions (pending deposits, withdrawals, completed history)
 
 ## Tech Stack
 - Node.js 20
@@ -159,6 +189,10 @@ The bot runs on PORT (env) or 5000 with an Express server for uptime monitoring.
 The self-ping loop runs every 4 minutes to maintain activity.
 
 ## Recent Changes (December 2025)
+- **NEW** PS99 Gem Banking System - Real gem deposits/withdrawals via mailbox to GemBank46
+  - User commands: /requestdeposit, /requestwithdraw, /mypending, /transactionhistory
+  - Staff commands: /confirmdeposit, /processwithdraw, /pendingtransactions, /canceldeposit, /cancelwithdraw
+  - 20M minimum withdrawal, transaction logging, DM notifications
 - **NEW** Invite rewards system with anti-exploit protection
 - **NEW** Bank interest system with decimal rate support
 - **NEW** Big wins notification channel system
