@@ -26,14 +26,15 @@ function saveUptimeData() {
 
 function startUptimeServer() {
     const app = express();
-    const PORT = 5000;
+    const PORT = process.env.PORT || 5000;
     
     app.get('/', (req, res) => {
         res.json({
             status: 'online',
             uptime: uptimeData.startTime ? Date.now() - uptimeData.startTime : 0,
             pingCount: uptimeData.pingCount,
-            lastPing: uptimeData.lastPing
+            lastPing: uptimeData.lastPing,
+            bot: 'PS99 Casino Bot'
         });
     });
     
@@ -53,12 +54,16 @@ function startUptimeServer() {
 
 async function selfPing() {
     const replitDomain = process.env.REPLIT_DEV_DOMAIN;
+    const railwayDomain = process.env.RAILWAY_PUBLIC_DOMAIN;
+    const port = process.env.PORT || 5000;
     
     let url;
-    if (replitDomain) {
+    if (railwayDomain) {
+        url = `https://${railwayDomain}`;
+    } else if (replitDomain) {
         url = `https://${replitDomain}`;
     } else {
-        url = `http://localhost:5000`;
+        url = `http://localhost:${port}`;
     }
     
     try {

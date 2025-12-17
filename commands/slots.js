@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
-const { createPS99Embed, PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { createPremiumEmbed, PS99_COLORS, ICONS, createErrorEmbed } = require('../utils/embedBuilder');
 const config = require('../config.json');
 
 const SYMBOLS = ['🍒', '🍋', '🍊', '🍉', '⭐', '🔔', '💎', '7️⃣'];
@@ -46,26 +46,45 @@ function calculateWin(middleRow, bet) {
 }
 
 function createSlotEmbed(frame, status, bet, spinning = true) {
-    const border = '═'.repeat(15);
     const reelDisplay = frame.map((row, i) => {
         const rowStr = `║ ${row.join(' │ ')} ║`;
         return i === 1 ? `➤ ${rowStr} ◀` : `  ${rowStr}  `;
     }).join('\n');
     
+    let color = PS99_COLORS.gold;
+    let title = '🎰 MEGA SLOTS 🎰';
+    let statusText = '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;36mSPINNING...[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m```';
+    
+    if (!spinning) {
+        if (status.multiplier >= 10) {
+            color = PS99_COLORS.rainbow;
+            title = '🎰 JACKPOT!!! 🎰';
+            statusText = '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;31m💎 MEGA WIN! 💎[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m```';
+        } else if (status.win > 0) {
+            color = PS99_COLORS.success;
+            title = '🎰 WINNER! 🎰';
+            statusText = '```ansi\n[1;32m╭─────────────────────────────╮[0m\n[1;32m│[0m    [1;33m🎉 YOU WON! 🎉[0m    [1;32m│[0m\n[1;32m╰─────────────────────────────╯[0m```';
+        } else {
+            color = PS99_COLORS.error;
+            title = '🎰 SLOTS 🎰';
+            statusText = '```ansi\n[1;31m╭─────────────────────────────╮[0m\n[1;31m│[0m    [1;37mTry Again![0m    [1;31m│[0m\n[1;31m╰─────────────────────────────╯[0m```';
+        }
+    }
+    
     const embed = new EmbedBuilder()
-        .setTitle('🎰 ═══ MEGA SLOTS ═══ 🎰')
-        .setColor(spinning ? PS99_COLORS.gold : (status.win > 0 ? PS99_COLORS.success : PS99_COLORS.error))
-        .setDescription(`\`\`\`\n╔${border}╗\n${reelDisplay}\n╚${border}╝\n\`\`\``)
+        .setTitle(title)
+        .setColor(color)
+        .setDescription(`${statusText}\n\`\`\`\n╔═══════════════════╗\n${reelDisplay}\n╚═══════════════════╝\n\`\`\``)
         .addFields(
-            { name: '💰 Bet', value: `\`${bet.toLocaleString()}\` gems`, inline: true },
+            { name: '💰 Bet', value: `\`${bet.toLocaleString()}\``, inline: true },
             { name: spinning ? '🎰 Status' : (status.win > 0 ? '🎉 Won' : '😢 Lost'), 
-              value: spinning ? 'Spinning...' : `\`${status.win.toLocaleString()}\` gems`, inline: true }
+              value: spinning ? '`Spinning...`' : `\`${status.win.toLocaleString()}\``, inline: true }
         )
-        .setFooter({ text: '💎 PS99 Casino 💎' })
+        .setFooter({ text: `${ICONS.gem} PS99 Casino ${ICONS.gem} | Premium Slots` })
         .setTimestamp();
     
     if (!spinning && status.multiplier > 0) {
-        embed.addFields({ name: '📊 Multiplier', value: `${status.multiplier}x`, inline: true });
+        embed.addFields({ name: '⚡ Multiplier', value: `\`${status.multiplier}x\``, inline: true });
     }
     
     return embed;
@@ -109,6 +128,15 @@ module.exports = {
     async execute(interaction) {
         const bet = interaction.options.getInteger('bet');
         const user = db.getUser(interaction.user.id, interaction.user.username);
+        
+        const gameSettings = db.getGameSettings('slots');
+        if (!gameSettings.enabled) {
+            return interaction.reply({ embeds: [createErrorEmbed('Slots is currently disabled!')], ephemeral: true });
+        }
+        
+        if (bet < gameSettings.minBet || bet > gameSettings.maxBet) {
+            return interaction.reply({ embeds: [createErrorEmbed(`Bet must be between \`${gameSettings.minBet.toLocaleString()}\` and \`${gameSettings.maxBet.toLocaleString()}\` gems!`)], ephemeral: true });
+        }
         
         if (user.balance < bet) {
             return interaction.reply({ embeds: [createErrorEmbed(`You don't have enough gems! You have \`${user.balance.toLocaleString()}\` gems.`)], ephemeral: true });
