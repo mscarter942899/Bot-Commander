@@ -344,7 +344,7 @@ module.exports = {
                     title: 'MAKE IT RAIN!',
                     titleIcon: '🌧️',
                     color: PS99_COLORS.gold,
-                    description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;32m💰 FREE GEMS! 💰[0m    [1;33m│[0m\n[1;33]╰─────────────────────────────╯[0m\`\`\`\n\nReact with 💰 within **${duration} seconds** to receive **${amount.toLocaleString()} gems**!`,
+                    description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;32m💰 FREE GEMS! 💰[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m\`\`\`\n\nReact with 💰 within **${duration} seconds** to receive **${amount.toLocaleString()} gems**!`,
                     footer: `Hosted by ${interaction.user.username}`
                 });
                 
@@ -410,7 +410,7 @@ module.exports = {
                     embeds: [createPremiumEmbed({
                         title: 'JACKPOT!',
                         titleIcon: '🎰',
-                        description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;31m🎰 JACKPOT WINNER! 🎰[0m    [1;33m│[0m\n[1;33]╰─────────────────────────────╯[0m\`\`\`\n\n👑 **${winner.username}** has won the random jackpot!\n\n💰 **Prize:** \`${amount.toLocaleString()}\` gems`,
+                        description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;31m🎰 JACKPOT WINNER! 🎰[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m\`\`\`\n\n👑 **${winner.username}** has won the random jackpot!\n\n💰 **Prize:** \`${amount.toLocaleString()}\` gems`,
                         color: PS99_COLORS.legendary
                     })]
                 });
@@ -436,7 +436,7 @@ module.exports = {
                     title: 'Guess The Color!',
                     titleIcon: '🎨',
                     color: PS99_COLORS.rainbow,
-                    description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33mCOLOR GUESSING GAME[0m    [1;35m│[0m\n[1;35]╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${duration}s\`\n\n**Click a color button to guess!**`,
+                    description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33mCOLOR GUESSING GAME[0m    [1;35m│[0m\n[1;35m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${duration}s\`\n\n**Click a color button to guess!**`,
                     footer: `Hosted by ${interaction.user.username}`
                 });
                 
@@ -504,7 +504,7 @@ module.exports = {
                     title: 'Guess The Number!',
                     titleIcon: '🔮',
                     color: PS99_COLORS.cosmic,
-                    description: `\`\`\`ansi\n[1;36m╭─────────────────────────────╮[0m\n[1;36m│[0m    [1;33mNUMBER GUESSING GAME[0m    [1;36m│[0m\n[1;36]╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${duration}s\`\n🔢 **Range:** \`1 - ${maxNumber}\`\n\n**Type a number in chat to guess!**`,
+                    description: `\`\`\`ansi\n[1;36m╭─────────────────────────────╮[0m\n[1;36m│[0m    [1;33mNUMBER GUESSING GAME[0m    [1;36m│[0m\n[1;36m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${duration}s\`\n🔢 **Range:** \`1 - ${maxNumber}\`\n\n**Type a number in chat to guess!**`,
                     footer: `Hosted by ${interaction.user.username} | First exact guess wins!`
                 });
                 
@@ -589,7 +589,7 @@ module.exports = {
                     title: 'Trivia Time!',
                     titleIcon: '🧠',
                     color: PS99_COLORS.sapphire,
-                    description: `\`\`\`ansi\n[1;34m╭─────────────────────────────╮[0m\n[1;34m│[0m       [1;33m${question.category.toUpperCase()}[0m       [1;34]│[0m\n[1;34]╰─────────────────────────────╯[0m\`\`\`\n\n**${question.question}**\n\n${optionsText}\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${duration}s\``,
+                    description: `\`\`\`ansi\n[1;34m╭─────────────────────────────╮[0m\n[1;34m│[0m       [1;33m${question.category.toUpperCase()}[0m       [1;34m│[0m\n[1;34m╰─────────────────────────────╯[0m\`\`\`\n\n**${question.question}**\n\n${optionsText}\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${duration}s\``,
                     footer: `Hosted by ${interaction.user.username}`
                 });
                 
@@ -654,7 +654,7 @@ module.exports = {
                     title: 'Hot Potato!',
                     titleIcon: '🥔',
                     color: PS99_COLORS.orange,
-                    description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m     [1;31m💣 HOT POTATO! 💣[0m     [1;33]│[0m\n[1;33]╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize Pool:** \`${prize.toLocaleString()}\` gems\n👥 **Minimum Players:** \`${minPlayers}\`\n\n**Click to join!** Game starts in 30 seconds.`,
+                    description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m     [1;31m💣 HOT POTATO! 💣[0m     [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize Pool:** \`${prize.toLocaleString()}\` gems\n👥 **Minimum Players:** \`${minPlayers}\`\n\n**Click to join!** Game starts in 30 seconds.`,
                     footer: `Hosted by ${interaction.user.username}`
                 });
                 
@@ -719,7 +719,7 @@ module.exports = {
                             title: 'Hot Potato!',
                             titleIcon: '🥔',
                             color: PS99_COLORS.orange,
-                            description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33]│[0m     [1;31m💣 PASS IT QUICK! 💣[0m     [1;33]│[0m\n[1;33]╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.potato} **Holding:** ${holderUser}\n🔄 **Round:** \`${round}\`\n👥 **Remaining:** \`${playerList.filter(p => !eliminated.has(p)).length}\`\n\n**${holderUser.username}, pass the potato!**`,
+                            description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m     [1;31m💣 PASS IT QUICK! 💣[0m     [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.potato} **Holding:** ${holderUser}\n🔄 **Round:** \`${round}\`\n👥 **Remaining:** \`${playerList.filter(p => !eliminated.has(p)).length}\`\n\n**${holderUser.username}, pass the potato!**`,
                             footer: `${holderUser.username} must click to pass!`
                         });
                         
@@ -826,7 +826,7 @@ module.exports = {
                     title: `${tier.charAt(0).toUpperCase() + tier.slice(1)} Mystery Box`,
                     titleIcon: tierEmojis[tier],
                     color: tierColors[tier],
-                    description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35]│[0m    [1;33m✨ MYSTERY BOX ✨[0m    [1;35]│[0m\n[1;35]╰─────────────────────────────╯[0m\`\`\`\n\n**Possible Prizes:**\n${prizes[tier].map(p => `• ${p.name} (${p.chance}%)`).join('\n')}\n\n**First click opens the box!**`,
+                    description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33m✨ MYSTERY BOX ✨[0m    [1;35m│[0m\n[1;35m╰─────────────────────────────╯[0m\`\`\`\n\n**Possible Prizes:**\n${prizes[tier].map(p => `• ${p.name} (${p.chance}%)`).join('\n')}\n\n**First click opens the box!**`,
                     footer: `${tier.toUpperCase()} tier | Hosted by ${interaction.user.username}`
                 });
                 

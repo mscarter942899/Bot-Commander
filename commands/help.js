@@ -25,7 +25,7 @@ const pages = [
     {
         title: 'GAMBLING GAMES',
         icon: '🎰',
-        description: '```ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33m🎲 11 GAMES! 🎲[0m    [1;35m│[0m\n[1;35]╰─────────────────────────────╯[0m```\n\n' +
+        description: '```ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33m🎲 11 GAMES! 🎲[0m    [1;35m│[0m\n[1;35m╰─────────────────────────────╯[0m```\n\n' +
             '🎰 `/slots` - Premium slot machine\n' +
             '🃏 `/blackjack` - Classic 21\n' +
             '♠️ `/poker` - Texas Hold\'em\n' +
@@ -43,7 +43,7 @@ const pages = [
     {
         title: 'SHOP & INVENTORY',
         icon: '🛒',
-        description: '```ansi\n[1;36m╭─────────────────────────────╮[0m\n[1;36m│[0m    [1;33m🛒 SHOP SYSTEM 🛒[0m    [1;36m│[0m\n[1;36]╰─────────────────────────────╯[0m```\n\n' +
+        description: '```ansi\n[1;36m╭─────────────────────────────╮[0m\n[1;36m│[0m    [1;33m🛒 SHOP SYSTEM 🛒[0m    [1;36m│[0m\n[1;36m╰─────────────────────────────╯[0m```\n\n' +
             '**Shop Commands:**\n' +
             '🛍️ `/shop browse` - Browse available items\n' +
             '💳 `/shop buy <id>` - Purchase an item\n\n' +
@@ -57,7 +57,7 @@ const pages = [
     {
         title: 'RAFFLE SYSTEM',
         icon: '🎟️',
-        description: '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;35m🎟️ RAFFLES 🎟️[0m    [1;33m│[0m\n[1;33]╰─────────────────────────────╯[0m```\n\n' +
+        description: '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;35m🎟️ RAFFLES 🎟️[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m```\n\n' +
             '**Gem Raffles:**\n' +
             '👁️ `/raffle view` - View active raffle\n' +
             '📜 `/raffle history` - Past raffle results\n\n' +
@@ -70,7 +70,7 @@ const pages = [
     {
         title: 'ADMIN COMMANDS',
         icon: '🛡️',
-        description: '```ansi\n[1;31m╭─────────────────────────────╮[0m\n[1;31m│[0m    [1;33m⚡ ADMIN PANEL ⚡[0m    [1;31]│[0m\n[1;31]╰─────────────────────────────╯[0m```\n\n' +
+        description: '```ansi\n[1;31m╭─────────────────────────────╮[0m\n[1;31m│[0m    [1;33m⚡ ADMIN PANEL ⚡[0m    [1;31m│[0m\n[1;31m╰─────────────────────────────╯[0m```\n\n' +
             '**Economy:**\n`/addgems` `/removegems` `/admin economy`\n\n' +
             '**Games:**\n`/admin games setbet` - Set min/max bets\n`/admin games toggle` - Enable/disable games\n\n' +
             '**Fun Events:**\n`/admin fun makeitrain` - Gem giveaway\n`/admin fun guesscolor` - Color game\n`/admin fun guessnumber` - Number game\n`/admin fun trivia` - Trivia quiz\n`/admin fun hotpotato` - Hot potato!\n`/admin fun mysterybox` - Mystery boxes\n`/admin fun jackpot` - Random jackpot\n\n' +
