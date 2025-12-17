@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
-const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
 
 function flipCoin() {
     return Math.random() < 0.48 ? 'heads' : 'tails';
@@ -71,7 +71,7 @@ module.exports = {
                     { name: '🦅 Tails', value: 'tails' }
                 )),
     
-    async execute(interaction) {
+    async execute(interaction, client) {
         const settings = db.getGameSettings('coinflip');
         if (!settings.enabled) {
             return interaction.reply({ embeds: [createErrorEmbed('Coinflip is currently disabled!')], ephemeral: true });
@@ -108,6 +108,7 @@ module.exports = {
             db.addBalance(interaction.user.id, winAmount);
             db.recordGame(interaction.user.id, true, bet, winAmount);
             db.addHouseProfit(bet - winAmount);
+            sendBigWinNotification(client, interaction.user.id, interaction.user.username, 'Coinflip', winAmount, 2);
         } else {
             db.recordGame(interaction.user.id, false, bet, 0);
             db.addHouseProfit(bet);

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
-const { createPremiumEmbed, PS99_COLORS, ICONS, createErrorEmbed } = require('../utils/embedBuilder');
+const { createPremiumEmbed, PS99_COLORS, ICONS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
 const config = require('../config.json');
 
 const SYMBOLS = ['🍒', '🍋', '🍊', '🍉', '⭐', '🔔', '💎', '7️⃣'];
@@ -125,7 +125,7 @@ module.exports = {
                 .setRequired(true)
                 .setMinValue(10)),
     
-    async execute(interaction) {
+    async execute(interaction, client) {
         const bet = interaction.options.getInteger('bet');
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
@@ -188,6 +188,7 @@ module.exports = {
             db.addBalance(interaction.user.id, result.win);
             db.recordGame(interaction.user.id, true, bet, result.win);
             db.addHouseProfit(bet - result.win);
+            sendBigWinNotification(client, interaction.user.id, interaction.user.username, 'Slots', result.win, result.multiplier);
         } else {
             db.recordGame(interaction.user.id, false, bet);
             db.addHouseProfit(bet);

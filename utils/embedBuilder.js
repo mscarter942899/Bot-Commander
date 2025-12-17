@@ -387,6 +387,42 @@ function createMysteryBoxEmbed(tier, prizes) {
     });
 }
 
+async function sendBigWinNotification(client, userId, username, game, winAmount, multiplier) {
+    const db = require('../database/db');
+    const bigWinsSettings = db.getBigWinsSettings();
+    
+    if (!bigWinsSettings.enabled || !bigWinsSettings.channelId) return;
+    if (winAmount < bigWinsSettings.threshold) return;
+    
+    try {
+        const channel = await client.channels.fetch(bigWinsSettings.channelId).catch(() => null);
+        if (!channel) return;
+        
+        let title = 'BIG WIN!';
+        let color = PS99_COLORS.gold;
+        
+        if (winAmount >= bigWinsSettings.threshold * 10) {
+            title = 'MASSIVE WIN!!!';
+            color = PS99_COLORS.rainbow;
+        } else if (winAmount >= bigWinsSettings.threshold * 5) {
+            title = 'HUGE WIN!!';
+            color = PS99_COLORS.legendary;
+        }
+        
+        const embed = createPremiumEmbed({
+            title: title,
+            titleIcon: ICONS.trophy,
+            color: color,
+            description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;32m🎉 WINNER WINNER! 🎉[0m    [1;33m│[0m\n[1;33]╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.crown} **Player:** <@${userId}>\n${ICONS.slots} **Game:** ${game}\n${ICONS.gem} **Won:** \`${winAmount.toLocaleString()}\` gems\n${ICONS.bolt} **Multiplier:** \`${multiplier}x\``,
+            footer: `Congratulations ${username}!`
+        });
+        
+        await channel.send({ embeds: [embed] });
+    } catch (error) {
+        console.error('Error sending big win notification:', error);
+    }
+}
+
 module.exports = {
     PS99_COLORS,
     ICONS,
@@ -406,5 +442,6 @@ module.exports = {
     createNumberGuessEmbed,
     createTriviaEmbed,
     createHotPotatoEmbed,
-    createMysteryBoxEmbed
+    createMysteryBoxEmbed,
+    sendBigWinNotification
 };

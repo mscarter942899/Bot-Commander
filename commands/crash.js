@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
-const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
 
 function generateCrashPoint() {
     const e = 2.71828;
@@ -141,6 +141,7 @@ module.exports = {
                 db.addBalance(interaction.user.id, winAmount);
                 db.recordGame(interaction.user.id, true, bet, winAmount);
                 db.addHouseProfit(bet - winAmount);
+                sendBigWinNotification(client, interaction.user.id, interaction.user.username, 'Crash', winAmount, game.autoCashout);
                 
                 db.addLog({
                     type: 'crash',

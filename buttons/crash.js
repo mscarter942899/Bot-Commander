@@ -1,5 +1,5 @@
 const db = require('../database/db');
-const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 function createPlayAgainButton(bet) {
@@ -46,6 +46,7 @@ module.exports = {
             db.addBalance(interaction.user.id, winAmount);
             db.recordGame(interaction.user.id, true, game.bet, winAmount);
             db.addHouseProfit(game.bet - winAmount);
+            sendBigWinNotification(client, interaction.user.id, interaction.user.username, 'Crash', winAmount, game.currentMultiplier);
             
             db.addLog({
                 type: 'crash',

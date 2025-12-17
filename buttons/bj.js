@@ -1,5 +1,5 @@
 const db = require('../database/db');
-const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
 const { calculateHandValue, handToString } = require('../utils/cards');
 const { createBlackjackEmbed, createPlayAgainButton } = require('../commands/blackjack');
 
@@ -104,6 +104,7 @@ module.exports = {
                 db.addBalance(interaction.user.id, winAmount);
                 db.recordGame(interaction.user.id, true, finalBet, winAmount);
                 db.addHouseProfit(finalBet - winAmount);
+                sendBigWinNotification(client, interaction.user.id, interaction.user.username, 'Blackjack', winAmount, 2);
             } else if (playerValue < dealerValue) {
                 status = 'lose';
                 db.recordGame(interaction.user.id, false, finalBet);

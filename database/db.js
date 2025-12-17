@@ -8,6 +8,7 @@ const SETTINGS_PATH = path.join(__dirname, 'settings.json');
 const SHOP_PATH = path.join(__dirname, 'shop.json');
 const ITEM_RAFFLES_PATH = path.join(__dirname, 'itemRaffles.json');
 const GAME_SETTINGS_PATH = path.join(__dirname, 'gameSettings.json');
+const INVITES_PATH = path.join(__dirname, 'invites.json');
 
 function loadJSON(filepath, defaultValue = {}) {
     try {
@@ -31,9 +32,19 @@ function saveJSON(filepath, data) {
 let users = loadJSON(DB_PATH, {});
 let raffles = loadJSON(RAFFLES_PATH, { active: null, history: [] });
 let logs = loadJSON(LOGS_PATH, { entries: [], channelId: null });
-let settings = loadJSON(SETTINGS_PATH, { houseProfit: 0, adminIds: [], dailyEnabled: true });
+let settings = loadJSON(SETTINGS_PATH, { 
+    houseProfit: 0, 
+    adminIds: [], 
+    dailyEnabled: true,
+    inviteRewards: { enabled: false, amount: 100, channelId: null, minAccountAge: 60 },
+    interest: { enabled: false, rate: 0.01, intervalHours: 24 },
+    bigWins: { enabled: false, channelId: null, threshold: 10000 },
+    depositChannel: null,
+    withdrawChannel: null
+});
 let shop = loadJSON(SHOP_PATH, { items: [], nextId: 1 });
 let itemRaffles = loadJSON(ITEM_RAFFLES_PATH, { active: null, history: [] });
+let invites = loadJSON(INVITES_PATH, { trackedInvites: {}, claimedRewards: {} });
 let gameSettings = loadJSON(GAME_SETTINGS_PATH, {
     slots: { minBet: 10, maxBet: 100000, enabled: true },
     blackjack: { minBet: 10, maxBet: 100000, enabled: true },
@@ -610,8 +621,134 @@ function getAllUsers() {
     return Object.values(users);
 }
 
+function getInviteSettings() {
+    if (!settings.inviteRewards) {
+        settings.inviteRewards = { enabled: false, amount: 100, channelId: null, minAccountAge: 60 };
+    }
+    return settings.inviteRewards;
+}
+
+function setInviteSettings(newSettings) {
+    settings.inviteRewards = { ...settings.inviteRewards, ...newSettings };
+    saveSettings();
+    return settings.inviteRewards;
+}
+
+function getInterestSettings() {
+    if (!settings.interest) {
+        settings.interest = { enabled: false, rate: 0.01, intervalHours: 24 };
+    }
+    return settings.interest;
+}
+
+function setInterestSettings(newSettings) {
+    settings.interest = { ...settings.interest, ...newSettings };
+    saveSettings();
+    return settings.interest;
+}
+
+function getBigWinsSettings() {
+    if (!settings.bigWins) {
+        settings.bigWins = { enabled: false, channelId: null, threshold: 10000 };
+    }
+    return settings.bigWins;
+}
+
+function setBigWinsSettings(newSettings) {
+    settings.bigWins = { ...settings.bigWins, ...newSettings };
+    saveSettings();
+    return settings.bigWins;
+}
+
+function setDepositChannel(channelId) {
+    settings.depositChannel = channelId;
+    saveSettings();
+}
+
+function getDepositChannel() {
+    return settings.depositChannel;
+}
+
+function setWithdrawChannel(channelId) {
+    settings.withdrawChannel = channelId;
+    saveSettings();
+}
+
+function getWithdrawChannel() {
+    return settings.withdrawChannel;
+}
+
+function trackInvite(inviterId, inviteeId, inviteeAccountCreated) {
+    if (!invites.trackedInvites[inviterId]) {
+        invites.trackedInvites[inviterId] = [];
+    }
+    invites.trackedInvites[inviterId].push({
+        inviteeId,
+        inviteeAccountCreated,
+        timestamp: Date.now()
+    });
+    saveInvites();
+}
+
+function hasClaimedInviteReward(inviterId, inviteeId) {
+    const key = `${inviterId}_${inviteeId}`;
+    return !!invites.claimedRewards[key];
+}
+
+function markInviteRewardClaimed(inviterId, inviteeId) {
+    const key = `${inviterId}_${inviteeId}`;
+    invites.claimedRewards[key] = Date.now();
+    saveInvites();
+}
+
+function hasJoinedBefore(guildId, memberId) {
+    const key = `joined_${guildId}_${memberId}`;
+    return !!invites.claimedRewards[key];
+}
+
+function markAsJoined(guildId, memberId) {
+    const key = `joined_${guildId}_${memberId}`;
+    invites.claimedRewards[key] = Date.now();
+    saveInvites();
+}
+
+function getInviteCount(inviterId) {
+    if (!invites.trackedInvites[inviterId]) return 0;
+    return invites.trackedInvites[inviterId].length;
+}
+
+function applyInterest() {
+    const interestSettings = getInterestSettings();
+    if (!interestSettings.enabled || interestSettings.rate <= 0) return [];
+    
+    const results = [];
+    const now = Date.now();
+    const intervalMs = interestSettings.intervalHours * 60 * 60 * 1000;
+    
+    for (const userId in users) {
+        const user = users[userId];
+        if (!user.lastInterest) user.lastInterest = now;
+        
+        if (now - user.lastInterest >= intervalMs && user.bank > 0) {
+            const interest = Math.floor(user.bank * interestSettings.rate);
+            if (interest > 0) {
+                user.bank += interest;
+                user.lastInterest = now;
+                results.push({ userId, username: user.username, interest, newBank: user.bank });
+            }
+        }
+    }
+    
+    if (results.length > 0) saveUsers();
+    return results;
+}
+
 function saveUsers() {
     saveJSON(DB_PATH, users);
+}
+
+function saveInvites() {
+    saveJSON(INVITES_PATH, invites);
 }
 
 function saveRaffles() {
@@ -685,5 +822,22 @@ module.exports = {
     getAllGameSettings,
     resetUserBalance,
     setUserBalance,
-    getAllUsers
+    getAllUsers,
+    getInviteSettings,
+    setInviteSettings,
+    getInterestSettings,
+    setInterestSettings,
+    getBigWinsSettings,
+    setBigWinsSettings,
+    setDepositChannel,
+    getDepositChannel,
+    setWithdrawChannel,
+    getWithdrawChannel,
+    trackInvite,
+    hasClaimedInviteReward,
+    markInviteRewardClaimed,
+    hasJoinedBefore,
+    markAsJoined,
+    getInviteCount,
+    applyInterest
 };
