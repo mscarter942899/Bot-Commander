@@ -53,21 +53,21 @@ function createSlotEmbed(frame, status, bet, spinning = true) {
     
     let color = PS99_COLORS.gold;
     let title = '🎰 MEGA SLOTS 🎰';
-    let statusText = '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;36mSPINNING...[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m```';
+    let statusText = '```\n╭─────────────────────────────╮\n│       ⏳ SPINNING... ⏳       │\n╰─────────────────────────────╯```';
     
     if (!spinning) {
         if (status.multiplier >= 10) {
             color = PS99_COLORS.rainbow;
             title = '🎰 JACKPOT!!! 🎰';
-            statusText = '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;31m💎 MEGA WIN! 💎[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m```';
+            statusText = '```\n╭─────────────────────────────╮\n│    💎 MEGA WIN! 💎    │\n╰─────────────────────────────╯```';
         } else if (status.win > 0) {
             color = PS99_COLORS.success;
             title = '🎰 WINNER! 🎰';
-            statusText = '```ansi\n[1;32m╭─────────────────────────────╮[0m\n[1;32m│[0m    [1;33m🎉 YOU WON! 🎉[0m    [1;32m│[0m\n[1;32m╰─────────────────────────────╯[0m```';
+            statusText = '```\n╭─────────────────────────────╮\n│    🎉 YOU WON! 🎉    │\n╰─────────────────────────────╯```';
         } else {
             color = PS99_COLORS.error;
             title = '🎰 SLOTS 🎰';
-            statusText = '```ansi\n[1;31m╭─────────────────────────────╮[0m\n[1;31m│[0m    [1;37mTry Again![0m    [1;31m│[0m\n[1;31m╰─────────────────────────────╯[0m```';
+            statusText = '```\n╭─────────────────────────────╮\n│       🍀 Try Again! 🍀       │\n╰─────────────────────────────╯```';
         }
     }
     

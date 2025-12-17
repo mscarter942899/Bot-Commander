@@ -156,7 +156,7 @@ function createBalanceEmbed(user, balance, bank = 0) {
         title: `${user.username}'s Vault`,
         titleIcon: tierIcon,
         color: tierColor,
-        description: `\`\`\`ansi\n[2;33m╭─────────────────────────────╮[0m\n[2;33m│[0m       [1;33m${tier} Tier Member[0m       [2;33m│[0m\n[2;33m╰─────────────────────────────╯[0m\`\`\``,
+        description: `\`\`\`\n╭─────────────────────────────╮\n│       ${tier} Tier Member       │\n╰─────────────────────────────╯\`\`\``,
         fields: [
             { icon: ICONS.money, name: 'Cash', value: `\`\`\`diff\n+ ${balance.toLocaleString()} gems\`\`\``, inline: true },
             { icon: ICONS.bank, name: 'Bank', value: `\`\`\`yaml\n${bank.toLocaleString()} gems\`\`\``, inline: true },
@@ -236,7 +236,7 @@ function createProfileEmbed(user, data) {
         title: `${user.username}'s Profile`,
         titleIcon: rankIcon,
         color: PS99_COLORS.cosmic,
-        description: `\`\`\`ansi\n[1;35m╭───────────────────────────────╮[0m\n[1;35m│[0m    [1;37m${rank} Gambler[0m    [1;35m│[0m\n[1;35m╰───────────────────────────────╯[0m\`\`\``,
+        description: `\`\`\`\n╭───────────────────────────────╮\n│       ${rank} Gambler       │\n╰───────────────────────────────╯\`\`\``,
         fields: [
             { icon: ICONS.money, name: 'Balance', value: `\`${data.balance.toLocaleString()}\``, inline: true },
             { icon: ICONS.bank, name: 'Bank', value: `\`${data.bank.toLocaleString()}\``, inline: true },
@@ -253,7 +253,7 @@ function createProfileEmbed(user, data) {
 
 function createLeaderboardEmbed(users, type = 'balance') {
     const medals = [ICONS.medal1, ICONS.medal2, ICONS.medal3, '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
-    let description = '```ansi\n[1;33m╭─────────────────────────────────╮[0m\n[1;33m│[0m        [1;37mTOP PLAYERS[0m        [1;33m│[0m\n[1;33m╰─────────────────────────────────╯[0m```\n';
+    let description = '```\n╭─────────────────────────────────╮\n│         TOP PLAYERS         │\n╰─────────────────────────────────╯```\n';
     
     users.slice(0, 10).forEach((user, index) => {
         const value = type === 'balance' ? user.balance + user.bank : user.totalWon;
@@ -301,7 +301,7 @@ function createEventEmbed(options = {}) {
         title: options.title,
         titleIcon: options.icon || ICONS.party,
         color: options.color || PS99_COLORS.rainbow,
-        description: `\`\`\`ansi\n[1;35m╔═══════════════════════════════════╗[0m\n[1;35m║[0m       [1;33mSPECIAL EVENT[0m       [1;35m║[0m\n[1;35m╚═══════════════════════════════════╝[0m\`\`\`\n\n${options.description}`,
+        description: `\`\`\`\n╔═══════════════════════════════════╗\n║       ✨ SPECIAL EVENT ✨       ║\n╚═══════════════════════════════════╝\`\`\`\n\n${options.description}`,
         fields: options.fields,
         footer: options.footer || 'Limited Time Event!'
     });
@@ -323,7 +323,7 @@ function createColorGuessEmbed(color, timeLeft, prize) {
         title: 'Guess The Color!',
         titleIcon: ICONS.color,
         color: PS99_COLORS.rainbow,
-        description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33mCOLOR GUESSING GAME[0m    [1;35m│[0m\n[1;35m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${timeLeft}s\`\n\n**Click a color button to guess!**\n\n🔴 🔵 🟢 🟡 🟣 🟠`,
+        description: `\`\`\`\n╭─────────────────────────────╮\n│    🎨 COLOR GUESSING GAME 🎨    │\n╰─────────────────────────────╯\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${timeLeft}s\`\n\n**Click a color button to guess!**\n\n🔴 🔵 🟢 🟡 🟣 🟠`,
         footer: 'First correct guess wins!'
     });
 }
@@ -335,7 +335,7 @@ function createNumberGuessEmbed(range, timeLeft, prize, hints = []) {
         title: 'Guess The Number!',
         titleIcon: ICONS.guess,
         color: PS99_COLORS.cosmic,
-        description: `\`\`\`ansi\n[1;36m╭─────────────────────────────╮[0m\n[1;36m│[0m    [1;33mNUMBER GUESSING GAME[0m    [1;36m│[0m\n[1;36m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${timeLeft}s\`\n🔢 **Range:** \`1 - ${range}\`\n\n**Type a number in chat to guess!**${hintsText}`,
+        description: `\`\`\`\n╭─────────────────────────────╮\n│    🔮 NUMBER GUESSING GAME 🔮    │\n╰─────────────────────────────╯\`\`\`\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${timeLeft}s\`\n🔢 **Range:** \`1 - ${range}\`\n\n**Type a number in chat to guess!**${hintsText}`,
         footer: 'Closest guess wins if no one gets it exact!'
     });
 }
@@ -348,7 +348,7 @@ function createTriviaEmbed(question, options, timeLeft, prize, category) {
         title: 'Trivia Time!',
         titleIcon: ICONS.brain,
         color: PS99_COLORS.sapphire,
-        description: `\`\`\`ansi\n[1;34m╭─────────────────────────────╮[0m\n[1;34m│[0m       [1;33m${category.toUpperCase()}[0m       [1;34m│[0m\n[1;34]╰─────────────────────────────╯[0m\`\`\`\n\n**${question}**\n\n${optionsText}\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${timeLeft}s\``,
+        description: `\`\`\`\n╭─────────────────────────────╮\n│       🧠 ${category.toUpperCase()} 🧠       │\n╰─────────────────────────────╯\`\`\`\n\n**${question}**\n\n${optionsText}\n\n${ICONS.gem} **Prize:** \`${prize.toLocaleString()}\` gems\n${ICONS.clock} **Time Left:** \`${timeLeft}s\``,
         footer: 'Click the correct answer!'
     });
 }
@@ -358,7 +358,7 @@ function createHotPotatoEmbed(currentHolder, timeLeft, prize, round) {
         title: 'Hot Potato!',
         titleIcon: ICONS.potato,
         color: PS99_COLORS.orange,
-        description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m     [1;31m💣 DON'T GET BURNED! 💣[0m     [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.potato} **Current Holder:** ${currentHolder}\n${ICONS.clock} **Time Until BOOM:** \`???\`\n🔄 **Round:** \`${round}\`\n\n${ICONS.gem} **Prize Pool:** \`${prize.toLocaleString()}\` gems\n\n**Click 'Pass' to throw the potato!**`,
+        description: `\`\`\`\n╭─────────────────────────────╮\n│     💣 DON'T GET BURNED! 💣     │\n╰─────────────────────────────╯\`\`\`\n\n${ICONS.potato} **Current Holder:** ${currentHolder}\n${ICONS.clock} **Time Until BOOM:** \`???\`\n🔄 **Round:** \`${round}\`\n\n${ICONS.gem} **Prize Pool:** \`${prize.toLocaleString()}\` gems\n\n**Click 'Pass' to throw the potato!**`,
         footer: 'Last one NOT holding wins!'
     });
 }
@@ -382,7 +382,7 @@ function createMysteryBoxEmbed(tier, prizes) {
         title: `${tier.charAt(0).toUpperCase() + tier.slice(1)} Mystery Box`,
         titleIcon: tierEmojis[tier] || ICONS.mysteryBox,
         color: tierColors[tier] || PS99_COLORS.gold,
-        description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33m✨ MYSTERY BOX ✨[0m    [1;35m│[0m\n[1;35m╰─────────────────────────────╯[0m\`\`\`\n\n**Possible Prizes:**\n${prizes.map(p => `• ${p}`).join('\n')}\n\n**Click to open!**`,
+        description: `\`\`\`\n╭─────────────────────────────╮\n│    ✨ MYSTERY BOX ✨    │\n╰─────────────────────────────╯\`\`\`\n\n**Possible Prizes:**\n${prizes.map(p => `• ${p}`).join('\n')}\n\n**Click to open!**`,
         footer: `${tier.toUpperCase()} tier box`
     });
 }
