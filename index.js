@@ -97,14 +97,28 @@ async function registerCommands() {
     
     try {
         console.log(`🔄 Registering ${commands.length} slash commands...`);
-        await rest.put(
+        const response = await rest.put(
             Routes.applicationCommands(client.user.id),
             { body: commands }
         );
         console.log(`✅ Successfully registered ${commands.length} slash commands!`);
+        console.log(`📋 Registered commands: ${response.map(cmd => cmd.name).join(', ')}`);
     } catch (error) {
         console.error('Error registering commands:', error);
     }
+}
+
+async function refreshCommands() {
+    console.log('🔄 Force refreshing command cache...');
+    
+    // Clear the command cache
+    client.commands.clear();
+    
+    // Reload all commands fresh
+    loadCommands();
+    
+    // Re-register with Discord
+    await registerCommands();
 }
 
 client.on('ready', async () => {
@@ -115,6 +129,9 @@ client.on('ready', async () => {
     console.log(`🎰 ═══════════════════════════════════════\n`);
     
     client.user.setActivity('🎰 /slots | !help', { type: 3 });
+    
+    // Force refresh commands on startup to ensure new commands show up after deployment
+    console.log('📝 Performing startup command registration...');
     await registerCommands();
 });
 
