@@ -73,9 +73,8 @@ module.exports = {
         .setDescription('Play Crash - cash out before it crashes!')
         .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addNumberOption(option =>
             option.setName('autocashout')
                 .setDescription('Auto cash out at this multiplier (optional)')

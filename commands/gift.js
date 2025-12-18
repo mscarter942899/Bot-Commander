@@ -11,11 +11,10 @@ module.exports = {
             option.setName('user')
                 .setDescription('User to gift gems to')
                 .setRequired(true))
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('amount')
-                .setDescription('Amount of gems to gift')
-                .setRequired(true)
-                .setMinValue(1)),
+                .setDescription('Amount of gems to gift (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
     
     async execute(interaction) {
         const targetUser = interaction.options.getUser('user');

@@ -9,9 +9,8 @@ module.exports = {
         .setDescription('Try to hit the progressive jackpot!')
         .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet (adds to jackpot pool)')
-                .setRequired(true)
-                .setMinValue(100)),
+                .setDescription('Amount to bet (adds to jackpot pool, e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
     
     async execute(interaction, client) {
         const betInput = interaction.options.getString('bet');

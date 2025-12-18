@@ -9,9 +9,8 @@ module.exports = {
         .setDescription('Find the ball under the cup!')
         .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addIntegerOption(option =>
             option.setName('cups')
                 .setDescription('Number of cups (3-5)')

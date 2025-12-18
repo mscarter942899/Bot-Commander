@@ -28,7 +28,6 @@ module.exports = {
             option.setName('bet')
                 .setDescription('Amount to bet')
                 .setRequired(true)
-                .setMinValue(10)),
     
     async execute(interaction, client) {
         const betInput = interaction.options.getString('bet');
