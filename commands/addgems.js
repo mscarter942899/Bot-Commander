@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const db = require('../database/db');
 const { createPS99Embed, PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,11 +11,10 @@ module.exports = {
             option.setName('user')
                 .setDescription('User to add gems to')
                 .setRequired(true))
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('amount')
-                .setDescription('Amount of gems to add')
-                .setRequired(true)
-                .setMinValue(1))
+                .setDescription('Amount of gems (e.g., 1000, 2.5m, 1b) to add')
+                .setRequired(true))
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     
     async execute(interaction) {
@@ -23,7 +23,8 @@ module.exports = {
         }
         
         const targetUser = interaction.options.getUser('user');
-        const amount = interaction.options.getInteger('amount');
+        const amountInput = interaction.options.getString('amount');
+        const amount = parseGemAmount(amountInput);
         
         db.getUser(targetUser.id, targetUser.username);
         db.addBalance(targetUser.id, amount);

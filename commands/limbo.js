@@ -14,11 +14,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('limbo')
         .setDescription('Bet on a target multiplier in Limbo!')
-        .addIntegerOption(opt =>
+        .addStringOption(opt =>
             opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addNumberOption(opt =>
             opt.setName('target')
                 .setDescription('Target multiplier (1.01 - 100)')

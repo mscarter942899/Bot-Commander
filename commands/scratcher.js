@@ -61,11 +61,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('scratcher')
         .setDescription('Buy a scratch card!')
-        .addIntegerOption(opt =>
-            opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1)),
 
     async execute(interaction, client) {
         const settings = db.getGameSettings('scratcher');

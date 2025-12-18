@@ -29,11 +29,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('keno')
         .setDescription('Play Keno!')
-        .addIntegerOption(opt =>
+        .addStringOption(opt =>
             opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addStringOption(opt =>
             opt.setName('numbers')
                 .setDescription('Pick 1-10 numbers (1-40) separated by spaces')

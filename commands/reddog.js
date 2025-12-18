@@ -26,11 +26,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('reddog')
         .setDescription('Play Red Dog Poker!')
-        .addIntegerOption(opt =>
-            opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1)),
 
     async execute(interaction, client) {
         const settings = db.getGameSettings('reddog');

@@ -30,11 +30,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('lottery')
         .setDescription('Play the lottery!')
-        .addIntegerOption(opt =>
+        .addStringOption(opt =>
             opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addStringOption(opt =>
             opt.setName('numbers')
                 .setDescription('Pick 6 numbers (1-49) separated by spaces, or type "quick" for quick pick')

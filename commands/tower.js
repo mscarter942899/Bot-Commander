@@ -9,11 +9,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('tower')
         .setDescription('Climb the tower and avoid traps!')
-        .addIntegerOption(opt =>
-            opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
         .addStringOption(opt =>
             opt.setName('difficulty')
                 .setDescription('Difficulty level')

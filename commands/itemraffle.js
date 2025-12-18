@@ -156,11 +156,9 @@ module.exports = {
             sub.setName('start')
                 .setDescription('Start a new item raffle (Admin only)')
                 .addStringOption(opt => opt.setName('item').setDescription('Prize item name').setRequired(true))
-                .addIntegerOption(opt => opt.setName('cost').setDescription('Ticket cost in gems').setRequired(true).setMinValue(1))
                 .addStringOption(opt => opt.setName('duration').setDescription('Duration (e.g., 30m, 2h, 1d, 1w)').setRequired(true))
                 .addStringOption(opt => opt.setName('description').setDescription('Item description'))
                 .addStringOption(opt => opt.setName('image').setDescription('Image URL for the item'))
-                .addIntegerOption(opt => opt.setName('winners').setDescription('Number of winners').setMinValue(1).setMaxValue(10))
                 .addIntegerOption(opt => opt.setName('maxtickets').setDescription('Maximum total tickets').setMinValue(10)))
         .addSubcommand(sub =>
             sub.setName('end')

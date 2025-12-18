@@ -28,11 +28,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('sicbo')
         .setDescription('Play Sic Bo!')
-        .addIntegerOption(opt =>
-            opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
         .addStringOption(opt =>
             opt.setName('type')
                 .setDescription('Bet type')

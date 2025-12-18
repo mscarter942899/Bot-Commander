@@ -16,11 +16,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('paigow')
         .setDescription('Play simplified Pai Gow!')
-        .addIntegerOption(opt =>
+        .addStringOption(opt =>
             opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1)),
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
 
     async execute(interaction, client) {
         const settings = db.getGameSettings('paigow');

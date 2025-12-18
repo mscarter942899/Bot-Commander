@@ -32,11 +32,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('wheel')
         .setDescription('Spin the prize wheel!')
-        .addIntegerOption(opt =>
-            opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1)),
 
     async execute(interaction, client) {
         const settings = db.getGameSettings('wheel');

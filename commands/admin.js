@@ -48,7 +48,6 @@ module.exports = {
                                     { name: 'Mines', value: 'mines' },
                                     { name: 'Coinflip', value: 'coinflip' }
                                 ))
-                        .addIntegerOption(opt => opt.setName('min').setDescription('Minimum bet').setMinValue(1))
                         .addIntegerOption(opt => opt.setName('max').setDescription('Maximum bet').setMinValue(1)))
                 .addSubcommand(sub =>
                     sub.setName('toggle')
@@ -126,7 +125,6 @@ module.exports = {
                 .addSubcommand(sub =>
                     sub.setName('jackpot')
                         .setDescription('Give a random online user a jackpot!')
-                        .addIntegerOption(opt => opt.setName('amount').setDescription('Jackpot amount').setRequired(true).setMinValue(100)))
                 .addSubcommand(sub =>
                     sub.setName('guesscolor')
                         .setDescription('Start a color guessing game!')

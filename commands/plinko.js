@@ -40,11 +40,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('plinko')
         .setDescription('Drop a ball in Plinko!')
-        .addIntegerOption(opt =>
-            opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
         .addStringOption(opt =>
             opt.setName('risk')
                 .setDescription('Risk level')

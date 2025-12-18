@@ -9,8 +9,8 @@ module.exports = {
         .setDescription('Guess a number 1-100 for multiplied winnings!')
         .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addIntegerOption(option =>
             option.setName('guess')
                 .setDescription('Your guess (1-100)')
