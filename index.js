@@ -86,7 +86,17 @@ function loadEvents() {
 
 async function registerCommands() {
     const commands = [];
-    client.commands.forEach(cmd => commands.push(cmd.data.toJSON()));
+    let commandList = [];
+    
+    client.commands.forEach((cmd, index) => {
+        try {
+            const json = cmd.data.toJSON();
+            commands.push(json);
+            commandList.push(cmd.data.name);
+        } catch (err) {
+            console.error(`❌ Error converting command ${index} (${cmd.data.name}):`, err.message);
+        }
+    });
     
     if (commands.length === 0) {
         console.log('No commands to register');
@@ -104,7 +114,10 @@ async function registerCommands() {
         console.log(`✅ Successfully registered ${commands.length} slash commands!`);
         console.log(`📋 Registered commands: ${response.map(cmd => cmd.name).join(', ')}`);
     } catch (error) {
-        console.error('Error registering commands:', error);
+        console.error('❌ Error registering commands:', error.message);
+        if (error.rawError && error.rawError.errors) {
+            console.error('Detailed errors:', JSON.stringify(error.rawError.errors, null, 2));
+        }
     }
 }
 
