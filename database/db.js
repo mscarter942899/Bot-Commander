@@ -77,7 +77,17 @@ let gameSettings = loadJSON(GAME_SETTINGS_PATH, {
     paigow: { minBet: 50, maxBet: 100000, enabled: true, rtp: 0.95 },
     fantan: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
     chuckluck: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.92 },
-    reddog: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 }
+    reddog: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    videopoker: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    horserace: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.92 },
+    numberguess: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.94 },
+    russianroulette: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    cups: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.90 },
+    rps: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.96 },
+    wheeloffortune: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.93 },
+    fruitslots: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.94 },
+    jackpot: { minBet: 100, maxBet: 100000, enabled: true, rtp: 0.90 },
+    luckybox: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.92 }
 });
 
 let transactions = loadJSON(TRANSACTIONS_PATH, {

@@ -63,7 +63,7 @@ function createItemSelectMenu(items, page = 0, itemsPerPage = 5) {
     
     return new ActionRowBuilder().addComponents(
         new StringSelectMenuBuilder()
-            .setCustomId('shop_buy')
+            .setCustomId('shop_select')
             .setPlaceholder('Select an item to purchase...')
             .addOptions(options)
     );
