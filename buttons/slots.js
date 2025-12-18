@@ -34,11 +34,12 @@ module.exports = {
         
         let bet = parseInt(betStr);
         const user = db.getUser(interaction.user.id, interaction.user.username);
+        const gameSettings = db.getGameSettings('slots');
         
         if (type === 'double') {
             bet = bet * 2;
         } else if (type === 'max') {
-            bet = Math.min(user.balance, 10000);
+            bet = Math.min(user.balance, gameSettings.maxBet);
         }
         
         if (user.balance < bet) {
