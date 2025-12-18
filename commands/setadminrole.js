@@ -8,10 +8,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('setadminrole')
         .setDescription('Set which role can use admin commands (Owner only)')
-        .addRoleOption(opt =>
-            opt.setName('role')
-                .setDescription('The role that can use admin commands')
-                .setRequired(false))
         .addSubcommand(sub =>
             sub.setName('set')
                 .setDescription('Set the admin role')
