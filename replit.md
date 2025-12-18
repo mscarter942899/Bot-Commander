@@ -31,7 +31,8 @@ project/
 - Gift system between users
 - Tier-based leaderboard (Bronze, Silver, Gold, Platinum, Diamond)
 
-### Gambling Games (11 Total)
+### Gambling Games (31+ Total)
+**Classic Games:**
 - **Slots**: Animated 3-reel machine with premium visuals
 - **Blackjack**: Real card emojis, full game logic
 - **Poker**: Texas Hold'em with 5 community cards
@@ -43,6 +44,18 @@ project/
 - **Dice**: Roll dice with various bet types
 - **Mines**: Reveal gems in 4x4 grid, avoid bombs
 - **Coinflip**: Double or nothing
+
+**New Games:**
+- **Video Poker**: Hold and draw, Jacks or Better (up to 250x Royal Flush!)
+- **Horse Race**: Bet on 5 horses with different odds (2x-8x)
+- **Number Guess**: Guess a number 1-100 (up to 50x for exact match!)
+- **Russian Roulette**: Survive pulls for multipliers (up to 10x)
+- **Cups**: Find the ball under cups (2.5x-4.5x based on difficulty)
+- **Rock Paper Scissors**: Classic RPS (2x payout)
+- **Wheel of Fortune**: Spin for multipliers (up to 25x)
+- **Fruit Slots**: 5-reel fruit machine (up to 200x for 5-of-a-kind!)
+- **Jackpot**: Progressive jackpot pool (chance at mega jackpot!)
+- **Lucky Box**: Mystery box with rarity tiers (Common to Legendary)
 
 ### Shop System
 - Admin can add/edit/remove shop items
@@ -72,7 +85,21 @@ project/
 - Inventory management (grant/clear items)
 
 ### Fun Admin Events
+**Via /admin fun:**
 - `/admin fun makeitrain` - Give gems to all reactors
+
+**Via /funevent:**
+- `/funevent gemrain` - Click-to-catch gem drops
+- `/funevent luckydraw` - Random winners from participants
+- `/funevent quiz` - Trivia quiz for gems
+- `/funevent scramble` - Word unscramble challenge
+- `/funevent mathrace` - First to solve math problem wins
+
+**Via /serverboost:**
+- `/serverboost doublexp` - Enable double gems for a duration
+- `/serverboost bonusdaily` - Give bonus gems to all users
+- `/serverboost massadd` - Gem giveaway via reactions
+- `/serverboost resetdaily` - Reset a user's daily cooldown
 - `/admin fun guesscolor` - Color guessing game for gems
 - `/admin fun guessnumber` - Number guessing with hints
 - `/admin fun trivia` - Trivia quiz with categories
