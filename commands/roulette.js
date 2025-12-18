@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
-const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 const ROULETTE_NUMBERS = {
     0: 'green',
