@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createPremiumEmbed, PS99_COLORS, ICONS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 const config = require('../config.json');
 
 const SYMBOLS = ['🍒', '🍋', '🍊', '🍉', '⭐', '🔔', '💎', '7️⃣'];
@@ -126,7 +127,8 @@ module.exports = {
                 .setMinValue(10)),
     
     async execute(interaction, client) {
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         const gameSettings = db.getGameSettings('slots');

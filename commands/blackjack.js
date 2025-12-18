@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 const { createDeck, calculateHandValue, handToString, handToLargeString, getCardEmoji } = require('../utils/cards');
 
 function createBlackjackEmbed(playerHand, dealerHand, bet, hideDealer = true, status = 'playing') {
@@ -100,14 +101,14 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('blackjack')
         .setDescription('Play blackjack against the dealer!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10)),
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
     
     async execute(interaction, client) {
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         if (user.balance < bet) {

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('discord.js');
 const db = require('../database/db');
 const { createPremiumEmbed, PS99_COLORS, ICONS, createSuccessEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,10 +16,10 @@ module.exports = {
                         .setDescription('Channel to announce big wins')
                         .addChannelTypes(ChannelType.GuildText)
                         .setRequired(true))
-                .addIntegerOption(opt =>
+                .addStringOption(opt =>
                     opt.setName('threshold')
-                        .setDescription('Minimum win amount to announce (default: 10000)')
-                        .setMinValue(100)))
+                        .setDescription('Minimum win amount (e.g., 100m, 1.5b, 50k)')
+                        .setRequired(false)))
         .addSubcommand(sub =>
             sub.setName('disable')
                 .setDescription('Disable big wins notifications'))
@@ -31,7 +32,8 @@ module.exports = {
 
         if (subcommand === 'setup') {
             const channel = interaction.options.getChannel('channel');
-            const threshold = interaction.options.getInteger('threshold') || 10000;
+            const thresholdInput = interaction.options.getString('threshold');
+            const threshold = thresholdInput ? parseGemAmount(thresholdInput) : 10000000;
 
             db.setBigWinsSettings({
                 enabled: true,

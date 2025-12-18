@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 function flipCoin() {
     return Math.random() < 0.48 ? 'heads' : 'tails';
@@ -57,11 +58,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('coinflip')
         .setDescription('Flip a coin - double or nothing!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addStringOption(option =>
             option.setName('choice')
                 .setDescription('Heads or Tails')
@@ -77,7 +77,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Coinflip is currently disabled!')], ephemeral: true });
         }
         
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const choice = interaction.options.getString('choice');
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
