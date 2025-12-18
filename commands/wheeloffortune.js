@@ -31,8 +31,8 @@ module.exports = {
         .setDescription('Spin the Wheel of Fortune!')
         .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
     
     async execute(interaction, client) {
         const betInput = interaction.options.getString('bet');

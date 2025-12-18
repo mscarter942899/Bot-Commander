@@ -27,6 +27,7 @@ module.exports = {
             sub.setName('scramble')
                 .setDescription('Word scramble game!')
                 .addStringOption(opt => opt.setName('word').setDescription('Word to scramble').setRequired(true))
+                .addIntegerOption(opt => opt.setName('prize').setDescription('Prize amount').setRequired(true).setMinValue(100)))
         .addSubcommand(sub =>
             sub.setName('mathrace')
                 .setDescription('First to solve wins!')
