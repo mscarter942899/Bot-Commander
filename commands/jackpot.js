@@ -21,8 +21,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Jackpot is disabled!')], ephemeral: true });
         }
         
-        if (bet < 100) {
-            return interaction.reply({ embeds: [createErrorEmbed('Minimum bet is `100` gems!')], ephemeral: true });
+        if (bet < settings.minBet) {
+            return interaction.reply({ embeds: [createErrorEmbed(`Minimum bet is \`${settings.minBet}\` gems!`)], ephemeral: true });
         }
         
         if (bet > settings.maxBet) {

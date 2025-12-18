@@ -1114,5 +1114,6 @@ module.exports = {
     isOwner,
     canUseAdminCommands,
     getGameRTP,
-    setGameRTP
+    setGameRTP,
+    saveData: saveUsers
 };

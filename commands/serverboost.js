@@ -126,7 +126,8 @@ module.exports = {
             const user = interaction.options.getUser('user');
             const userData = db.getUser(user.id, user.username);
             
-            db.updateUser(user.id, { lastDaily: null, dailyStreak: userData.dailyStreak });
+            userData.lastDaily = null;
+            db.saveData();
 
             await interaction.reply({
                 embeds: [createSuccessEmbed('Daily Reset', `${user}'s daily cooldown has been reset! They can claim daily again.`)]

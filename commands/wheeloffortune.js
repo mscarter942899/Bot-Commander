@@ -43,6 +43,10 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Wheel of Fortune is disabled!')], ephemeral: true });
         }
         
+        if (bet < settings.minBet) {
+            return interaction.reply({ embeds: [createErrorEmbed(`Minimum bet is \`${settings.minBet}\` gems!`)], ephemeral: true });
+        }
+        
         if (bet > settings.maxBet) {
             return interaction.reply({ embeds: [createErrorEmbed(`Maximum bet is \`${settings.maxBet}\` gems!`)], ephemeral: true });
         }
