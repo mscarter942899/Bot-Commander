@@ -33,6 +33,10 @@ module.exports = {
                 .setDescription('View current invite rewards settings')),
 
     async execute(interaction) {
+        if (!db.canUseAdminCommands(interaction.member)) {
+            return interaction.reply({ embeds: [createErrorEmbed('You do not have permission to use this command!')], ephemeral: true });
+        }
+
         const subcommand = interaction.options.getSubcommand();
 
         if (subcommand === 'setup') {
@@ -51,7 +55,7 @@ module.exports = {
                 title: 'Invite Rewards Enabled!',
                 titleIcon: ICONS.gift,
                 color: PS99_COLORS.success,
-                description: `\`\`\`ansi\n[1;32m╭─────────────────────────────╮[0m\n[1;32m│[0m    [1;33m🎉 INVITE SYSTEM ACTIVE 🎉[0m    [1;32m│[0m\n[1;32]╰─────────────────────────────╯[0m\`\`\``,
+                description: `\`\`\`\n╭─────────────────────────────╮\n│   🎉 INVITE SYSTEM ACTIVE 🎉   │\n╰─────────────────────────────╯\`\`\``,
                 fields: [
                     { icon: ICONS.gem, name: 'Reward', value: `\`${amount.toLocaleString()}\` gems`, inline: true },
                     { icon: '📢', name: 'Channel', value: `${channel}`, inline: true },
@@ -76,7 +80,7 @@ module.exports = {
                 title: 'Invite Rewards Settings',
                 titleIcon: ICONS.gift,
                 color: settings.enabled ? PS99_COLORS.success : PS99_COLORS.error,
-                description: `\`\`\`ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;37mINVITE CONFIGURATION[0m    [1;35m│[0m\n[1;35]╰─────────────────────────────╯[0m\`\`\``,
+                description: `\`\`\`\n╭─────────────────────────────╮\n│     INVITE CONFIGURATION     │\n╰─────────────────────────────╯\`\`\``,
                 fields: [
                     { icon: settings.enabled ? ICONS.check : ICONS.cross, name: 'Status', value: settings.enabled ? '`Enabled`' : '`Disabled`', inline: true },
                     { icon: ICONS.gem, name: 'Reward', value: `\`${settings.amount?.toLocaleString() || 0}\` gems`, inline: true },

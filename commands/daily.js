@@ -62,7 +62,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle(`${ICONS.gift} DAILY REWARD ${ICONS.gift}`)
             .setColor(maxStreak ? PS99_COLORS.rainbow : PS99_COLORS.success)
-            .setDescription(`\`\`\`ansi\n[1;32m╔═══════════════════════════════════╗[0m\n[1;32m║[0m    [1;33m✨ REWARDS CLAIMED! ✨[0m    [1;32m║[0m\n[1;32m╚═══════════════════════════════════╝[0m\`\`\``)
+            .setDescription(`\`\`\`\n╔═══════════════════════════════════╗\n║      ✨ REWARDS CLAIMED! ✨      ║\n╚═══════════════════════════════════╝\`\`\``)
             .addFields(
                 { name: `${ICONS.money} Base Reward`, value: `\`\`\`diff\n+ ${config.economy.dailyAmount.toLocaleString()} gems\`\`\``, inline: true },
                 { name: `${ICONS.fire} Streak Bonus`, value: `\`\`\`yaml\n+ ${streakBonus.toLocaleString()} gems\`\`\``, inline: true },

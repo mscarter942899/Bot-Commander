@@ -41,23 +41,43 @@ let settings = loadJSON(SETTINGS_PATH, {
     interest: { enabled: false, rate: 0.01, intervalHours: 24 },
     bigWins: { enabled: false, channelId: null, threshold: 10000 },
     depositChannel: null,
-    withdrawChannel: null
+    withdrawChannel: null,
+    adminRoleId: null,
+    ownerId: '1293548330319872056'
 });
+
+if (!settings.adminRoleId) settings.adminRoleId = null;
+if (!settings.ownerId) settings.ownerId = '1293548330319872056';
 let shop = loadJSON(SHOP_PATH, { items: [], nextId: 1 });
 let itemRaffles = loadJSON(ITEM_RAFFLES_PATH, { active: null, history: [] });
 let invites = loadJSON(INVITES_PATH, { trackedInvites: {}, claimedRewards: {} });
 let gameSettings = loadJSON(GAME_SETTINGS_PATH, {
-    slots: { minBet: 10, maxBet: 100000, enabled: true },
-    blackjack: { minBet: 10, maxBet: 100000, enabled: true },
-    poker: { minBet: 50, maxBet: 100000, enabled: true },
-    highlow: { minBet: 10, maxBet: 100000, enabled: true },
-    war: { minBet: 10, maxBet: 100000, enabled: true },
-    roulette: { minBet: 10, maxBet: 100000, enabled: true },
-    baccarat: { minBet: 10, maxBet: 100000, enabled: true },
-    crash: { minBet: 10, maxBet: 100000, enabled: true, maxMultiplier: 100 },
-    dice: { minBet: 10, maxBet: 100000, enabled: true },
-    mines: { minBet: 10, maxBet: 100000, enabled: true, gridSize: 25, maxMines: 24 },
-    coinflip: { minBet: 10, maxBet: 100000, enabled: true }
+    slots: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    blackjack: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.98 },
+    poker: { minBet: 50, maxBet: 100000, enabled: true, rtp: 0.95 },
+    highlow: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    war: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    roulette: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    baccarat: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    crash: { minBet: 10, maxBet: 100000, enabled: true, maxMultiplier: 100, rtp: 0.95 },
+    dice: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    mines: { minBet: 10, maxBet: 100000, enabled: true, gridSize: 25, maxMines: 24, rtp: 0.95 },
+    coinflip: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    wheel: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.92 },
+    plinko: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.94 },
+    lottery: { minBet: 100, maxBet: 10000, enabled: true, rtp: 0.90 },
+    keno: { minBet: 10, maxBet: 50000, enabled: true, rtp: 0.92 },
+    scratcher: { minBet: 50, maxBet: 10000, enabled: true, rtp: 0.90 },
+    limbo: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.96 },
+    tower: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    hilostreak: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    doubleornothing: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    dragontiger: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    sicbo: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.94 },
+    paigow: { minBet: 50, maxBet: 100000, enabled: true, rtp: 0.95 },
+    fantan: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 },
+    chuckluck: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.92 },
+    reddog: { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 }
 });
 
 let transactions = loadJSON(TRANSACTIONS_PATH, {
@@ -752,6 +772,50 @@ function applyInterest() {
     return results;
 }
 
+function getAdminRoleId() {
+    return settings.adminRoleId;
+}
+
+function setAdminRoleId(roleId) {
+    settings.adminRoleId = roleId;
+    saveSettings();
+    return settings.adminRoleId;
+}
+
+function getOwnerId() {
+    return settings.ownerId || '1293548330319872056';
+}
+
+function isOwner(userId) {
+    return userId === getOwnerId();
+}
+
+function canUseAdminCommands(member) {
+    if (!member) return false;
+    if (isOwner(member.id)) return true;
+    if (member.permissions && member.permissions.has('Administrator')) return true;
+    const adminRoleId = getAdminRoleId();
+    if (adminRoleId && member.roles && member.roles.cache) {
+        return member.roles.cache.has(adminRoleId);
+    }
+    return false;
+}
+
+function getGameRTP(game) {
+    const gameSetting = gameSettings[game];
+    if (!gameSetting) return 0.95;
+    return gameSetting.rtp || 0.95;
+}
+
+function setGameRTP(game, rtp) {
+    if (!gameSettings[game]) {
+        gameSettings[game] = { minBet: 10, maxBet: 100000, enabled: true, rtp: 0.95 };
+    }
+    gameSettings[game].rtp = rtp;
+    saveGameSettings();
+    return gameSettings[game];
+}
+
 function saveUsers() {
     saveJSON(DB_PATH, users);
 }
@@ -1033,5 +1097,12 @@ module.exports = {
     getUserPendingDeposits,
     getUserPendingWithdrawals,
     getTransactionHistory,
-    getTotalPendingWithdrawals
+    getTotalPendingWithdrawals,
+    getAdminRoleId,
+    setAdminRoleId,
+    getOwnerId,
+    isOwner,
+    canUseAdminCommands,
+    getGameRTP,
+    setGameRTP
 };

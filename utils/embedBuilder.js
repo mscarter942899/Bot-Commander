@@ -283,7 +283,22 @@ function createGameEmbed(options = {}) {
         coinflip: ICONS.gold,
         highlow: '📊',
         war: '⚔️',
-        baccarat: ICONS.cards
+        baccarat: ICONS.cards,
+        wheel: '🎡',
+        plinko: '📍',
+        lottery: '🎟️',
+        keno: '🔢',
+        scratcher: '🎫',
+        limbo: '📉',
+        tower: '🗼',
+        hilostreak: '📊',
+        doubleornothing: '2️⃣',
+        dragontiger: '🐉',
+        sicbo: '🎲',
+        paigow: '🀄',
+        fantan: '⭕',
+        chuckluck: '🎲',
+        reddog: '🐕'
     };
     
     const icon = gameIcons[options.game] || ICONS.dice;
@@ -415,7 +430,7 @@ async function sendBigWinNotification(client, userId, username, game, winAmount,
             title: title,
             titleIcon: ICONS.trophy,
             color: color,
-            description: `\`\`\`ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;32m🎉 WINNER WINNER! 🎉[0m    [1;33m│[0m\n[1;33]╰─────────────────────────────╯[0m\`\`\`\n\n${ICONS.crown} **Player:** <@${userId}>\n${ICONS.slots} **Game:** ${game}\n${ICONS.gem} **Won:** \`${winAmount.toLocaleString()}\` gems\n${ICONS.bolt} **Multiplier:** \`${multiplier}x\``,
+            description: `\`\`\`\n╭─────────────────────────────╮\n│    🎉 WINNER WINNER! 🎉    │\n╰─────────────────────────────╯\`\`\`\n\n${ICONS.crown} **Player:** <@${userId}>\n${ICONS.slots} **Game:** ${game}\n${ICONS.gem} **Won:** \`${winAmount.toLocaleString()}\` gems\n${ICONS.bolt} **Multiplier:** \`${multiplier}x\``,
             footer: `Congratulations ${username}!`
         });
         
