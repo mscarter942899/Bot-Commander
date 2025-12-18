@@ -42,11 +42,19 @@ function startUptimeServer() {
         res.send('OK');
     });
     
-    app.listen(PORT, '0.0.0.0', () => {
+    const server = app.listen(PORT, '0.0.0.0', () => {
         console.log(`🌐 Uptime server running on port ${PORT}`);
         uptimeData.startTime = Date.now();
         uptimeData.status = 'online';
         saveUptimeData();
+    });
+    
+    server.on('error', (error) => {
+        if (error.code === 'EADDRINUSE') {
+            console.warn(`⚠️ Port ${PORT} already in use, skipping uptime server`);
+        } else {
+            console.error('Server error:', error);
+        }
     });
     
     return app;
