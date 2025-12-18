@@ -5,27 +5,28 @@ const pages = [
     {
         title: 'PS99 CASINO',
         icon: '🎰',
-        description: '```ansi\n[1;33m╔═══════════════════════════════════╗[0m\n[1;33m║[0m   [1;37mWELCOME TO PS99 CASINO[0m   [1;33m║[0m\n[1;33m║[0m   [1;36mPremium Gaming Experience[0m   [1;33m║[0m\n[1;33m╚═══════════════════════════════════╝[0m```\n\n**Navigate using the buttons below!**\n\n📑 **Page 1** - Home\n💰 **Page 2** - Economy Commands\n🎰 **Page 3** - Gambling Games\n🛒 **Page 4** - Shop & Inventory\n🎟️ **Page 5** - Raffles\n🛡️ **Page 6** - Admin Commands',
+        description: '```\n╔═══════════════════════════════════╗\n║   WELCOME TO PS99 CASINO   ║\n║   Premium Gaming Experience   ║\n╚═══════════════════════════════════╝```\n\n**Navigate using the buttons below!**\n\n📑 **Page 1** - Home\n💰 **Page 2** - Economy Commands\n🎰 **Page 3** - Classic Games (11)\n🎲 **Page 4** - New Games (15)\n🛒 **Page 5** - Shop & Inventory\n🎟️ **Page 6** - Raffles\n🛡️ **Page 7** - Admin Commands',
         color: PS99_COLORS.gold
     },
     {
         title: 'ECONOMY COMMANDS',
         icon: '💰',
-        description: '```ansi\n[1;32m╭─────────────────────────────╮[0m\n[1;32m│[0m    [1;33m💰 ECONOMY SYSTEM 💰[0m    [1;32m│[0m\n[1;32m╰─────────────────────────────╯[0m```\n\n' +
+        description: '```\n╭─────────────────────────────╮\n│    💰 ECONOMY SYSTEM 💰    │\n╰─────────────────────────────╯```\n\n' +
             '💎 `/balance` - Check your gem balance\n' +
             '🎁 `/daily` - Claim daily reward + streak bonus\n' +
             '🎀 `/gift` - Gift gems to another user\n' +
             '🏦 `/deposit` - Deposit gems to bank\n' +
             '💵 `/withdraw` - Withdraw from bank\n' +
             '🏆 `/top` - View the richest players\n' +
-            '📊 `/profile` - View your detailed stats\n\n' +
+            '📊 `/profile` - View your detailed stats\n' +
+            '📧 `/invites` - Check your invite stats\n\n' +
             '**Prefix commands:** `!bal`, `!daily`, `!gift`, `!deposit`, `!withdraw`, `!top`, `!profile`',
         color: PS99_COLORS.success
     },
     {
-        title: 'GAMBLING GAMES',
+        title: 'CLASSIC GAMBLING GAMES',
         icon: '🎰',
-        description: '```ansi\n[1;35m╭─────────────────────────────╮[0m\n[1;35m│[0m    [1;33m🎲 11 GAMES! 🎲[0m    [1;35m│[0m\n[1;35m╰─────────────────────────────╯[0m```\n\n' +
+        description: '```\n╭─────────────────────────────╮\n│    🎲 CLASSIC GAMES 🎲    │\n╰─────────────────────────────╯```\n\n' +
             '🎰 `/slots` - Premium slot machine\n' +
             '🃏 `/blackjack` - Classic 21\n' +
             '♠️ `/poker` - Texas Hold\'em\n' +
@@ -41,9 +42,30 @@ const pages = [
         color: PS99_COLORS.purple
     },
     {
+        title: 'NEW GAMBLING GAMES',
+        icon: '🎲',
+        description: '```\n╭─────────────────────────────╮\n│    ✨ 15 NEW GAMES ✨    │\n╰─────────────────────────────╯```\n\n' +
+            '🎡 `/wheel` - Spin the prize wheel\n' +
+            '📍 `/plinko` - Drop the ball\n' +
+            '🎟️ `/lottery` - Pick 6 numbers\n' +
+            '🔢 `/keno` - Match numbers\n' +
+            '🎫 `/scratcher` - Scratch cards\n' +
+            '📉 `/limbo` - Target multiplier\n' +
+            '🗼 `/tower` - Climb & avoid traps\n' +
+            '📊 `/hilostreak` - Build a streak\n' +
+            '2️⃣ `/doubleornothing` - Risk it all\n' +
+            '🐉 `/dragontiger` - Dragon vs Tiger\n' +
+            '🎲 `/sicbo` - Three dice game\n' +
+            '🀄 `/paigow` - Pai Gow tiles\n' +
+            '⭕ `/fantan` - Count the beads\n' +
+            '🎲 `/chuckluck` - Lucky dice\n' +
+            '🐕 `/reddog` - Red Dog poker',
+        color: PS99_COLORS.neon
+    },
+    {
         title: 'SHOP & INVENTORY',
         icon: '🛒',
-        description: '```ansi\n[1;36m╭─────────────────────────────╮[0m\n[1;36m│[0m    [1;33m🛒 SHOP SYSTEM 🛒[0m    [1;36m│[0m\n[1;36m╰─────────────────────────────╯[0m```\n\n' +
+        description: '```\n╭─────────────────────────────╮\n│    🛒 SHOP SYSTEM 🛒    │\n╰─────────────────────────────╯```\n\n' +
             '**Shop Commands:**\n' +
             '🛍️ `/shop browse` - Browse available items\n' +
             '💳 `/shop buy <id>` - Purchase an item\n\n' +
@@ -57,7 +79,7 @@ const pages = [
     {
         title: 'RAFFLE SYSTEM',
         icon: '🎟️',
-        description: '```ansi\n[1;33m╭─────────────────────────────╮[0m\n[1;33m│[0m    [1;35m🎟️ RAFFLES 🎟️[0m    [1;33m│[0m\n[1;33m╰─────────────────────────────╯[0m```\n\n' +
+        description: '```\n╭─────────────────────────────╮\n│    🎟️ RAFFLES 🎟️    │\n╰─────────────────────────────╯```\n\n' +
             '**Gem Raffles:**\n' +
             '👁️ `/raffle view` - View active raffle\n' +
             '📜 `/raffle history` - Past raffle results\n\n' +
@@ -70,11 +92,12 @@ const pages = [
     {
         title: 'ADMIN COMMANDS',
         icon: '🛡️',
-        description: '```ansi\n[1;31m╭─────────────────────────────╮[0m\n[1;31m│[0m    [1;33m⚡ ADMIN PANEL ⚡[0m    [1;31m│[0m\n[1;31m╰─────────────────────────────╯[0m```\n\n' +
+        description: '```\n╭─────────────────────────────╮\n│    ⚡ ADMIN PANEL ⚡    │\n╰─────────────────────────────╯```\n\n' +
             '**Economy:**\n`/addgems` `/removegems` `/admin economy`\n\n' +
-            '**Games:**\n`/admin games setbet` - Set min/max bets\n`/admin games toggle` - Enable/disable games\n\n' +
-            '**Fun Events:**\n`/admin fun makeitrain` - Gem giveaway\n`/admin fun guesscolor` - Color game\n`/admin fun guessnumber` - Number game\n`/admin fun trivia` - Trivia quiz\n`/admin fun hotpotato` - Hot potato!\n`/admin fun mysterybox` - Mystery boxes\n`/admin fun jackpot` - Random jackpot\n\n' +
-            '**Shop & Raffles:**\n`/shop add/edit/remove`\n`/raffle start/end/cancel`\n`/itemraffle start/end/cancel`',
+            '**Games:**\n`/admin games setbet` - Set min/max bets\n`/admin games toggle` - Enable/disable games\n`/setrtp` - Set return-to-player rates\n\n' +
+            '**Settings:**\n`/setadminrole` - Set admin role (Owner only)\n`/inviterewards` - Configure invite rewards\n\n' +
+            '**Fun Events:**\n`/admin fun makeitrain` - Gem giveaway\n`/admin fun guesscolor` - Color game\n`/admin fun guessnumber` - Number game\n`/admin fun trivia` - Trivia quiz\n`/admin fun mysterybox` - Mystery boxes\n\n' +
+            '**Shop & Raffles:**\n`/shop add/edit/remove`\n`/raffle start/end/cancel`',
         color: PS99_COLORS.error
     }
 ];

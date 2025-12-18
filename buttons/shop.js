@@ -1,7 +1,50 @@
 const db = require('../database/db');
-const { PS99_COLORS, createErrorEmbed, createSuccessEmbed } = require('../utils/embedBuilder');
-const { createShopEmbed, createItemEmbed } = require('../commands/shop');
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require('discord.js');
+const { PS99_COLORS, createErrorEmbed, createSuccessEmbed, createPremiumEmbed } = require('../utils/embedBuilder');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
+
+function createShopEmbed(items, page = 0, itemsPerPage = 5) {
+    const start = page * itemsPerPage;
+    const pageItems = items.slice(start, start + itemsPerPage);
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+    
+    const embed = new EmbedBuilder()
+        .setTitle('🛒 ═══ SHOP ═══ 🛒')
+        .setColor(PS99_COLORS.neon)
+        .setFooter({ text: `Page ${page + 1}/${totalPages} | 💎 PS99 Casino 💎` })
+        .setTimestamp();
+    
+    if (pageItems.length === 0) {
+        embed.setDescription('The shop is empty! Check back later.');
+        return embed;
+    }
+    
+    let description = '';
+    pageItems.forEach((item, i) => {
+        const stockText = item.stock === null ? '∞' : item.stock;
+        description += `**${start + i + 1}. ${item.name}** - \`${item.price.toLocaleString()}\` gems\n`;
+        if (item.description) description += `   *${item.description}*\n`;
+        description += `   📦 Stock: ${stockText} | 🏷️ ${item.category}\n\n`;
+    });
+    
+    embed.setDescription(description);
+    return embed;
+}
+
+function createItemEmbed(item) {
+    const stockText = item.stock === null ? 'Unlimited' : item.stock;
+    
+    return new EmbedBuilder()
+        .setTitle(`🛍️ ${item.name}`)
+        .setColor(PS99_COLORS.neon)
+        .setDescription(item.description || 'No description available')
+        .addFields(
+            { name: '💰 Price', value: `\`${item.price.toLocaleString()}\` gems`, inline: true },
+            { name: '📦 Stock', value: stockText.toString(), inline: true },
+            { name: '🏷️ Category', value: item.category, inline: true }
+        )
+        .setFooter({ text: '💎 PS99 Casino 💎' })
+        .setTimestamp();
+}
 
 function createShopButtons(page, totalPages) {
     return new ActionRowBuilder().addComponents(
@@ -32,7 +75,7 @@ function createItemSelectMenu(items, page = 0, itemsPerPage = 5) {
     
     return new ActionRowBuilder().addComponents(
         new StringSelectMenuBuilder()
-            .setCustomId('shop_buy')
+            .setCustomId('shop_select')
             .setPlaceholder('Select an item to purchase...')
             .addOptions(options)
     );
@@ -64,6 +107,11 @@ module.exports = {
             
         } else if (action === 'confirm') {
             const itemId = parseInt(parts[2]);
+            const item = db.getShopItem(itemId);
+            
+            if (!item || !item.enabled) {
+                return interaction.reply({ embeds: [createErrorEmbed('Item no longer available!')], ephemeral: true });
+            }
             
             const result = db.buyShopItem(interaction.user.id, itemId);
             
@@ -86,16 +134,35 @@ module.exports = {
             
         } else if (action === 'cancel') {
             await interaction.update({
-                embeds: [createSuccessEmbed('Cancelled', 'Purchase cancelled.')],
+                embeds: [createPremiumEmbed({
+                    title: 'Cancelled',
+                    titleIcon: '❌',
+                    description: 'Purchase cancelled.',
+                    color: PS99_COLORS.info
+                })],
                 components: []
             });
             
-        } else if (action === 'buy' || interaction.isStringSelectMenu()) {
-            const itemId = parseInt(interaction.values ? interaction.values[0] : parts[2]);
+        } else if (action === 'select' || interaction.isStringSelectMenu()) {
+            let itemId;
+            if (interaction.isStringSelectMenu()) {
+                itemId = parseInt(interaction.values[0]);
+            } else {
+                itemId = parseInt(parts[2]);
+            }
+            
             const item = db.getShopItem(itemId);
             
             if (!item || !item.enabled) {
                 return interaction.reply({ embeds: [createErrorEmbed('Item not found!')], ephemeral: true });
+            }
+            
+            const user = db.getUser(interaction.user.id);
+            if (user.balance < item.price) {
+                return interaction.reply({ 
+                    embeds: [createErrorEmbed(`You need \`${item.price.toLocaleString()}\` gems but only have \`${user.balance.toLocaleString()}\` gems!`)], 
+                    ephemeral: true 
+                });
             }
             
             const buyButtons = new ActionRowBuilder().addComponents(

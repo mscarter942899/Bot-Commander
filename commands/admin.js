@@ -163,6 +163,10 @@ module.exports = {
                                 )))),
     
     async execute(interaction, client) {
+        if (!db.canUseAdminCommands(interaction.member)) {
+            return interaction.reply({ embeds: [createErrorEmbed('You do not have permission to use admin commands!')], ephemeral: true });
+        }
+
         const group = interaction.options.getSubcommandGroup();
         const subcommand = interaction.options.getSubcommand();
         
