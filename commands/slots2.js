@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
@@ -44,14 +45,15 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('fruitslots')
         .setDescription('5-reel fruit slots!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
                 .setDescription('Amount to bet')
                 .setRequired(true)
                 .setMinValue(10)),
     
     async execute(interaction, client) {
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         const settings = db.getGameSettings('fruitslots') || { enabled: true, minBet: 10, maxBet: 100000 };

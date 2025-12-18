@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createGameEmbed, createWinEmbed, createLoseEmbed, createErrorEmbed, PS99_COLORS, sendBigWinNotification } = require('../utils/embedBuilder');
@@ -50,7 +51,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Sic Bo is currently disabled!')], ephemeral: true });
         }
 
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const betType = interaction.options.getString('type');
         
         if (bet < settings.minBet || bet > settings.maxBet) {

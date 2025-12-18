@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createGameEmbed, createWinEmbed, createLoseEmbed, createErrorEmbed, PS99_COLORS, sendBigWinNotification } = require('../utils/embedBuilder');
@@ -31,7 +32,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Limbo is currently disabled!')], ephemeral: true });
         }
 
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const target = interaction.options.getNumber('target');
         
         if (bet < settings.minBet || bet > settings.maxBet) {

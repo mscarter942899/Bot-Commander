@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const db = require('../database/db');
 const { createGameEmbed, createWinEmbed, createLoseEmbed, createErrorEmbed, PS99_COLORS, sendBigWinNotification } = require('../utils/embedBuilder');
@@ -32,7 +33,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Hi-Lo Streak is currently disabled!')], ephemeral: true });
         }
 
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         
         if (bet < settings.minBet || bet > settings.maxBet) {
             return interaction.reply({ embeds: [createErrorEmbed(`Bet must be between ${settings.minBet.toLocaleString()} and ${settings.maxBet.toLocaleString()} gems!`)], ephemeral: true });

@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createPS99Embed, PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
@@ -18,7 +19,8 @@ module.exports = {
     
     async execute(interaction) {
         const targetUser = interaction.options.getUser('user');
-        const amount = interaction.options.getInteger('amount');
+        const amountInput = interaction.options.getString('amount');
+        const amount = parseGemAmount(amountInput);
         
         if (targetUser.id === interaction.user.id) {
             return interaction.reply({ embeds: [createErrorEmbed('You cannot gift gems to yourself!')], ephemeral: true });

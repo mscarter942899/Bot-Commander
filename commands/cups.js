@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
@@ -6,7 +7,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('cups')
         .setDescription('Find the ball under the cup!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
                 .setDescription('Amount to bet')
                 .setRequired(true)
@@ -19,7 +20,8 @@ module.exports = {
                 .setMaxValue(5)),
     
     async execute(interaction, client) {
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const numCups = interaction.options.getInteger('cups') || 3;
         const user = db.getUser(interaction.user.id, interaction.user.username);
         

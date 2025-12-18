@@ -1,3 +1,4 @@
+const { parseGemAmount } = require('../utils/numberParser');
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
@@ -70,7 +71,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('crash')
         .setDescription('Play Crash - cash out before it crashes!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
                 .setDescription('Amount to bet')
                 .setRequired(true)
@@ -87,7 +88,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Crash is currently disabled!')], ephemeral: true });
         }
         
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const autoCashout = interaction.options.getNumber('autocashout') || null;
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
