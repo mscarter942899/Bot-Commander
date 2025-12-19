@@ -175,6 +175,17 @@ client.on('interactionCreate', async (interaction) => {
                 console.error(`Error handling button ${buttonId}:`, error);
             }
         }
+    } else if (interaction.isStringSelectMenu()) {
+        const [buttonId] = interaction.customId.split('_');
+        const button = client.buttons.get(buttonId);
+        
+        if (button) {
+            try {
+                await button.execute(interaction, client);
+            } catch (error) {
+                console.error(`Error handling select menu ${buttonId}:`, error);
+            }
+        }
     }
 });
 
