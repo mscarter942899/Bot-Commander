@@ -84,67 +84,8 @@ function createItemSelectMenu(items, page = 0, itemsPerPage = 5) {
 module.exports = {
     customId: 'shop',
     async execute(interaction, client) {
-        const parts = interaction.customId.split('_');
-        const action = parts[1];
-        
-        if (action === 'prev' || action === 'next') {
-            const currentPage = parseInt(parts[2]);
-            const newPage = action === 'prev' ? currentPage - 1 : currentPage + 1;
-            
-            const items = db.getShopItems();
-            const totalPages = Math.ceil(items.length / 5);
-            
-            const embed = createShopEmbed(items, newPage);
-            const selectMenu = createItemSelectMenu(items, newPage);
-            const buttons = createShopButtons(newPage, totalPages);
-            
-            const components = selectMenu ? [selectMenu, buttons] : [buttons];
-            
-            await interaction.update({
-                embeds: [embed],
-                components: components
-            });
-            
-        } else if (action === 'confirm') {
-            const itemId = parseInt(parts[2]);
-            const item = db.getShopItem(itemId);
-            
-            if (!item || !item.enabled) {
-                return interaction.reply({ embeds: [createErrorEmbed('Item no longer available!')], ephemeral: true });
-            }
-            
-            const result = db.buyShopItem(interaction.user.id, itemId);
-            
-            if (!result.success) {
-                return interaction.reply({ embeds: [createErrorEmbed(result.reason)], ephemeral: true });
-            }
-            
-            db.addLog({
-                type: 'shop_purchase',
-                userId: interaction.user.id,
-                username: interaction.user.username,
-                item: result.item.name,
-                price: result.item.price
-            });
-            
-            await interaction.update({
-                embeds: [createSuccessEmbed('Purchase Complete!', `You bought **${result.item.name}** for \`${result.item.price.toLocaleString()}\` gems!\n\nCheck your inventory with \`/inventory view\``)],
-                components: []
-            });
-            
-        } else if (action === 'cancel') {
-            await interaction.update({
-                embeds: [createPremiumEmbed({
-                    title: 'Cancelled',
-                    titleIcon: '❌',
-                    description: 'Purchase cancelled.',
-                    color: PS99_COLORS.info
-                })],
-                components: []
-            });
-            
-        } else if (interaction.isStringSelectMenu && interaction.isStringSelectMenu()) {
-            try {
+        try {
+            if (interaction.isStringSelectMenu && interaction.isStringSelectMenu()) {
                 const itemId = parseInt(interaction.values[0]);
                 const item = db.getShopItem(itemId);
                 
@@ -176,9 +117,72 @@ module.exports = {
                     components: [buyButtons],
                     ephemeral: true
                 });
-            } catch (error) {
-                console.error('Shop select error:', error);
-                await interaction.reply({ embeds: [createErrorEmbed('An error occurred!')], ephemeral: true });
+                return;
+            }
+            
+            const parts = interaction.customId.split('_');
+            const action = parts[1];
+            
+            if (action === 'prev' || action === 'next') {
+                const currentPage = parseInt(parts[2]);
+                const newPage = action === 'prev' ? currentPage - 1 : currentPage + 1;
+                
+                const items = db.getShopItems();
+                const totalPages = Math.ceil(items.length / 5);
+                
+                const embed = createShopEmbed(items, newPage);
+                const selectMenu = createItemSelectMenu(items, newPage);
+                const buttons = createShopButtons(newPage, totalPages);
+                
+                const components = selectMenu ? [selectMenu, buttons] : [buttons];
+                
+                await interaction.update({
+                    embeds: [embed],
+                    components: components
+                });
+                
+            } else if (action === 'confirm') {
+                const itemId = parseInt(parts[2]);
+                const item = db.getShopItem(itemId);
+                
+                if (!item || !item.enabled) {
+                    return interaction.reply({ embeds: [createErrorEmbed('Item no longer available!')], ephemeral: true });
+                }
+                
+                const result = db.buyShopItem(interaction.user.id, itemId);
+                
+                if (!result.success) {
+                    return interaction.reply({ embeds: [createErrorEmbed(result.reason)], ephemeral: true });
+                }
+                
+                db.addLog({
+                    type: 'shop_purchase',
+                    userId: interaction.user.id,
+                    username: interaction.user.username,
+                    item: result.item.name,
+                    price: result.item.price
+                });
+                
+                await interaction.update({
+                    embeds: [createSuccessEmbed('Purchase Complete!', `You bought **${result.item.name}** for \`${result.item.price.toLocaleString()}\` gems!\n\nCheck your inventory with \`/inventory view\``)],
+                    components: []
+                });
+                
+            } else if (action === 'cancel') {
+                await interaction.update({
+                    embeds: [createPremiumEmbed({
+                        title: 'Cancelled',
+                        titleIcon: '❌',
+                        description: 'Purchase cancelled.',
+                        color: PS99_COLORS.info
+                    })],
+                    components: []
+                });
+            }
+        } catch (error) {
+            console.error('Shop handler error:', error);
+            if (!interaction.replied) {
+                await interaction.reply({ embeds: [createErrorEmbed('An error occurred!')], ephemeral: true }).catch(() => {});
             }
         }
     }
