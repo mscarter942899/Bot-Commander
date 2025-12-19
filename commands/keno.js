@@ -89,6 +89,16 @@ module.exports = {
 
         const matchedDisplay = playerNumbers.map(n => drawnNumbers.includes(n) ? `**[${n}]**` : n).join(', ');
 
+        const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+        function createPlayAgainButton(bet) {
+            return new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`keno_again_${bet}`)
+                    .setLabel('🔄 Play Again')
+                    .setStyle(ButtonStyle.Success)
+            );
+        }
+
         if (winnings > 0) {
             db.addBalance(interaction.user.id, winnings);
             db.recordGame(interaction.user.id, true, bet, winnings);
@@ -100,14 +110,14 @@ module.exports = {
 
             const embed = createWinEmbed('Keno', winnings, multiplier, 
                 `🎫 **Your Numbers:** ${matchedDisplay}\n🏆 **Drawn:** ${drawnNumbers.slice(0, 10).join(', ')}...\n\n✨ You matched **${matches}/${playerNumbers.length}** numbers!`);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         } else {
             db.recordGame(interaction.user.id, false, bet, 0);
             db.addHouseProfit(bet);
 
             const embed = createLoseEmbed('Keno', bet, 
                 `🎫 **Your Numbers:** ${matchedDisplay}\n🏆 **Drawn:** ${drawnNumbers.slice(0, 10).join(', ')}...\n\n😔 You only matched **${matches}/${playerNumbers.length}** numbers.`);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         }
     }
 };

@@ -127,8 +127,8 @@ module.exports = {
                 .setMinValue(10)),
     
     async execute(interaction, client) {
-        const betInput = interaction.options.getString('bet');
-        const bet = parseGemAmount(betInput);
+        const betInput = interaction.options.getInteger('bet');
+        const bet = betInput;
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         const gameSettings = db.getGameSettings('slots');

@@ -98,6 +98,16 @@ module.exports = {
             db.addHouseProfit(bet);
         }
         
+        const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+        function createPlayAgainButton(bet) {
+            return new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`wheeloffortune_again_${bet}`)
+                    .setLabel('🔄 Spin Again')
+                    .setStyle(ButtonStyle.Success)
+            );
+        }
+
         db.addLog({
             type: 'wheeloffortune',
             userId: interaction.user.id,
@@ -105,6 +115,6 @@ module.exports = {
             bet, result: result.label, multiplier: result.multiplier, winAmount, won: result.multiplier > 0
         });
         
-        await interaction.editReply({ embeds: [resultEmbed] });
+        await interaction.editReply({ embeds: [resultEmbed], components: [createPlayAgainButton(bet)] });
     }
 };

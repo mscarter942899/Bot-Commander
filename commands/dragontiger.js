@@ -11,15 +11,16 @@ function getRandomCard() {
     return { display: `${values[valueIndex]}${suit}`, value: valueIndex };
 }
 
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('dragontiger')
         .setDescription('Bet on Dragon or Tiger!')
-        .addIntegerOption(opt =>
+        .addStringOption(opt =>
             opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addStringOption(opt =>
             opt.setName('choice')
                 .setDescription('Bet on Dragon, Tiger, or Tie')
@@ -84,6 +85,23 @@ module.exports = {
         const winnings = Math.floor(bet * multiplier);
         const resultDisplay = `🐉 **Dragon:** \`${dragonCard.display}\`\n🐅 **Tiger:** \`${tigerCard.display}\`\n\n🏆 **Winner:** ${result === 'dragon' ? '🐉 Dragon' : result === 'tiger' ? '🐅 Tiger' : '🤝 Tie'}`;
 
+        function createPlayAgainButton(bet) {
+            return new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`dragontiger_dragon_${bet}`)
+                    .setLabel('🐉 Play Again')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId(`dragontiger_tiger_${bet}`)
+                    .setLabel('🐅 Play Again')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId(`dragontiger_tie_${bet}`)
+                    .setLabel('🤝 Play Again')
+                    .setStyle(ButtonStyle.Secondary)
+            );
+        }
+
         if (won && winnings > 0) {
             db.addBalance(interaction.user.id, winnings);
             db.recordGame(interaction.user.id, true, bet, winnings);
@@ -94,13 +112,13 @@ module.exports = {
             }
 
             const embed = createWinEmbed('Dragon Tiger', winnings, multiplier, resultDisplay);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         } else {
             db.recordGame(interaction.user.id, false, bet, 0);
             db.addHouseProfit(bet);
 
             const embed = createLoseEmbed('Dragon Tiger', bet, resultDisplay);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         }
     }
 };

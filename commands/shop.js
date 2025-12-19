@@ -120,6 +120,7 @@ module.exports = {
             sub.setName('add')
                 .setDescription('Add an item to the shop (Admin only)')
                 .addStringOption(opt => opt.setName('name').setDescription('Item name').setRequired(true))
+                .addIntegerOption(opt => opt.setName('cost').setDescription('Item cost in gems').setRequired(true))
                 .addStringOption(opt => opt.setName('description').setDescription('Item description'))
                 .addStringOption(opt => opt.setName('category').setDescription('Item category'))
                 .addIntegerOption(opt => opt.setName('stock').setDescription('Stock quantity (leave empty for unlimited)'))
@@ -192,7 +193,7 @@ module.exports = {
             }
             
             const name = interaction.options.getString('name');
-            const price = interaction.options.getInteger('price');
+            const price = interaction.options.getInteger('cost');
             const description = interaction.options.getString('description') || '';
             const category = interaction.options.getString('category') || 'General';
             const stock = interaction.options.getInteger('stock') || null;

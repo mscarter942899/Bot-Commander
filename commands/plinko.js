@@ -41,6 +41,10 @@ module.exports = {
         .setName('plinko')
         .setDescription('Drop a ball in Plinko!')
         .addStringOption(opt =>
+            opt.setName('bet')
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
+        .addStringOption(opt =>
             opt.setName('risk')
                 .setDescription('Risk level')
                 .setRequired(false)
@@ -88,6 +92,16 @@ module.exports = {
 
         const board = createPlinkoBoard(result.index);
 
+        const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+        function createPlayAgainButton(bet) {
+            return new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`plinko_again_${bet}`)
+                    .setLabel('🔄 Play Again')
+                    .setStyle(ButtonStyle.Success)
+            );
+        }
+
         if (winnings > 0) {
             db.addBalance(interaction.user.id, winnings);
             db.recordGame(interaction.user.id, result.multiplier >= 1, bet, winnings);
@@ -99,14 +113,14 @@ module.exports = {
 
             const embed = createWinEmbed('Plinko', winnings, result.multiplier, 
                 `\`\`\`\n${board}\n\`\`\`\n📍 The ball landed on **${result.multiplier}x**!`);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         } else {
             db.recordGame(interaction.user.id, false, bet, 0);
             db.addHouseProfit(bet);
 
             const embed = createLoseEmbed('Plinko', bet, 
                 `\`\`\`\n${board}\n\`\`\`\n💀 The ball fell in the **0x** slot!`);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         }
     }
 };

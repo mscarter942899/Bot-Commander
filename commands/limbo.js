@@ -62,6 +62,16 @@ module.exports = {
         const won = result >= target;
         const winnings = won ? Math.floor(bet * target) : 0;
 
+        const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+        function createPlayAgainButton(bet) {
+            return new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`limbo_again_${bet}`)
+                    .setLabel('🔄 Play Again')
+                    .setStyle(ButtonStyle.Success)
+            );
+        }
+
         if (won) {
             db.addBalance(interaction.user.id, winnings);
             db.recordGame(interaction.user.id, true, bet, winnings);
@@ -73,14 +83,14 @@ module.exports = {
 
             const embed = createWinEmbed('Limbo', winnings, target, 
                 `📊 **Result:** \`${result.toFixed(2)}x\`\n🎯 **Target:** \`${target.toFixed(2)}x\`\n\n✨ The result was higher than your target!`);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         } else {
             db.recordGame(interaction.user.id, false, bet, 0);
             db.addHouseProfit(bet);
 
             const embed = createLoseEmbed('Limbo', bet, 
                 `📊 **Result:** \`${result.toFixed(2)}x\`\n🎯 **Target:** \`${target.toFixed(2)}x\`\n\n💀 The result was lower than your target!`);
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed], components: [createPlayAgainButton(bet)] });
         }
     }
 };
