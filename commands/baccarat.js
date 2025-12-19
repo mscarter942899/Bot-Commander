@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 const SUITS = ['♠️', '♥️', '♦️', '♣️'];
 const RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -127,11 +128,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('baccarat')
         .setDescription('Play Baccarat!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addStringOption(option =>
             option.setName('hand')
                 .setDescription('Which hand to bet on')
@@ -142,13 +142,14 @@ module.exports = {
                     { name: '🤝 Tie (9x)', value: 'tie' }
                 )),
     
-    async execute(interaction) {
+    async execute(interaction, client) {
         const settings = db.getGameSettings('baccarat');
         if (!settings.enabled) {
             return interaction.reply({ embeds: [createErrorEmbed('Baccarat is currently disabled!')], ephemeral: true });
         }
         
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const betType = interaction.options.getString('hand');
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
@@ -211,6 +212,9 @@ module.exports = {
             db.addBalance(interaction.user.id, winAmount);
             db.recordGame(interaction.user.id, true, bet, winAmount);
             db.addHouseProfit(bet - winAmount);
+            if (payout >= 9) {
+                sendBigWinNotification(client, interaction.user.id, interaction.user.username, 'Baccarat', winAmount, payout);
+            }
         } else {
             db.recordGame(interaction.user.id, false, bet, 0);
             db.addHouseProfit(bet);

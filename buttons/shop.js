@@ -143,44 +143,43 @@ module.exports = {
                 components: []
             });
             
-        } else if (action === 'select' || interaction.isStringSelectMenu()) {
-            let itemId;
-            if (interaction.isStringSelectMenu()) {
-                itemId = parseInt(interaction.values[0]);
-            } else {
-                itemId = parseInt(parts[2]);
-            }
-            
-            const item = db.getShopItem(itemId);
-            
-            if (!item || !item.enabled) {
-                return interaction.reply({ embeds: [createErrorEmbed('Item not found!')], ephemeral: true });
-            }
-            
-            const user = db.getUser(interaction.user.id);
-            if (user.balance < item.price) {
-                return interaction.reply({ 
-                    embeds: [createErrorEmbed(`You need \`${item.price.toLocaleString()}\` gems but only have \`${user.balance.toLocaleString()}\` gems!`)], 
-                    ephemeral: true 
+        } else if (interaction.isStringSelectMenu && interaction.isStringSelectMenu()) {
+            try {
+                const itemId = parseInt(interaction.values[0]);
+                const item = db.getShopItem(itemId);
+                
+                if (!item || !item.enabled) {
+                    return await interaction.reply({ embeds: [createErrorEmbed('Item not found!')], ephemeral: true });
+                }
+                
+                const user = db.getUser(interaction.user.id);
+                if (user.balance < item.price) {
+                    return await interaction.reply({ 
+                        embeds: [createErrorEmbed(`You need \`${item.price.toLocaleString()}\` gems but only have \`${user.balance.toLocaleString()}\` gems!`)], 
+                        ephemeral: true 
+                    });
+                }
+                
+                const buyButtons = new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId(`shop_confirm_${itemId}`)
+                        .setLabel('✅ Buy Now')
+                        .setStyle(ButtonStyle.Success),
+                    new ButtonBuilder()
+                        .setCustomId('shop_cancel')
+                        .setLabel('❌ Cancel')
+                        .setStyle(ButtonStyle.Danger)
+                );
+                
+                await interaction.reply({
+                    embeds: [createItemEmbed(item)],
+                    components: [buyButtons],
+                    ephemeral: true
                 });
+            } catch (error) {
+                console.error('Shop select error:', error);
+                await interaction.reply({ embeds: [createErrorEmbed('An error occurred!')], ephemeral: true });
             }
-            
-            const buyButtons = new ActionRowBuilder().addComponents(
-                new ButtonBuilder()
-                    .setCustomId(`shop_confirm_${itemId}`)
-                    .setLabel('✅ Buy Now')
-                    .setStyle(ButtonStyle.Success),
-                new ButtonBuilder()
-                    .setCustomId('shop_cancel')
-                    .setLabel('❌ Cancel')
-                    .setStyle(ButtonStyle.Danger)
-            );
-            
-            await interaction.reply({
-                embeds: [createItemEmbed(item)],
-                components: [buyButtons],
-                ephemeral: true
-            });
         }
     }
 };
