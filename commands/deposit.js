@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createPS99Embed, PS99_COLORS, ICONS, createErrorEmbed, createPremiumEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,7 +9,7 @@ module.exports = {
         .setDescription('Deposit gems into your bank')
         .addStringOption(option =>
             option.setName('amount')
-                .setDescription('Amount to deposit (number or "all")')
+                .setDescription('Amount to deposit (e.g., "1000", "5m", "2.5b", or "all")')
                 .setRequired(true)),
     
     async execute(interaction, client) {
@@ -19,11 +20,11 @@ module.exports = {
         if (amountStr === 'all') {
             amount = user.balance;
         } else {
-            amount = parseInt(amountStr);
+            amount = parseGemAmount(amountStr);
         }
         
-        if (isNaN(amount) || amount <= 0) {
-            return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid amount!')], ephemeral: true });
+        if (amount <= 0) {
+            return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid amount (e.g., "1000", "5m", "2.5b")!')], ephemeral: true });
         }
         
         if (user.balance < amount) {

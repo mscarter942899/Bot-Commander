@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 const CHOICES = {
     rock: { emoji: '🪨', beats: 'scissors', name: 'Rock' },
@@ -12,14 +13,13 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('rps')
         .setDescription('Rock Paper Scissors!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10)),
+                .setDescription('Amount to bet (e.g., "1000", "5m", "2.5b")')
+                .setRequired(true)),
     
     async execute(interaction, client) {
-        const bet = interaction.options.getInteger('bet');
+        const bet = parseGemAmount(interaction.options.getString('bet'));
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         const settings = db.getGameSettings('rps') || { enabled: true, minBet: 10, maxBet: 100000 };
@@ -27,8 +27,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('RPS is disabled!')], ephemeral: true });
         }
         
-        if (bet < settings.minBet) {
-            return interaction.reply({ embeds: [createErrorEmbed(`Minimum bet is \`${settings.minBet}\` gems!`)], ephemeral: true });
+        if (bet <= 0 || bet < settings.minBet) {
+            return interaction.reply({ embeds: [createErrorEmbed(`Please enter a valid bet (minimum: \`${settings.minBet}\` gems)!`)], ephemeral: true });
         }
         
         if (bet > settings.maxBet) {

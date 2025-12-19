@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, createPS99Embed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 function createRaffleEmbed(raffle, status = 'active') {
     const participants = Object.keys(raffle.participants).length;
@@ -102,8 +103,8 @@ module.exports = {
         .addSubcommand(sub =>
             sub.setName('start')
                 .setDescription('Start a new raffle (Admin only)')
-                .addIntegerOption(opt => opt.setName('prize').setDescription('Prize amount in gems').setRequired(true).setMinValue(100))
-                .addIntegerOption(opt => opt.setName('cost').setDescription('Ticket cost').setRequired(true).setMinValue(1))
+                .addStringOption(opt => opt.setName('prize').setDescription('Prize amount (e.g., "1000", "5m", "2.5b")').setRequired(true))
+                .addStringOption(opt => opt.setName('cost').setDescription('Ticket cost (e.g., "1000", "5m", "2.5b")').setRequired(true))
                 .addIntegerOption(opt => opt.setName('duration').setDescription('Duration in minutes').setRequired(true).setMinValue(1).setMaxValue(1440))
                 .addIntegerOption(opt => opt.setName('winners').setDescription('Number of winners').setRequired(false).setMinValue(1).setMaxValue(10))
                 .addIntegerOption(opt => opt.setName('maxtickets').setDescription('Maximum total tickets').setRequired(false).setMinValue(10)))
@@ -132,9 +133,13 @@ module.exports = {
                 return interaction.reply({ embeds: [createErrorEmbed('There is already an active raffle!')], ephemeral: true });
             }
             
-            const prize = interaction.options.getInteger('prize');
-            const cost = interaction.options.getInteger('cost');
+            const prize = parseGemAmount(interaction.options.getString('prize'));
+            const cost = parseGemAmount(interaction.options.getString('cost'));
             const duration = interaction.options.getInteger('duration') * 60000;
+            
+            if (prize <= 0 || cost <= 0) {
+                return interaction.reply({ embeds: [createErrorEmbed('Please enter valid amounts!')], ephemeral: true });
+            }
             const winners = interaction.options.getInteger('winners') || 1;
             const maxTickets = interaction.options.getInteger('maxtickets') || null;
             

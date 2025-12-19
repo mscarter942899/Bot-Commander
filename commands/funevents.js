@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed, createSuccessEmbed, createPremiumEmbed, ICONS } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,28 +11,28 @@ module.exports = {
         .addSubcommand(sub =>
             sub.setName('gemrain')
                 .setDescription('Drop gems for everyone who reacts!')
-                .addIntegerOption(opt => opt.setName('amount').setDescription('Total gems to distribute').setRequired(true).setMinValue(100))
+                .addStringOption(opt => opt.setName('amount').setDescription('Total gems to distribute (e.g., "1000", "5m", "2.5b")').setRequired(true))
                 .addIntegerOption(opt => opt.setName('duration').setDescription('Seconds to react (default 30)').setMinValue(5).setMaxValue(120)))
         .addSubcommand(sub =>
             sub.setName('luckydraw')
                 .setDescription('Random user wins gems!')
-                .addIntegerOption(opt => opt.setName('prize').setDescription('Prize amount').setRequired(true).setMinValue(100))
+                .addStringOption(opt => opt.setName('prize').setDescription('Prize amount (e.g., "1000", "5m", "2.5b")').setRequired(true))
                 .addIntegerOption(opt => opt.setName('winners').setDescription('Number of winners (default 1)').setMinValue(1).setMaxValue(10)))
         .addSubcommand(sub =>
             sub.setName('quiz')
                 .setDescription('Start a trivia quiz!')
                 .addStringOption(opt => opt.setName('question').setDescription('The question').setRequired(true))
                 .addStringOption(opt => opt.setName('answer').setDescription('Correct answer').setRequired(true))
-                .addIntegerOption(opt => opt.setName('prize').setDescription('Prize for first correct answer').setRequired(true).setMinValue(100)))
+                .addStringOption(opt => opt.setName('prize').setDescription('Prize for first correct answer (e.g., "1000", "5m")').setRequired(true)))
         .addSubcommand(sub =>
             sub.setName('scramble')
                 .setDescription('Word scramble game!')
                 .addStringOption(opt => opt.setName('word').setDescription('Word to scramble').setRequired(true))
-                .addIntegerOption(opt => opt.setName('prize').setDescription('Prize amount').setRequired(true).setMinValue(100)))
+                .addStringOption(opt => opt.setName('prize').setDescription('Prize amount (e.g., "1000", "5m", "2.5b")').setRequired(true)))
         .addSubcommand(sub =>
             sub.setName('mathrace')
                 .setDescription('First to solve wins!')
-                .addIntegerOption(opt => opt.setName('prize').setDescription('Prize amount').setRequired(true).setMinValue(100))),
+                .addStringOption(opt => opt.setName('prize').setDescription('Prize amount (e.g., "1000", "5m", "2.5b")').setRequired(true))),
 
     async execute(interaction, client) {
         if (!db.canUseAdminCommands(interaction.member)) {
@@ -41,8 +42,12 @@ module.exports = {
         const subcommand = interaction.options.getSubcommand();
 
         if (subcommand === 'gemrain') {
-            const amount = interaction.options.getInteger('amount');
+            const amount = parseGemAmount(interaction.options.getString('amount'));
             const duration = interaction.options.getInteger('duration') || 30;
+            
+            if (amount <= 0) {
+                return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid gem amount!')], ephemeral: true });
+            }
             
             const embed = new EmbedBuilder()
                 .setTitle('💎 ═══ GEM RAIN! ═══ 💎')
@@ -93,8 +98,12 @@ module.exports = {
             });
 
         } else if (subcommand === 'luckydraw') {
-            const prize = interaction.options.getInteger('prize');
+            const prize = parseGemAmount(interaction.options.getString('prize'));
             const winnersCount = interaction.options.getInteger('winners') || 1;
+            
+            if (prize <= 0) {
+                return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid prize amount!')], ephemeral: true });
+            }
 
             const embed = new EmbedBuilder()
                 .setTitle('🎰 ═══ LUCKY DRAW! ═══ 🎰')
@@ -150,7 +159,11 @@ module.exports = {
         } else if (subcommand === 'quiz') {
             const question = interaction.options.getString('question');
             const answer = interaction.options.getString('answer').toLowerCase();
-            const prize = interaction.options.getInteger('prize');
+            const prize = parseGemAmount(interaction.options.getString('prize'));
+            
+            if (prize <= 0) {
+                return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid prize amount!')], ephemeral: true });
+            }
 
             const embed = new EmbedBuilder()
                 .setTitle('❓ ═══ TRIVIA QUIZ! ═══ ❓')
@@ -186,7 +199,11 @@ module.exports = {
 
         } else if (subcommand === 'scramble') {
             const word = interaction.options.getString('word');
-            const prize = interaction.options.getInteger('prize');
+            const prize = parseGemAmount(interaction.options.getString('prize'));
+            
+            if (prize <= 0) {
+                return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid prize amount!')], ephemeral: true });
+            }
             
             const scrambled = word.split('').sort(() => Math.random() - 0.5).join('');
 
@@ -222,7 +239,11 @@ module.exports = {
             });
 
         } else if (subcommand === 'mathrace') {
-            const prize = interaction.options.getInteger('prize');
+            const prize = parseGemAmount(interaction.options.getString('prize'));
+            
+            if (prize <= 0) {
+                return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid prize amount!')], ephemeral: true });
+            }
             
             const ops = ['+', '-', '*'];
             const op = ops[Math.floor(Math.random() * ops.length)];

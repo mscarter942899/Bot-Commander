@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createGameEmbed, createWinEmbed, createLoseEmbed, createErrorEmbed, PS99_COLORS, sendBigWinNotification } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 function rollDice() {
     return [
@@ -14,11 +15,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('chuckluck')
         .setDescription('Play Chuck-a-Luck!')
-        .addIntegerOption(opt =>
+        .addStringOption(opt =>
             opt.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(1))
+                .setDescription('Amount to bet (e.g., "1000", "5m", "2.5b")')
+                .setRequired(true))
         .addIntegerOption(opt =>
             opt.setName('number')
                 .setDescription('Pick a number (1-6)')
@@ -32,11 +32,11 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Chuck-a-Luck is currently disabled!')], ephemeral: true });
         }
 
-        const bet = interaction.options.getInteger('bet');
+        const bet = parseGemAmount(interaction.options.getString('bet'));
         const choice = interaction.options.getInteger('number');
         
-        if (bet < settings.minBet || bet > settings.maxBet) {
-            return interaction.reply({ embeds: [createErrorEmbed(`Bet must be between ${settings.minBet.toLocaleString()} and ${settings.maxBet.toLocaleString()} gems!`)], ephemeral: true });
+        if (bet <= 0 || bet < settings.minBet || bet > settings.maxBet) {
+            return interaction.reply({ embeds: [createErrorEmbed(`Please enter a valid bet between ${settings.minBet.toLocaleString()} and ${settings.maxBet.toLocaleString()} gems!`)], ephemeral: true });
         }
 
         const user = db.getUser(interaction.user.id, interaction.user.username);
