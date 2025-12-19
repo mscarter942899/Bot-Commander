@@ -113,7 +113,8 @@ function getUser(userId, username = 'Unknown') {
             lastDaily: null,
             dailyStreak: 0,
             createdAt: Date.now(),
-            inventory: []
+            inventory: [],
+            robloxAccount: null
         };
         saveUsers();
     } else if (username !== 'Unknown') {
@@ -121,6 +122,9 @@ function getUser(userId, username = 'Unknown') {
     }
     if (!users[userId].inventory) {
         users[userId].inventory = [];
+    }
+    if (!users[userId].robloxAccount) {
+        users[userId].robloxAccount = null;
     }
     return users[userId];
 }
@@ -1115,5 +1119,24 @@ module.exports = {
     canUseAdminCommands,
     getGameRTP,
     setGameRTP,
-    saveData: saveUsers
+    saveData: saveUsers,
+    linkRobloxAccount(userId, robloxData) {
+        if (users[userId]) {
+            users[userId].robloxAccount = robloxData;
+            saveUsers();
+            return true;
+        }
+        return false;
+    },
+    getRobloxAccount(userId) {
+        return users[userId]?.robloxAccount || null;
+    },
+    unlinkRobloxAccount(userId) {
+        if (users[userId]) {
+            users[userId].robloxAccount = null;
+            saveUsers();
+            return true;
+        }
+        return false;
+    }
 };

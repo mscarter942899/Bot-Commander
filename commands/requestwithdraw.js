@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createPS99Embed, PS99_COLORS, ICONS, createErrorEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 const BANK_USERNAME = 'GemBank46';
 const MIN_WITHDRAWAL = 20000000;
@@ -9,20 +10,28 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('requestwithdraw')
         .setDescription('Request a gem withdrawal to your PS99 mailbox')
-        .addIntegerOption(option =>
-            option.setName('amount')
-                .setDescription('Amount of gems to withdraw (minimum 20M)')
-                .setRequired(true)
-                .setMinValue(MIN_WITHDRAWAL))
         .addStringOption(option =>
-            option.setName('roblox_username')
-                .setDescription('Your Roblox username (where gems will be sent)')
+            option.setName('amount')
+                .setDescription('Amount of gems to withdraw (minimum 20M, e.g., "20m", "50m")')
                 .setRequired(true)),
     
     async execute(interaction, client) {
-        const amount = interaction.options.getInteger('amount');
-        const robloxUsername = interaction.options.getString('roblox_username');
+        const amount = parseGemAmount(interaction.options.getString('amount'));
         const user = db.getUser(interaction.user.id, interaction.user.username);
+        const robloxAccount = db.getRobloxAccount(interaction.user.id);
+        
+        if (!robloxAccount) {
+            return interaction.reply({ 
+                embeds: [createErrorEmbed('❌ You must link your Roblox account first!\n\nUse `/link` to link your Roblox username.')],
+                ephemeral: true 
+            });
+        }
+        
+        if (amount <= 0) {
+            return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid amount!')], ephemeral: true });
+        }
+        
+        const robloxUsername = robloxAccount.username;
         
         if (amount < MIN_WITHDRAWAL) {
             return interaction.reply({

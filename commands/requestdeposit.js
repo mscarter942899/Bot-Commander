@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
-const { createPS99Embed, PS99_COLORS, ICONS } = require('../utils/embedBuilder');
+const { createPS99Embed, PS99_COLORS, ICONS, createErrorEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 const BANK_USERNAME = 'GemBank46';
 
@@ -8,20 +9,28 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('requestdeposit')
         .setDescription('Request a gem deposit from PS99 mailbox')
-        .addIntegerOption(option =>
-            option.setName('amount')
-                .setDescription('Amount of gems you sent via PS99 mailbox')
-                .setRequired(true)
-                .setMinValue(1))
         .addStringOption(option =>
-            option.setName('roblox_username')
-                .setDescription('Your Roblox username (for verification)')
+            option.setName('amount')
+                .setDescription('Amount of gems you sent via PS99 mailbox (e.g., "1000", "5m")')
                 .setRequired(true)),
     
     async execute(interaction, client) {
-        const amount = interaction.options.getInteger('amount');
-        const robloxUsername = interaction.options.getString('roblox_username');
+        const amount = parseGemAmount(interaction.options.getString('amount'));
         const user = db.getUser(interaction.user.id, interaction.user.username);
+        const robloxAccount = db.getRobloxAccount(interaction.user.id);
+        
+        if (!robloxAccount) {
+            return interaction.reply({ 
+                embeds: [createErrorEmbed('❌ You must link your Roblox account first!\n\nUse `/link` to link your Roblox username.')],
+                ephemeral: true 
+            });
+        }
+        
+        if (amount <= 0) {
+            return interaction.reply({ embeds: [createErrorEmbed('Please enter a valid amount!')], ephemeral: true });
+        }
+        
+        const robloxUsername = robloxAccount.username;
         
         const pendingDeposits = db.getUserPendingDeposits(interaction.user.id);
         if (pendingDeposits.length >= 3) {
