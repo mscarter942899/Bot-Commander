@@ -85,7 +85,7 @@ module.exports = {
     customId: 'shop',
     async execute(interaction, client) {
         try {
-            if (interaction.isStringSelectMenu && interaction.isStringSelectMenu()) {
+            if (interaction.isStringSelectMenu()) {
                 const itemId = parseInt(interaction.values[0]);
                 const item = db.getShopItem(itemId);
                 
