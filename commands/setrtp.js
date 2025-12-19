@@ -32,6 +32,18 @@ const ALL_GAMES = [
     { name: 'Chuck-a-Luck', value: 'chuckluck' }
 ];
 
+const MORE_GAMES = [
+    { name: 'Red Dog', value: 'reddog' },
+    { name: 'Cups', value: 'cups' },
+    { name: 'Video Poker', value: 'videopoker' },
+    { name: 'Russian Roulette', value: 'russianroulette' },
+    { name: 'Number Guess', value: 'numberguess' },
+    { name: 'Jackpot', value: 'jackpot' },
+    { name: 'Lucky Box', value: 'luckybox' },
+    { name: 'Horse Race', value: 'horserace' },
+    { name: 'Wheel of Fortune', value: 'wheeloffortune' }
+];
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setrtp')
@@ -41,9 +53,23 @@ module.exports = {
                 .setDescription('Set RTP for a specific game')
                 .addStringOption(opt =>
                     opt.setName('game')
-                        .setDescription('The game to configure')
+                        .setDescription('The game to configure (A-M)')
                         .setRequired(true)
-                        .addChoices(...ALL_GAMES.slice(0, 25)))
+                        .addChoices(...ALL_GAMES))
+                .addNumberOption(opt =>
+                    opt.setName('rtp')
+                        .setDescription('RTP percentage (0.50 = 50%, 0.95 = 95%, 1.0 = 100%)')
+                        .setRequired(true)
+                        .setMinValue(0.01)
+                        .setMaxValue(2.0)))
+        .addSubcommand(sub =>
+            sub.setName('set2')
+                .setDescription('Set RTP for additional games')
+                .addStringOption(opt =>
+                    opt.setName('game')
+                        .setDescription('The game to configure (N-Z)')
+                        .setRequired(true)
+                        .addChoices(...MORE_GAMES))
                 .addNumberOption(opt =>
                     opt.setName('rtp')
                         .setDescription('RTP percentage (0.50 = 50%, 0.95 = 95%, 1.0 = 100%)')
@@ -64,7 +90,7 @@ module.exports = {
 
         const subcommand = interaction.options.getSubcommand();
 
-        if (subcommand === 'set') {
+        if (subcommand === 'set' || subcommand === 'set2') {
             const game = interaction.options.getString('game');
             const rtp = interaction.options.getNumber('rtp');
             
