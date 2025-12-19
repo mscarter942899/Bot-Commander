@@ -2,6 +2,46 @@ const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, ActionRowBuilder
 const db = require('../database/db');
 const { PS99_COLORS, ICONS, createErrorEmbed, createPremiumEmbed, createSuccessEmbed, createColorGuessEmbed, createNumberGuessEmbed, createTriviaEmbed, createHotPotatoEmbed, createMysteryBoxEmbed } = require('../utils/embedBuilder');
 
+const ALL_GAMES = [
+    { name: 'Slots', value: 'slots' },
+    { name: 'Blackjack', value: 'blackjack' },
+    { name: 'Poker', value: 'poker' },
+    { name: 'High/Low', value: 'highlow' },
+    { name: 'War', value: 'war' },
+    { name: 'Roulette', value: 'roulette' },
+    { name: 'Baccarat', value: 'baccarat' },
+    { name: 'Crash', value: 'crash' },
+    { name: 'Dice', value: 'dice' },
+    { name: 'Mines', value: 'mines' },
+    { name: 'Coinflip', value: 'coinflip' },
+    { name: 'Wheel', value: 'wheel' },
+    { name: 'Plinko', value: 'plinko' },
+    { name: 'Lottery', value: 'lottery' },
+    { name: 'Keno', value: 'keno' },
+    { name: 'Scratcher', value: 'scratcher' },
+    { name: 'Limbo', value: 'limbo' },
+    { name: 'Tower', value: 'tower' },
+    { name: 'Hi-Lo Streak', value: 'hilostreak' },
+    { name: 'Double or Nothing', value: 'doubleornothing' },
+    { name: 'Dragon Tiger', value: 'dragontiger' },
+    { name: 'Sic Bo', value: 'sicbo' },
+    { name: 'Pai Gow', value: 'paigow' },
+    { name: 'Fan Tan', value: 'fantan' },
+    { name: 'Chuck-a-Luck', value: 'chuckluck' }
+];
+
+const MORE_GAMES = [
+    { name: 'Red Dog', value: 'reddog' },
+    { name: 'Cups', value: 'cups' },
+    { name: 'Video Poker', value: 'videopoker' },
+    { name: 'Russian Roulette', value: 'russianroulette' },
+    { name: 'Number Guess', value: 'numberguess' },
+    { name: 'Jackpot', value: 'jackpot' },
+    { name: 'Lucky Box', value: 'luckybox' },
+    { name: 'Horse Race', value: 'horserace' },
+    { name: 'Wheel of Fortune', value: 'wheeloffortune' }
+];
+
 const TRIVIA_QUESTIONS = [
     { category: 'Gaming', question: 'What year was Minecraft officially released?', options: ['2009', '2011', '2013', '2015'], answer: 1 },
     { category: 'Gaming', question: 'What is the best-selling video game of all time?', options: ['Tetris', 'Minecraft', 'GTA V', 'Wii Sports'], answer: 1 },
@@ -30,46 +70,41 @@ module.exports = {
                 .setDescription('Game settings')
                 .addSubcommand(sub =>
                     sub.setName('setbet')
-                        .setDescription('Set min/max bet for a game')
+                        .setDescription('Set min/max bet for a game (A-M)')
                         .addStringOption(opt =>
                             opt.setName('game')
                                 .setDescription('Game to configure')
                                 .setRequired(true)
-                                .addChoices(
-                                    { name: 'Slots', value: 'slots' },
-                                    { name: 'Blackjack', value: 'blackjack' },
-                                    { name: 'Poker', value: 'poker' },
-                                    { name: 'High/Low', value: 'highlow' },
-                                    { name: 'War', value: 'war' },
-                                    { name: 'Roulette', value: 'roulette' },
-                                    { name: 'Baccarat', value: 'baccarat' },
-                                    { name: 'Crash', value: 'crash' },
-                                    { name: 'Dice', value: 'dice' },
-                                    { name: 'Mines', value: 'mines' },
-                                    { name: 'Coinflip', value: 'coinflip' }
-                                ))
+                                .addChoices(...ALL_GAMES))
+                        .addIntegerOption(opt => opt.setName('min').setDescription('Minimum bet').setMinValue(1))
+                        .addIntegerOption(opt => opt.setName('max').setDescription('Maximum bet').setMinValue(1)))
+                .addSubcommand(sub =>
+                    sub.setName('setbet2')
+                        .setDescription('Set min/max bet for additional games (N-Z)')
+                        .addStringOption(opt =>
+                            opt.setName('game')
+                                .setDescription('Game to configure')
+                                .setRequired(true)
+                                .addChoices(...MORE_GAMES))
                         .addIntegerOption(opt => opt.setName('min').setDescription('Minimum bet').setMinValue(1))
                         .addIntegerOption(opt => opt.setName('max').setDescription('Maximum bet').setMinValue(1)))
                 .addSubcommand(sub =>
                     sub.setName('toggle')
-                        .setDescription('Enable or disable a game')
+                        .setDescription('Enable or disable a game (A-M)')
                         .addStringOption(opt =>
                             opt.setName('game')
                                 .setDescription('Game to toggle')
                                 .setRequired(true)
-                                .addChoices(
-                                    { name: 'Slots', value: 'slots' },
-                                    { name: 'Blackjack', value: 'blackjack' },
-                                    { name: 'Poker', value: 'poker' },
-                                    { name: 'High/Low', value: 'highlow' },
-                                    { name: 'War', value: 'war' },
-                                    { name: 'Roulette', value: 'roulette' },
-                                    { name: 'Baccarat', value: 'baccarat' },
-                                    { name: 'Crash', value: 'crash' },
-                                    { name: 'Dice', value: 'dice' },
-                                    { name: 'Mines', value: 'mines' },
-                                    { name: 'Coinflip', value: 'coinflip' }
-                                ))
+                                .addChoices(...ALL_GAMES))
+                        .addBooleanOption(opt => opt.setName('enabled').setDescription('Enable or disable').setRequired(true)))
+                .addSubcommand(sub =>
+                    sub.setName('toggle2')
+                        .setDescription('Enable or disable additional games (N-Z)')
+                        .addStringOption(opt =>
+                            opt.setName('game')
+                                .setDescription('Game to toggle')
+                                .setRequired(true)
+                                .addChoices(...MORE_GAMES))
                         .addBooleanOption(opt => opt.setName('enabled').setDescription('Enable or disable').setRequired(true)))
                 .addSubcommand(sub =>
                     sub.setName('settings')
@@ -171,7 +206,7 @@ module.exports = {
         const subcommand = interaction.options.getSubcommand();
         
         if (group === 'games') {
-            if (subcommand === 'setbet') {
+            if (subcommand === 'setbet' || subcommand === 'setbet2') {
                 const game = interaction.options.getString('game');
                 const min = interaction.options.getInteger('min');
                 const max = interaction.options.getInteger('max');
@@ -197,7 +232,7 @@ module.exports = {
                     embeds: [createSuccessEmbed('Game Settings Updated', `**${game}** settings updated!\nMin: \`${settings.minBet.toLocaleString()}\` | Max: \`${settings.maxBet.toLocaleString()}\``)]
                 });
                 
-            } else if (subcommand === 'toggle') {
+            } else if (subcommand === 'toggle' || subcommand === 'toggle2') {
                 const game = interaction.options.getString('game');
                 const enabled = interaction.options.getBoolean('enabled');
                 
