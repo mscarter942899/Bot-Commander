@@ -1,0 +1,1001 @@
+2025-12-21T06:10:13.340431031Z [err]  node:events:496
+2025-12-21T06:10:13.340435274Z [err]        throw er; // Unhandled 'error' event
+2025-12-21T06:10:13.340439605Z [err]        ^
+2025-12-21T06:10:13.340443614Z [err]  
+2025-12-21T06:10:13.341734486Z [err]  DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:10:13.341742692Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:10:13.341751438Z [err]          username: undefined,
+2025-12-21T06:10:13.341751946Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:10:13.341758786Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:10:13.341760683Z [err]          avatar_url: undefined,
+2025-12-21T06:10:13.341770188Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:10:13.341774079Z [err]          embeds: undefined,
+2025-12-21T06:10:13.341776331Z [err]      json: {
+2025-12-21T06:10:13.341780439Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:10:13.341793471Z [err]          components: undefined,
+2025-12-21T06:10:13.341795506Z [err]        type: 4,
+2025-12-21T06:10:13.341797839Z [err]      at async Client.<anonymous> (/app/index.js:164:17)
+2025-12-21T06:10:13.341811710Z [err]  Emitted 'error' event on Client instance at:
+2025-12-21T06:10:13.341813626Z [err]        data: {
+2025-12-21T06:10:13.341813720Z [err]      at emitUnhandledRejectionOrErr (node:events:401:10)
+2025-12-21T06:10:13.341824136Z [err]          content: '❌ An error occurred while executing this command!',
+2025-12-21T06:10:13.341830540Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:84:21) {
+2025-12-21T06:10:13.341835173Z [err]          tts: false,
+2025-12-21T06:10:13.341841143Z [err]    requestBody: {
+2025-12-21T06:10:13.341847127Z [err]          nonce: undefined,
+2025-12-21T06:10:13.341852122Z [err]      files: [],
+2025-12-21T06:10:13.341858733Z [err]          enforce_nonce: false,
+2025-12-21T06:10:13.342260305Z [err]    code: 10062,
+2025-12-21T06:10:13.342265688Z [err]    status: 404,
+2025-12-21T06:10:13.342271382Z [err]    method: 'POST',
+2025-12-21T06:10:13.342275086Z [err]          allowed_mentions: undefined,
+2025-12-21T06:10:13.342277785Z [err]    url: 'https://discord.com/api/v10/interactions/1452181344120602727/aW50ZXJhY3Rpb246MTQ1MjE4MTM0NDEyMDYwMjcyNzo1NUN4TWF5c0NER2pyUWZHYVhrWjZTcUFzd1NoY3BKbGpMSjR6V3VrdnRPQ1V2SVE3c1hVRUptZUxQM0JhUVo0dE56Z3h5TjJvd1ltSGpiTEd6OGVrYmdVVnlUZWNwRGtlTmc3d1VkOUYwRFpZdlo0Q2VXUUxCdWRsdE1FZllkUQ/callback?with_response=false'
+2025-12-21T06:10:13.342283115Z [err]          flags: 64,
+2025-12-21T06:10:13.342283483Z [err]  }
+2025-12-21T06:10:13.342289748Z [err]  
+2025-12-21T06:10:13.342290160Z [err]          message_reference: undefined,
+2025-12-21T06:10:13.342295175Z [err]  Node.js v20.18.1
+2025-12-21T06:10:13.342299551Z [err]          attachments: undefined,
+2025-12-21T06:10:13.342307818Z [err]          sticker_ids: undefined,
+2025-12-21T06:10:13.342317096Z [err]          thread_name: undefined,
+2025-12-21T06:10:13.342325474Z [err]          applied_tags: undefined,
+2025-12-21T06:10:13.342334028Z [err]          poll: undefined
+2025-12-21T06:10:13.342341631Z [err]        }
+2025-12-21T06:10:13.342350021Z [err]      }
+2025-12-21T06:10:13.342357571Z [err]    },
+2025-12-21T06:10:13.342363455Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:10:13.964124386Z [inf]  ✅ Loaded slash command: addgems
+2025-12-21T06:10:13.969201061Z [inf]  ✅ Loaded slash command: admin
+2025-12-21T06:10:13.969205089Z [inf]  ✅ Loaded slash command: announce
+2025-12-21T06:10:13.969209168Z [inf]  ✅ Loaded slash command: baccarat
+2025-12-21T06:10:13.969213741Z [inf]  ✅ Loaded slash command: balance
+2025-12-21T06:10:13.969218291Z [inf]  ✅ Loaded slash command: bigwins
+2025-12-21T06:10:13.969744199Z [inf]  ✅ Loaded slash command: blackjack
+2025-12-21T06:10:13.969751029Z [inf]  ✅ Loaded slash command: canceldeposit
+2025-12-21T06:10:13.970507660Z [inf]  ✅ Loaded slash command: cancelwithdraw
+2025-12-21T06:10:13.970515377Z [inf]  ✅ Loaded slash command: chuckluck
+2025-12-21T06:10:13.971361846Z [inf]  ✅ Loaded slash command: coinflip
+2025-12-21T06:10:13.972327832Z [inf]  ✅ Loaded slash command: confirmdeposit
+2025-12-21T06:10:13.972335310Z [inf]  ✅ Loaded slash command: crash
+2025-12-21T06:10:13.973315691Z [inf]  ✅ Loaded slash command: cups
+2025-12-21T06:10:13.973322338Z [inf]  ✅ Loaded slash command: daily
+2025-12-21T06:10:13.974057894Z [inf]  ✅ Loaded slash command: debug
+2025-12-21T06:10:13.974063196Z [inf]  ✅ Loaded slash command: deposit
+2025-12-21T06:10:13.974777318Z [inf]  ✅ Loaded slash command: dice
+2025-12-21T06:10:13.975707062Z [inf]  ✅ Loaded slash command: doubleornothing
+2025-12-21T06:10:13.975713482Z [inf]  ✅ Loaded slash command: dragontiger
+2025-12-21T06:10:13.976238564Z [inf]  ✅ Loaded slash command: fantan
+2025-12-21T06:10:13.981190571Z [inf]  ✅ Loaded slash command: funevent
+2025-12-21T06:10:13.981196331Z [inf]  ✅ Loaded slash command: gift
+2025-12-21T06:10:13.981200921Z [inf]  ✅ Loaded slash command: help
+2025-12-21T06:10:13.981206064Z [inf]  ✅ Loaded slash command: highlow
+2025-12-21T06:10:13.981210944Z [inf]  ✅ Loaded slash command: hilostreak
+2025-12-21T06:10:13.981215870Z [inf]  ✅ Loaded slash command: horserace
+2025-12-21T06:10:13.981221079Z [inf]  ✅ Loaded slash command: houseprofit
+2025-12-21T06:10:13.981225852Z [inf]  ✅ Loaded slash command: interest
+2025-12-21T06:10:13.981230609Z [inf]  ✅ Loaded slash command: inventory
+2025-12-21T06:10:13.981789992Z [inf]  ✅ Loaded slash command: inviterewards
+2025-12-21T06:10:13.981795427Z [inf]  ✅ Loaded slash command: invites
+2025-12-21T06:10:13.986664721Z [inf]  ✅ Loaded slash command: itemraffle
+2025-12-21T06:10:13.986673841Z [inf]  ✅ Loaded slash command: jackpot
+2025-12-21T06:10:13.986681975Z [inf]  ✅ Loaded slash command: keno
+2025-12-21T06:10:13.986690551Z [inf]  ✅ Loaded slash command: limbo
+2025-12-21T06:10:13.986698137Z [inf]  ✅ Loaded slash command: link
+2025-12-21T06:10:13.986706809Z [inf]  ✅ Loaded slash command: lottery
+2025-12-21T06:10:13.986714488Z [inf]  ✅ Loaded slash command: luckybox
+2025-12-21T06:10:13.987202628Z [inf]  ✅ Loaded slash command: mines
+2025-12-21T06:10:13.987210875Z [inf]  ✅ Loaded slash command: mypending
+2025-12-21T06:10:13.988138590Z [inf]  ✅ Loaded slash command: numberguess
+2025-12-21T06:10:13.988144215Z [inf]  ✅ Loaded slash command: paigow
+2025-12-21T06:10:13.989011113Z [inf]  ✅ Loaded slash command: pendingtransactions
+2025-12-21T06:10:13.989016700Z [inf]  ✅ Loaded slash command: plinko
+2025-12-21T06:10:13.989915347Z [inf]  ✅ Loaded slash command: poker
+2025-12-21T06:10:13.989922392Z [inf]  ✅ Loaded slash command: processwithdraw
+2025-12-21T06:10:13.990796227Z [inf]  ✅ Loaded slash command: profile
+2025-12-21T06:10:13.991812257Z [inf]  ✅ Loaded slash command: raffle
+2025-12-21T06:10:13.991820145Z [inf]  ✅ Loaded slash command: reddog
+2025-12-21T06:10:13.991833144Z [inf]  ✅ Loaded slash command: removegems
+2025-12-21T06:10:13.992776666Z [inf]  ✅ Loaded slash command: requestdeposit
+2025-12-21T06:10:13.992783073Z [inf]  ✅ Loaded slash command: requestwithdraw
+2025-12-21T06:10:13.993816115Z [inf]  ✅ Loaded slash command: robloxinfo
+2025-12-21T06:10:13.993822338Z [inf]  ✅ Loaded slash command: rps
+2025-12-21T06:10:13.994868024Z [inf]  ✅ Loaded slash command: roulette
+2025-12-21T06:10:13.994873764Z [inf]  ✅ Loaded slash command: russianroulette
+2025-12-21T06:10:13.994878061Z [inf]  ✅ Loaded slash command: scratcher
+2025-12-21T06:10:13.995884013Z [inf]  ✅ Loaded slash command: serverboost
+2025-12-21T06:10:13.996884318Z [inf]  ✅ Loaded slash command: setadminrole
+2025-12-21T06:10:13.996890404Z [inf]  ✅ Loaded slash command: setdepositchannel
+2025-12-21T06:10:13.996896441Z [inf]  ✅ Loaded slash command: setlogs
+2025-12-21T06:10:13.997963684Z [inf]  ✅ Loaded slash command: setrtp
+2025-12-21T06:10:13.997970697Z [inf]  ✅ Loaded slash command: setwithdrawchannel
+2025-12-21T06:10:14.002590760Z [inf]  ✅ Loaded slash command: shop
+2025-12-21T06:10:14.002598611Z [inf]  ✅ Loaded slash command: sicbo
+2025-12-21T06:10:14.002603640Z [inf]  ✅ Loaded slash command: slots
+2025-12-21T06:10:14.002608015Z [inf]  ✅ Loaded slash command: fruitslots
+2025-12-21T06:10:14.002612883Z [inf]  ✅ Loaded slash command: toggledaily
+2025-12-21T06:10:14.002617648Z [inf]  ✅ Loaded slash command: top
+2025-12-21T06:10:14.002621562Z [inf]  ✅ Loaded slash command: tower
+2025-12-21T06:10:14.002625235Z [inf]  ✅ Loaded slash command: transactionhistory
+2025-12-21T06:10:14.003877201Z [inf]  ✅ Loaded slash command: videopoker
+2025-12-21T06:10:14.003885263Z [inf]  ✅ Loaded slash command: war
+2025-12-21T06:10:14.003889940Z [inf]  ✅ Loaded slash command: wheel
+2025-12-21T06:10:14.004843486Z [inf]  ✅ Loaded slash command: wheeloffortune
+2025-12-21T06:10:14.004851680Z [inf]  ✅ Loaded slash command: withdraw
+2025-12-21T06:10:14.004859174Z [inf]  ✅ Loaded prefix command: balance
+2025-12-21T06:10:14.005952446Z [inf]  ✅ Loaded prefix command: blackjack
+2025-12-21T06:10:14.005958003Z [inf]  ✅ Loaded prefix command: coinflip
+2025-12-21T06:10:14.005962400Z [inf]  ✅ Loaded prefix command: daily
+2025-12-21T06:10:14.005966240Z [inf]  ✅ Loaded prefix command: deposit
+2025-12-21T06:10:14.005972897Z [inf]  ✅ Loaded prefix command: dice
+2025-12-21T06:10:14.007141373Z [inf]  ✅ Loaded prefix command: gift
+2025-12-21T06:10:14.007148520Z [inf]  ✅ Loaded prefix command: help
+2025-12-21T06:10:14.007153946Z [inf]  ✅ Loaded prefix command: highlow
+2025-12-21T06:10:14.007162119Z [inf]  ✅ Loaded prefix command: inventory
+2025-12-21T06:10:14.007170688Z [inf]  ✅ Loaded prefix command: poker
+2025-12-21T06:10:14.007178755Z [inf]  ✅ Loaded prefix command: profile
+2025-12-21T06:10:14.008135883Z [inf]  ✅ Loaded prefix command: raffle
+2025-12-21T06:10:14.008141125Z [inf]  ✅ Loaded prefix command: roulette
+2025-12-21T06:10:14.008146679Z [inf]  ✅ Loaded prefix command: shop
+2025-12-21T06:10:14.008153640Z [inf]  ✅ Loaded prefix command: slots
+2025-12-21T06:10:14.009002266Z [inf]  ✅ Loaded prefix command: top
+2025-12-21T06:10:14.009010895Z [inf]  ✅ Loaded prefix command: war
+2025-12-21T06:10:14.009018469Z [inf]  ✅ Loaded prefix command: withdraw
+2025-12-21T06:10:14.009836669Z [inf]  ✅ Loaded button: baccarat
+2025-12-21T06:10:14.009841947Z [inf]  ✅ Loaded button: bj
+2025-12-21T06:10:14.009847610Z [inf]  ✅ Loaded button: coinflip
+2025-12-21T06:10:14.010825331Z [inf]  ✅ Loaded button: crash
+2025-12-21T06:10:14.010837480Z [inf]  ✅ Loaded button: cups
+2025-12-21T06:10:14.010842843Z [inf]  ✅ Loaded button: dice
+2025-12-21T06:10:14.010847362Z [inf]  ✅ Loaded button: hl
+2025-12-21T06:10:14.010853151Z [inf]  ✅ Loaded button: inventory
+2025-12-21T06:10:14.011815535Z [inf]  ✅ Loaded button: itemraffle
+2025-12-21T06:10:14.011822556Z [inf]  ✅ Loaded button: link_cancel
+2025-12-21T06:10:14.011829397Z [inf]  ✅ Loaded button: link_confirm
+2025-12-21T06:10:14.011836422Z [inf]  ✅ Loaded button: mines
+2025-12-21T06:10:14.012972146Z [inf]  ✅ Loaded button: poker
+2025-12-21T06:10:14.012980121Z [inf]  ✅ Loaded button: raffle
+2025-12-21T06:10:14.012987787Z [inf]  ✅ Loaded button: roulette
+2025-12-21T06:10:14.012994672Z [inf]  ✅ Loaded button: rps
+2025-12-21T06:10:14.013802744Z [inf]  ✅ Loaded button: rr
+2025-12-21T06:10:14.013809551Z [inf]  ✅ Loaded button: shop
+2025-12-21T06:10:14.013817488Z [inf]  ✅ Loaded button: slots
+2025-12-21T06:10:14.014908913Z [inf]  ✅ Loaded button: vp
+2025-12-21T06:10:14.014916777Z [inf]  ✅ Loaded button: war
+2025-12-21T06:10:14.014922499Z [inf]  ✅ Loaded event: guildMemberAdd
+2025-12-21T06:10:14.014928342Z [inf]  ✅ Loaded event: interactionCreate
+2025-12-21T06:10:14.014933593Z [inf]  ✅ Loaded event: inviteCreate
+2025-12-21T06:10:14.015995559Z [inf]  ✅ Loaded event: inviteDelete
+2025-12-21T06:10:14.016000996Z [inf]  ✅ Loaded event: ready
+2025-12-21T06:10:14.021272976Z [inf]  🔄 Self-ping loop started (every 4 minutes)
+2025-12-21T06:10:14.022190040Z [inf]  🌐 Uptime server running on port 8080
+2025-12-21T06:10:14.027942007Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:10:14.027947476Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:10:14.027951211Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:10:14.027957000Z [err]      at Server.<anonymous> (/app/utils/uptime.js:49:9)
+2025-12-21T06:10:14.027961592Z [err]      at Object.onceWrapper (node:events:632:28)
+2025-12-21T06:10:14.027965347Z [err]      at Server.emit (node:events:530:35)
+2025-12-21T06:10:14.027969165Z [err]      at emitListeningNT (node:net:1951:10)
+2025-12-21T06:10:14.027973315Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {
+2025-12-21T06:10:14.027977450Z [err]    errno: -2,
+2025-12-21T06:10:14.027982146Z [err]    code: 'ENOENT',
+2025-12-21T06:10:14.027992183Z [err]    syscall: 'open',
+2025-12-21T06:10:14.027998295Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:10:14.028005893Z [err]  }
+2025-12-21T06:10:14.925347673Z [inf]  
+2025-12-21T06:10:14.925356452Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:10:14.925366846Z [inf]     GemBot#1335 is now online!
+2025-12-21T06:10:14.925376858Z [inf]     Servers: 4
+2025-12-21T06:10:14.925385484Z [inf]     Users: 1
+2025-12-21T06:10:14.925392816Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:10:14.925401108Z [inf]  
+2025-12-21T06:10:14.925411034Z [inf]  📝 Performing startup command registration...
+2025-12-21T06:10:14.925419445Z [inf]  🔄 Registering 77 slash commands...
+2025-12-21T06:10:14.925428390Z [err]  (node:1) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+2025-12-21T06:10:14.925437904Z [err]  (Use `node --trace-deprecation ...` to show where the warning was created)
+2025-12-21T06:10:15.147000508Z [inf]  📧 Cached 42 invites for Dark’s Community and Trading
+2025-12-21T06:10:15.328778345Z [inf]  ✅ Successfully registered 77 slash commands!
+2025-12-21T06:10:15.328782112Z [inf]  📋 Registered commands: addgems, admin, announce, baccarat, balance, bigwins, blackjack, canceldeposit, cancelwithdraw, chuckluck, coinflip, confirmdeposit, crash, cups, daily, debug, deposit, dice, doubleornothing, dragontiger, fantan, funevent, gift, help, highlow, hilostreak, horserace, houseprofit, interest, inventory, inviterewards, invites, itemraffle, jackpot, keno, limbo, link, lottery, luckybox, mines, mypending, numberguess, paigow, pendingtransactions, plinko, poker, processwithdraw, profile, raffle, reddog, removegems, requestdeposit, requestwithdraw, robloxinfo, rps, roulette, russianroulette, scratcher, serverboost, setadminrole, setdepositchannel, setlogs, setrtp, setwithdrawchannel, shop, sicbo, slots, fruitslots, toggledaily, top, tower, transactionhistory, videopoker, war, wheel, wheeloffortune, withdraw
+2025-12-21T06:10:15.380292504Z [inf]  📧 Cached 4 invites for Jalen's server
+2025-12-21T06:10:15.740820418Z [inf]  📧 Cached 0 invites for Roblox games
+2025-12-21T06:10:15.960554881Z [inf]  ⚠️ Could not fetch invites for BEAMS R US
+2025-12-21T06:10:24.250151899Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:10:24.250155721Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:10:24.250159838Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:10:24.250164333Z [err]      at Timeout.selfPing [as _onTimeout] (/app/utils/uptime.js:81:9)
+2025-12-21T06:10:24.250168325Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+2025-12-21T06:10:24.250172241Z [err]    errno: -2,
+2025-12-21T06:10:24.250176487Z [err]    code: 'ENOENT',
+2025-12-21T06:10:24.250180395Z [err]    syscall: 'open',
+2025-12-21T06:10:24.250184620Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:10:24.250189096Z [err]  }
+2025-12-21T06:10:24.250193322Z [inf]  ✅ Self-ping #1 successful
+2025-12-21T06:11:14.286816262Z [err]  Error executing blackjack: DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:11:14.286823715Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:11:14.286828792Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:11:14.286829208Z [err]    method: 'POST',
+2025-12-21T06:11:14.286833438Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:11:14.286839781Z [err]    url: 'https://discord.com/api/v10/interactions/1452181585422975102/aW50ZXJhY3Rpb246MTQ1MjE4MTU4NTQyMjk3NTEwMjpicThYN2NPelAzQlZmV3h5RmFuWm0zQ2czajRkYW5qVmtUaU5ZWlJyUW5vcHNSZFRDeXJ4dFZLODZ6SlJjRGVZUk5pVzdkOUhSdGpVU0pRWFUzc1p5NVVPMGlsZGNtU3g4cmJtNXBJWGlYWHZ1cjNyQmZQNjlWVll4MnBkMXptTw/callback?with_response=false'
+2025-12-21T06:11:14.286840022Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:11:14.286845675Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:11:14.286849429Z [err]  }
+2025-12-21T06:11:14.286856074Z [err]  (node:1) Warning: Supplying "ephemeral" for interaction response options is deprecated. Utilize flags instead.
+2025-12-21T06:11:14.286856234Z [err]      at async Object.execute (/app/commands/blackjack.js:174:9)
+2025-12-21T06:11:14.286862093Z [err]      at async Client.<anonymous> (/app/index.js:157:13) {
+2025-12-21T06:11:14.286863492Z [err]  node:events:496
+2025-12-21T06:11:14.286868419Z [err]    requestBody: { files: [], json: { type: 4, data: [Object] } },
+2025-12-21T06:11:14.286871859Z [err]        throw er; // Unhandled 'error' event
+2025-12-21T06:11:14.286874476Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:11:14.286878902Z [err]    code: 10062,
+2025-12-21T06:11:14.286885437Z [err]    status: 404,
+2025-12-21T06:11:14.287496616Z [err]        ^
+2025-12-21T06:11:14.287507381Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:11:14.287508841Z [err]          components: undefined,
+2025-12-21T06:11:14.287512699Z [err]      json: {
+2025-12-21T06:11:14.287515051Z [err]  
+2025-12-21T06:11:14.287524117Z [err]          enforce_nonce: false,
+2025-12-21T06:11:14.287528694Z [err]        type: 4,
+2025-12-21T06:11:14.287528761Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:11:14.287534292Z [err]  DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:11:14.287535186Z [err]          embeds: undefined,
+2025-12-21T06:11:14.287537948Z [err]  Emitted 'error' event on Client instance at:
+2025-12-21T06:11:14.287544069Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:11:14.287545912Z [err]        data: {
+2025-12-21T06:11:14.287550504Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:11:14.287555592Z [err]      at emitUnhandledRejectionOrErr (node:events:401:10)
+2025-12-21T06:11:14.287559092Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:11:14.287562002Z [err]          content: '❌ An error occurred while executing this command!',
+2025-12-21T06:11:14.287571042Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:84:21) {
+2025-12-21T06:11:14.287573739Z [err]      at async Client.<anonymous> (/app/index.js:164:17)
+2025-12-21T06:11:14.287576381Z [err]          tts: false,
+2025-12-21T06:11:14.287581643Z [err]    requestBody: {
+2025-12-21T06:11:14.287591526Z [err]          nonce: undefined,
+2025-12-21T06:11:14.287591562Z [err]      files: [],
+2025-12-21T06:11:14.288697706Z [inf]  ✅ Loaded slash command: announce
+2025-12-21T06:11:14.288701861Z [err]          username: undefined,
+2025-12-21T06:11:14.288704394Z [err]  
+2025-12-21T06:11:14.288706396Z [inf]  ✅ Loaded slash command: baccarat
+2025-12-21T06:11:14.288714316Z [err]          avatar_url: undefined,
+2025-12-21T06:11:14.288716171Z [inf]  ✅ Loaded slash command: balance
+2025-12-21T06:11:14.288716939Z [err]  Node.js v20.18.1
+2025-12-21T06:11:14.288723188Z [err]        }
+2025-12-21T06:11:14.288727378Z [err]          allowed_mentions: undefined,
+2025-12-21T06:11:14.288731558Z [inf]  ✅ Loaded slash command: addgems
+2025-12-21T06:11:14.288738274Z [err]      }
+2025-12-21T06:11:14.288741214Z [err]          flags: 64,
+2025-12-21T06:11:14.288745284Z [inf]  ✅ Loaded slash command: admin
+2025-12-21T06:11:14.288751019Z [err]    },
+2025-12-21T06:11:14.288755059Z [err]          message_reference: undefined,
+2025-12-21T06:11:14.288763320Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:11:14.288768742Z [err]          attachments: undefined,
+2025-12-21T06:11:14.288774032Z [err]    code: 10062,
+2025-12-21T06:11:14.288781483Z [err]          sticker_ids: undefined,
+2025-12-21T06:11:14.288788631Z [err]    status: 404,
+2025-12-21T06:11:14.288795985Z [err]          thread_name: undefined,
+2025-12-21T06:11:14.288799911Z [err]    method: 'POST',
+2025-12-21T06:11:14.288810535Z [err]          applied_tags: undefined,
+2025-12-21T06:11:14.288810564Z [err]    url: 'https://discord.com/api/v10/interactions/1452181585422975102/aW50ZXJhY3Rpb246MTQ1MjE4MTU4NTQyMjk3NTEwMjpicThYN2NPelAzQlZmV3h5RmFuWm0zQ2czajRkYW5qVmtUaU5ZWlJyUW5vcHNSZFRDeXJ4dFZLODZ6SlJjRGVZUk5pVzdkOUhSdGpVU0pRWFUzc1p5NVVPMGlsZGNtU3g4cmJtNXBJWGlYWHZ1cjNyQmZQNjlWVll4MnBkMXptTw/callback?with_response=false'
+2025-12-21T06:11:14.288824135Z [err]  }
+2025-12-21T06:11:14.288825393Z [err]          poll: undefined
+2025-12-21T06:11:14.289111529Z [inf]  ✅ Loaded slash command: bigwins
+2025-12-21T06:11:14.289119609Z [inf]  ✅ Loaded slash command: blackjack
+2025-12-21T06:11:14.289128516Z [inf]  ✅ Loaded slash command: canceldeposit
+2025-12-21T06:11:14.289137081Z [inf]  ✅ Loaded slash command: cancelwithdraw
+2025-12-21T06:11:14.289144312Z [inf]  ✅ Loaded slash command: chuckluck
+2025-12-21T06:11:14.289152097Z [inf]  ✅ Loaded slash command: coinflip
+2025-12-21T06:11:14.289158764Z [inf]  ✅ Loaded slash command: confirmdeposit
+2025-12-21T06:11:14.289165721Z [inf]  ✅ Loaded slash command: crash
+2025-12-21T06:11:14.289173202Z [inf]  ✅ Loaded slash command: cups
+2025-12-21T06:11:14.289180617Z [inf]  ✅ Loaded slash command: daily
+2025-12-21T06:11:14.289187706Z [inf]  ✅ Loaded slash command: debug
+2025-12-21T06:11:14.289194593Z [inf]  ✅ Loaded slash command: deposit
+2025-12-21T06:11:14.289201920Z [inf]  ✅ Loaded slash command: dice
+2025-12-21T06:11:14.289208572Z [inf]  ✅ Loaded slash command: doubleornothing
+2025-12-21T06:11:14.289215077Z [inf]  ✅ Loaded slash command: dragontiger
+2025-12-21T06:11:14.289223899Z [inf]  ✅ Loaded slash command: fantan
+2025-12-21T06:11:14.289231304Z [inf]  ✅ Loaded slash command: funevent
+2025-12-21T06:11:14.289238746Z [inf]  ✅ Loaded slash command: gift
+2025-12-21T06:11:14.289244965Z [inf]  ✅ Loaded slash command: help
+2025-12-21T06:11:14.289251256Z [inf]  ✅ Loaded slash command: highlow
+2025-12-21T06:11:14.289259618Z [inf]  ✅ Loaded slash command: hilostreak
+2025-12-21T06:11:14.289266451Z [inf]  ✅ Loaded slash command: horserace
+2025-12-21T06:11:14.289324915Z [inf]  ✅ Loaded slash command: houseprofit
+2025-12-21T06:11:14.289331898Z [inf]  ✅ Loaded slash command: interest
+2025-12-21T06:11:14.289338221Z [inf]  ✅ Loaded slash command: inventory
+2025-12-21T06:11:14.289344440Z [inf]  ✅ Loaded slash command: inviterewards
+2025-12-21T06:11:14.290233725Z [inf]  ✅ Loaded slash command: invites
+2025-12-21T06:11:14.290234246Z [inf]  ✅ Loaded slash command: robloxinfo
+2025-12-21T06:11:14.290242189Z [inf]  ✅ Loaded slash command: reddog
+2025-12-21T06:11:14.290245384Z [inf]  ✅ Loaded slash command: rps
+2025-12-21T06:11:14.290249808Z [inf]  ✅ Loaded slash command: itemraffle
+2025-12-21T06:11:14.290255512Z [inf]  ✅ Loaded slash command: removegems
+2025-12-21T06:11:14.290256034Z [inf]  ✅ Loaded slash command: paigow
+2025-12-21T06:11:14.290257246Z [inf]  ✅ Loaded slash command: roulette
+2025-12-21T06:11:14.290264085Z [inf]  ✅ Loaded slash command: jackpot
+2025-12-21T06:11:14.290267609Z [inf]  ✅ Loaded slash command: requestdeposit
+2025-12-21T06:11:14.290269160Z [inf]  ✅ Loaded slash command: russianroulette
+2025-12-21T06:11:14.290272085Z [inf]  ✅ Loaded slash command: pendingtransactions
+2025-12-21T06:11:14.290274701Z [inf]  ✅ Loaded slash command: keno
+2025-12-21T06:11:14.290280082Z [inf]  ✅ Loaded slash command: requestwithdraw
+2025-12-21T06:11:14.290282828Z [inf]  ✅ Loaded slash command: plinko
+2025-12-21T06:11:14.290286415Z [inf]  ✅ Loaded slash command: limbo
+2025-12-21T06:11:14.290295170Z [inf]  ✅ Loaded slash command: link
+2025-12-21T06:11:14.290302637Z [inf]  ✅ Loaded slash command: lottery
+2025-12-21T06:11:14.290308474Z [inf]  ✅ Loaded slash command: luckybox
+2025-12-21T06:11:14.290309143Z [inf]  ✅ Loaded slash command: poker
+2025-12-21T06:11:14.290318562Z [inf]  ✅ Loaded slash command: mines
+2025-12-21T06:11:14.290318880Z [inf]  ✅ Loaded slash command: processwithdraw
+2025-12-21T06:11:14.290328959Z [inf]  ✅ Loaded slash command: mypending
+2025-12-21T06:11:14.290329221Z [inf]  ✅ Loaded slash command: profile
+2025-12-21T06:11:14.290338512Z [inf]  ✅ Loaded slash command: numberguess
+2025-12-21T06:11:14.290341296Z [inf]  ✅ Loaded slash command: raffle
+2025-12-21T06:11:14.291189648Z [inf]  ✅ Loaded slash command: wheeloffortune
+2025-12-21T06:11:14.291193680Z [inf]  ✅ Loaded slash command: scratcher
+2025-12-21T06:11:14.291198899Z [inf]  ✅ Loaded slash command: withdraw
+2025-12-21T06:11:14.291204542Z [inf]  ✅ Loaded slash command: serverboost
+2025-12-21T06:11:14.291211251Z [inf]  ✅ Loaded prefix command: balance
+2025-12-21T06:11:14.291213524Z [inf]  ✅ Loaded slash command: setadminrole
+2025-12-21T06:11:14.291223165Z [inf]  ✅ Loaded slash command: setdepositchannel
+2025-12-21T06:11:14.291224258Z [inf]  ✅ Loaded prefix command: blackjack
+2025-12-21T06:11:14.291234685Z [inf]  ✅ Loaded slash command: setlogs
+2025-12-21T06:11:14.291235645Z [inf]  ✅ Loaded prefix command: coinflip
+2025-12-21T06:11:14.291245526Z [inf]  ✅ Loaded slash command: setrtp
+2025-12-21T06:11:14.291246862Z [inf]  ✅ Loaded prefix command: daily
+2025-12-21T06:11:14.291256046Z [inf]  ✅ Loaded prefix command: deposit
+2025-12-21T06:11:14.291256330Z [inf]  ✅ Loaded slash command: setwithdrawchannel
+2025-12-21T06:11:14.291264382Z [inf]  ✅ Loaded slash command: shop
+2025-12-21T06:11:14.291269626Z [inf]  ✅ Loaded prefix command: dice
+2025-12-21T06:11:14.291272955Z [inf]  ✅ Loaded slash command: sicbo
+2025-12-21T06:11:14.291296919Z [inf]  ✅ Loaded slash command: slots
+2025-12-21T06:11:14.291303331Z [inf]  ✅ Loaded slash command: fruitslots
+2025-12-21T06:11:14.291312912Z [inf]  ✅ Loaded slash command: toggledaily
+2025-12-21T06:11:14.291319705Z [inf]  ✅ Loaded slash command: top
+2025-12-21T06:11:14.291324870Z [inf]  ✅ Loaded slash command: tower
+2025-12-21T06:11:14.291329053Z [inf]  ✅ Loaded slash command: transactionhistory
+2025-12-21T06:11:14.291333793Z [inf]  ✅ Loaded slash command: videopoker
+2025-12-21T06:11:14.291338280Z [inf]  ✅ Loaded slash command: war
+2025-12-21T06:11:14.291342496Z [inf]  ✅ Loaded slash command: wheel
+2025-12-21T06:11:14.291909940Z [inf]  ✅ Loaded prefix command: gift
+2025-12-21T06:11:14.291911542Z [inf]  ✅ Loaded button: dice
+2025-12-21T06:11:14.291916126Z [inf]  ✅ Loaded prefix command: help
+2025-12-21T06:11:14.291918177Z [inf]  ✅ Loaded button: hl
+2025-12-21T06:11:14.291921869Z [inf]  ✅ Loaded prefix command: highlow
+2025-12-21T06:11:14.291923879Z [inf]  ✅ Loaded button: inventory
+2025-12-21T06:11:14.291927746Z [inf]  ✅ Loaded prefix command: inventory
+2025-12-21T06:11:14.291929854Z [inf]  ✅ Loaded button: itemraffle
+2025-12-21T06:11:14.291934784Z [inf]  ✅ Loaded button: link_cancel
+2025-12-21T06:11:14.291936750Z [inf]  ✅ Loaded prefix command: poker
+2025-12-21T06:11:14.291939975Z [inf]  ✅ Loaded button: link_confirm
+2025-12-21T06:11:14.291944729Z [inf]  ✅ Loaded button: mines
+2025-12-21T06:11:14.291945819Z [inf]  ✅ Loaded prefix command: profile
+2025-12-21T06:11:14.291950220Z [inf]  ✅ Loaded button: poker
+2025-12-21T06:11:14.291955061Z [inf]  ✅ Loaded prefix command: raffle
+2025-12-21T06:11:14.291955536Z [inf]  ✅ Loaded button: raffle
+2025-12-21T06:11:14.291960716Z [inf]  ✅ Loaded button: roulette
+2025-12-21T06:11:14.291963559Z [inf]  ✅ Loaded prefix command: roulette
+2025-12-21T06:11:14.291969715Z [inf]  ✅ Loaded prefix command: shop
+2025-12-21T06:11:14.291973746Z [inf]  ✅ Loaded prefix command: slots
+2025-12-21T06:11:14.291977561Z [inf]  ✅ Loaded prefix command: top
+2025-12-21T06:11:14.291984674Z [inf]  ✅ Loaded prefix command: war
+2025-12-21T06:11:14.291988795Z [inf]  ✅ Loaded prefix command: withdraw
+2025-12-21T06:11:14.291993231Z [inf]  ✅ Loaded button: baccarat
+2025-12-21T06:11:14.291999221Z [inf]  ✅ Loaded button: bj
+2025-12-21T06:11:14.292003573Z [inf]  ✅ Loaded button: coinflip
+2025-12-21T06:11:14.292007558Z [inf]  ✅ Loaded button: crash
+2025-12-21T06:11:14.292011693Z [inf]  ✅ Loaded button: cups
+2025-12-21T06:11:14.292550773Z [inf]  ✅ Loaded button: rps
+2025-12-21T06:11:14.292559409Z [inf]  ✅ Loaded button: rr
+2025-12-21T06:11:14.292565098Z [inf]  ✅ Loaded button: shop
+2025-12-21T06:11:14.292571961Z [inf]  ✅ Loaded button: slots
+2025-12-21T06:11:14.292577200Z [inf]  ✅ Loaded button: vp
+2025-12-21T06:11:14.292584857Z [inf]  ✅ Loaded button: war
+2025-12-21T06:11:14.292590260Z [inf]  ✅ Loaded event: guildMemberAdd
+2025-12-21T06:11:14.292595437Z [inf]  ✅ Loaded event: interactionCreate
+2025-12-21T06:11:14.292600500Z [inf]  ✅ Loaded event: inviteCreate
+2025-12-21T06:11:14.292605209Z [inf]  ✅ Loaded event: inviteDelete
+2025-12-21T06:11:14.292609764Z [inf]  ✅ Loaded event: ready
+2025-12-21T06:11:14.292616333Z [inf]  🔄 Self-ping loop started (every 4 minutes)
+2025-12-21T06:11:14.292620491Z [inf]  🌐 Uptime server running on port 8080
+2025-12-21T06:11:14.292624944Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:11:14.292630040Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:11:14.292635068Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:11:14.292639797Z [err]      at Server.<anonymous> (/app/utils/uptime.js:49:9)
+2025-12-21T06:11:14.292644005Z [err]      at Object.onceWrapper (node:events:632:28)
+2025-12-21T06:11:14.292647866Z [err]      at Server.emit (node:events:530:35)
+2025-12-21T06:11:14.292652412Z [err]      at emitListeningNT (node:net:1951:10)
+2025-12-21T06:11:14.292657193Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {
+2025-12-21T06:11:14.292661853Z [err]    errno: -2,
+2025-12-21T06:11:14.292666480Z [err]    code: 'ENOENT',
+2025-12-21T06:11:14.292670901Z [err]    syscall: 'open',
+2025-12-21T06:11:14.292676306Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:11:14.292681812Z [err]  }
+2025-12-21T06:11:14.293175640Z [inf]  📝 Performing startup command registration...
+2025-12-21T06:11:14.293179831Z [inf]  
+2025-12-21T06:11:14.293185811Z [inf]  🔄 Registering 77 slash commands...
+2025-12-21T06:11:14.293190069Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:11:14.293194750Z [err]  (node:1) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+2025-12-21T06:11:14.293202193Z [inf]     GemBot#1335 is now online!
+2025-12-21T06:11:14.293204809Z [err]  (Use `node --trace-deprecation ...` to show where the warning was created)
+2025-12-21T06:11:14.293213011Z [inf]     Servers: 4
+2025-12-21T06:11:14.293215467Z [inf]  📧 Cached 42 invites for Dark’s Community and Trading
+2025-12-21T06:11:14.293223970Z [inf]  ✅ Successfully registered 77 slash commands!
+2025-12-21T06:11:14.293225599Z [inf]     Users: 1
+2025-12-21T06:11:14.293231795Z [inf]  📋 Registered commands: addgems, admin, announce, baccarat, balance, bigwins, blackjack, canceldeposit, cancelwithdraw, chuckluck, coinflip, confirmdeposit, crash, cups, daily, debug, deposit, dice, doubleornothing, dragontiger, fantan, funevent, gift, help, highlow, hilostreak, horserace, houseprofit, interest, inventory, inviterewards, invites, itemraffle, jackpot, keno, limbo, link, lottery, luckybox, mines, mypending, numberguess, paigow, pendingtransactions, plinko, poker, processwithdraw, profile, raffle, reddog, removegems, requestdeposit, requestwithdraw, robloxinfo, rps, roulette, russianroulette, scratcher, serverboost, setadminrole, setdepositchannel, setlogs, setrtp, setwithdrawchannel, shop, sicbo, slots, fruitslots, toggledaily, top, tower, transactionhistory, videopoker, war, wheel, wheeloffortune, withdraw
+2025-12-21T06:11:14.293235351Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:11:14.293241135Z [inf]  
+2025-12-21T06:11:14.294614133Z [inf]  📧 Cached 4 invites for Jalen's server
+2025-12-21T06:11:14.294619841Z [inf]  📧 Cached 0 invites for Roblox games
+2025-12-21T06:11:14.294624155Z [inf]  ⚠️ Could not fetch invites for BEAMS R US
+2025-12-21T06:11:14.829972558Z [err]      at WebSocketManager.emit (/app/node_modules/@vladfrangu/async_event_emitter/dist/index.cjs:2504:31) {
+2025-12-21T06:11:14.829980459Z [err]    code: 'CommandInteractionOptionType'
+2025-12-21T06:11:14.829985402Z [err]  }
+2025-12-21T06:11:14.829991285Z [err]  Error executing command: TypeError [CommandInteractionOptionType]: Option "bet" is of type: 4; expected 3.
+2025-12-21T06:11:14.829996521Z [err]      at CommandInteractionOptionResolver._getTypedOption (/app/node_modules/discord.js/src/structures/CommandInteractionOptionResolver.js:99:13)
+2025-12-21T06:11:14.830006328Z [err]  Error executing fantan: TypeError [CommandInteractionOptionType]: Option "bet" is of type: 4; expected 3.
+2025-12-21T06:11:14.830013771Z [err]      at CommandInteractionOptionResolver._getTypedOption (/app/node_modules/discord.js/src/structures/CommandInteractionOptionResolver.js:99:13)
+2025-12-21T06:11:14.830020226Z [err]      at CommandInteractionOptionResolver.getString (/app/node_modules/discord.js/src/structures/CommandInteractionOptionResolver.js:172:25)
+2025-12-21T06:11:14.830029108Z [err]      at Object.execute (/app/commands/fantan.js:28:46)
+2025-12-21T06:11:14.830038515Z [err]      at Client.<anonymous> (/app/index.js:157:27)
+2025-12-21T06:11:14.830044965Z [err]      at Client.emit (node:events:530:35)
+2025-12-21T06:11:14.830050838Z [err]      at InteractionCreateAction.handle (/app/node_modules/discord.js/src/client/actions/InteractionCreate.js:101:12)
+2025-12-21T06:11:14.830056917Z [err]      at module.exports [as INTERACTION_CREATE] (/app/node_modules/discord.js/src/client/websocket/handlers/INTERACTION_CREATE.js:4:36)
+2025-12-21T06:11:14.830063488Z [err]      at WebSocketManager.handlePacket (/app/node_modules/discord.js/src/client/websocket/WebSocketManager.js:352:31)
+2025-12-21T06:11:14.830071009Z [err]      at WebSocketManager.<anonymous> (/app/node_modules/discord.js/src/client/websocket/WebSocketManager.js:236:12)
+2025-12-21T06:11:14.830715723Z [err]      at CommandInteractionOptionResolver.getString (/app/node_modules/discord.js/src/structures/CommandInteractionOptionResolver.js:172:25)
+2025-12-21T06:11:14.830719885Z [err]  }
+2025-12-21T06:11:14.830723300Z [err]      at Object.execute (/app/commands/fantan.js:28:46)
+2025-12-21T06:11:14.830728778Z [err]      at Object.execute (/app/events/interactionCreate.js:9:31)
+2025-12-21T06:11:14.830729503Z [err]  (node:1) Warning: Supplying "ephemeral" for interaction response options is deprecated. Utilize flags instead.
+2025-12-21T06:11:14.830733631Z [err]      at Client.<anonymous> (/app/index.js:80:58)
+2025-12-21T06:11:14.830738678Z [err]      at Client.emit (node:events:530:35)
+2025-12-21T06:11:14.830743748Z [err]      at InteractionCreateAction.handle (/app/node_modules/discord.js/src/client/actions/InteractionCreate.js:101:12)
+2025-12-21T06:11:14.830747798Z [err]      at module.exports [as INTERACTION_CREATE] (/app/node_modules/discord.js/src/client/websocket/handlers/INTERACTION_CREATE.js:4:36)
+2025-12-21T06:11:14.830751748Z [err]      at WebSocketManager.handlePacket (/app/node_modules/discord.js/src/client/websocket/WebSocketManager.js:352:31)
+2025-12-21T06:11:14.830755829Z [err]      at WebSocketManager.<anonymous> (/app/node_modules/discord.js/src/client/websocket/WebSocketManager.js:236:12) {
+2025-12-21T06:11:14.830760251Z [err]    code: 'CommandInteractionOptionType'
+2025-12-21T06:11:21.893026737Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:11:21.893033308Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:11:21.893038238Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:11:21.893049036Z [err]      at Timeout.selfPing [as _onTimeout] (/app/utils/uptime.js:81:9)
+2025-12-21T06:11:21.893053107Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+2025-12-21T06:11:21.893058001Z [err]    errno: -2,
+2025-12-21T06:11:21.893062586Z [err]    code: 'ENOENT',
+2025-12-21T06:11:21.893066486Z [err]    syscall: 'open',
+2025-12-21T06:11:21.893071186Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:11:21.893075858Z [err]  }
+2025-12-21T06:11:21.893080532Z [inf]  ✅ Self-ping #1 successful
+2025-12-21T06:11:29.207486211Z [err]  Error executing blackjack: DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:11:29.207499522Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:11:29.207505810Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:11:29.207510328Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:11:29.207515109Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:11:29.207519844Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:11:29.207525024Z [err]      at async Object.execute (/app/commands/blackjack.js:174:9)
+2025-12-21T06:11:29.207529866Z [err]      at async Client.<anonymous> (/app/index.js:157:13) {
+2025-12-21T06:11:29.207535285Z [err]    requestBody: { files: [], json: { type: 4, data: [Object] } },
+2025-12-21T06:11:29.207541633Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:11:29.207546002Z [err]    code: 10062,
+2025-12-21T06:11:29.207550759Z [err]    status: 404,
+2025-12-21T06:11:29.207560617Z [err]    method: 'POST',
+2025-12-21T06:11:29.207565313Z [err]    url: 'https://discord.com/api/v10/interactions/1452181663642681388/aW50ZXJhY3Rpb246MTQ1MjE4MTY2MzY0MjY4MTM4ODpUblg1a0RNTTBzZUI5MDdOdWNNdjl3T1IxdHJrOXhYdWFWUnR0ajNqdGRQRGxGMVlvaDZYSHdmMUc3UzNXNFUzNHZQb1JXN1hudkMzczE3WlI3OEk2VjhjVVhmeWROYm5teTRCSVhVRjV1d3dwd0hoWEpDeGNMWjVHZTZEdnBMTQ/callback?with_response=false'
+2025-12-21T06:11:29.207569711Z [err]  }
+2025-12-21T06:11:29.349300085Z [err]  node:events:496
+2025-12-21T06:11:29.349302261Z [err]      json: {
+2025-12-21T06:11:29.349311970Z [err]        throw er; // Unhandled 'error' event
+2025-12-21T06:11:29.349315287Z [err]        type: 4,
+2025-12-21T06:11:29.349318200Z [err]        ^
+2025-12-21T06:11:29.349324895Z [err]        data: {
+2025-12-21T06:11:29.349324912Z [err]  
+2025-12-21T06:11:29.349329188Z [err]  DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:11:29.349333766Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:11:29.349338468Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:11:29.349340981Z [err]          content: '❌ An error occurred while executing this command!',
+2025-12-21T06:11:29.349344182Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:11:29.349350055Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:11:29.349350685Z [err]          tts: false,
+2025-12-21T06:11:29.349355002Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:11:29.349359573Z [err]          nonce: undefined,
+2025-12-21T06:11:29.349360667Z [err]      at async Client.<anonymous> (/app/index.js:164:17)
+2025-12-21T06:11:29.349367821Z [err]  Emitted 'error' event on Client instance at:
+2025-12-21T06:11:29.349369008Z [err]          enforce_nonce: false,
+2025-12-21T06:11:29.349373686Z [err]      at emitUnhandledRejectionOrErr (node:events:401:10)
+2025-12-21T06:11:29.349377546Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:84:21) {
+2025-12-21T06:11:29.349381615Z [err]    requestBody: {
+2025-12-21T06:11:29.349385641Z [err]      files: [],
+2025-12-21T06:11:29.349754341Z [err]  }
+2025-12-21T06:11:29.349758984Z [err]          embeds: undefined,
+2025-12-21T06:11:29.349764621Z [err]  
+2025-12-21T06:11:29.349766348Z [err]          components: undefined,
+2025-12-21T06:11:29.349771695Z [err]          username: undefined,
+2025-12-21T06:11:29.349773867Z [err]  Node.js v20.18.1
+2025-12-21T06:11:29.349777141Z [err]          avatar_url: undefined,
+2025-12-21T06:11:29.349781253Z [err]          allowed_mentions: undefined,
+2025-12-21T06:11:29.349790739Z [err]          flags: 64,
+2025-12-21T06:11:29.349795192Z [err]          message_reference: undefined,
+2025-12-21T06:11:29.349799643Z [err]          attachments: undefined,
+2025-12-21T06:11:29.349805216Z [err]          sticker_ids: undefined,
+2025-12-21T06:11:29.349809764Z [err]          thread_name: undefined,
+2025-12-21T06:11:29.349814012Z [err]          applied_tags: undefined,
+2025-12-21T06:11:29.349818017Z [err]          poll: undefined
+2025-12-21T06:11:29.349821801Z [err]        }
+2025-12-21T06:11:29.349825982Z [err]      }
+2025-12-21T06:11:29.349829793Z [err]    },
+2025-12-21T06:11:29.349834033Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:11:29.349838219Z [err]    code: 10062,
+2025-12-21T06:11:29.349842235Z [err]    status: 404,
+2025-12-21T06:11:29.349846429Z [err]    method: 'POST',
+2025-12-21T06:11:29.349850448Z [err]    url: 'https://discord.com/api/v10/interactions/1452181663642681388/aW50ZXJhY3Rpb246MTQ1MjE4MTY2MzY0MjY4MTM4ODpUblg1a0RNTTBzZUI5MDdOdWNNdjl3T1IxdHJrOXhYdWFWUnR0ajNqdGRQRGxGMVlvaDZYSHdmMUc3UzNXNFUzNHZQb1JXN1hudkMzczE3WlI3OEk2VjhjVVhmeWROYm5teTRCSVhVRjV1d3dwd0hoWEpDeGNMWjVHZTZEdnBMTQ/callback?with_response=false'
+2025-12-21T06:11:30.206928003Z [inf]  ✅ Loaded slash command: bigwins
+2025-12-21T06:11:30.206937408Z [inf]  ✅ Loaded slash command: blackjack
+2025-12-21T06:11:30.206942534Z [inf]  ✅ Loaded slash command: canceldeposit
+2025-12-21T06:11:30.206947351Z [inf]  ✅ Loaded slash command: cancelwithdraw
+2025-12-21T06:11:30.206954327Z [inf]  ✅ Loaded slash command: chuckluck
+2025-12-21T06:11:30.206959847Z [inf]  ✅ Loaded slash command: coinflip
+2025-12-21T06:11:30.206964367Z [inf]  ✅ Loaded slash command: confirmdeposit
+2025-12-21T06:11:30.206969330Z [inf]  ✅ Loaded slash command: crash
+2025-12-21T06:11:30.206982042Z [inf]  ✅ Loaded slash command: addgems
+2025-12-21T06:11:30.206985802Z [inf]  ✅ Loaded slash command: admin
+2025-12-21T06:11:30.206990773Z [inf]  ✅ Loaded slash command: announce
+2025-12-21T06:11:30.206995289Z [inf]  ✅ Loaded slash command: baccarat
+2025-12-21T06:11:30.206999318Z [inf]  ✅ Loaded slash command: balance
+2025-12-21T06:11:30.207185650Z [inf]  ✅ Loaded slash command: cups
+2025-12-21T06:11:30.207965005Z [inf]  ✅ Loaded slash command: daily
+2025-12-21T06:11:30.208703839Z [inf]  ✅ Loaded slash command: debug
+2025-12-21T06:11:30.209417357Z [inf]  ✅ Loaded slash command: deposit
+2025-12-21T06:11:30.210372358Z [inf]  ✅ Loaded slash command: dice
+2025-12-21T06:11:30.211315144Z [inf]  ✅ Loaded slash command: doubleornothing
+2025-12-21T06:11:30.211321466Z [inf]  ✅ Loaded slash command: dragontiger
+2025-12-21T06:11:30.212235416Z [inf]  ✅ Loaded slash command: fantan
+2025-12-21T06:11:30.213069710Z [inf]  ✅ Loaded slash command: funevent
+2025-12-21T06:11:30.214013716Z [inf]  ✅ Loaded slash command: gift
+2025-12-21T06:11:30.214020465Z [inf]  ✅ Loaded slash command: help
+2025-12-21T06:11:30.214790714Z [inf]  ✅ Loaded slash command: highlow
+2025-12-21T06:11:30.214795687Z [inf]  ✅ Loaded slash command: hilostreak
+2025-12-21T06:11:30.215771384Z [inf]  ✅ Loaded slash command: horserace
+2025-12-21T06:11:30.215778102Z [inf]  ✅ Loaded slash command: houseprofit
+2025-12-21T06:11:30.216642282Z [inf]  ✅ Loaded slash command: interest
+2025-12-21T06:11:30.217668723Z [inf]  ✅ Loaded slash command: inventory
+2025-12-21T06:11:30.217675915Z [inf]  ✅ Loaded slash command: inviterewards
+2025-12-21T06:11:30.217681705Z [inf]  ✅ Loaded slash command: invites
+2025-12-21T06:11:30.218509339Z [inf]  ✅ Loaded slash command: itemraffle
+2025-12-21T06:11:30.219524982Z [inf]  ✅ Loaded slash command: jackpot
+2025-12-21T06:11:30.219533509Z [inf]  ✅ Loaded slash command: keno
+2025-12-21T06:11:30.220530124Z [inf]  ✅ Loaded slash command: limbo
+2025-12-21T06:11:30.220537234Z [inf]  ✅ Loaded slash command: link
+2025-12-21T06:11:30.221377497Z [inf]  ✅ Loaded slash command: lottery
+2025-12-21T06:11:30.221384886Z [inf]  ✅ Loaded slash command: luckybox
+2025-12-21T06:11:30.222228608Z [inf]  ✅ Loaded slash command: mines
+2025-12-21T06:11:30.222234140Z [inf]  ✅ Loaded slash command: mypending
+2025-12-21T06:11:30.223165704Z [inf]  ✅ Loaded slash command: numberguess
+2025-12-21T06:11:30.223173039Z [inf]  ✅ Loaded slash command: paigow
+2025-12-21T06:11:30.224115658Z [inf]  ✅ Loaded slash command: pendingtransactions
+2025-12-21T06:11:30.224121432Z [inf]  ✅ Loaded slash command: plinko
+2025-12-21T06:11:30.225075229Z [inf]  ✅ Loaded slash command: poker
+2025-12-21T06:11:30.225080303Z [inf]  ✅ Loaded slash command: processwithdraw
+2025-12-21T06:11:30.226262957Z [inf]  ✅ Loaded slash command: profile
+2025-12-21T06:11:30.226270461Z [inf]  ✅ Loaded slash command: raffle
+2025-12-21T06:11:30.227474015Z [inf]  ✅ Loaded slash command: reddog
+2025-12-21T06:11:30.227481323Z [inf]  ✅ Loaded slash command: removegems
+2025-12-21T06:11:30.228676601Z [inf]  ✅ Loaded slash command: requestdeposit
+2025-12-21T06:11:30.228685774Z [inf]  ✅ Loaded slash command: requestwithdraw
+2025-12-21T06:11:30.228693123Z [inf]  ✅ Loaded slash command: robloxinfo
+2025-12-21T06:11:30.229675433Z [inf]  ✅ Loaded slash command: rps
+2025-12-21T06:11:30.230728958Z [inf]  ✅ Loaded slash command: roulette
+2025-12-21T06:11:30.236145295Z [inf]  ✅ Loaded slash command: russianroulette
+2025-12-21T06:11:30.236153198Z [inf]  ✅ Loaded slash command: scratcher
+2025-12-21T06:11:30.236159626Z [inf]  ✅ Loaded slash command: serverboost
+2025-12-21T06:11:30.236165991Z [inf]  ✅ Loaded slash command: setadminrole
+2025-12-21T06:11:30.236172020Z [inf]  ✅ Loaded slash command: setdepositchannel
+2025-12-21T06:11:30.236178391Z [inf]  ✅ Loaded slash command: setlogs
+2025-12-21T06:11:30.236184077Z [inf]  ✅ Loaded slash command: setrtp
+2025-12-21T06:11:30.236189892Z [inf]  ✅ Loaded slash command: setwithdrawchannel
+2025-12-21T06:11:30.240439228Z [inf]  ✅ Loaded slash command: shop
+2025-12-21T06:11:30.240445332Z [inf]  ✅ Loaded slash command: sicbo
+2025-12-21T06:11:30.240449265Z [inf]  ✅ Loaded slash command: slots
+2025-12-21T06:11:30.240453369Z [inf]  ✅ Loaded slash command: fruitslots
+2025-12-21T06:11:30.240457685Z [inf]  ✅ Loaded slash command: toggledaily
+2025-12-21T06:11:30.240462382Z [inf]  ✅ Loaded slash command: top
+2025-12-21T06:11:30.240466596Z [inf]  ✅ Loaded slash command: tower
+2025-12-21T06:11:30.241208955Z [inf]  ✅ Loaded slash command: transactionhistory
+2025-12-21T06:11:30.241213410Z [inf]  ✅ Loaded slash command: videopoker
+2025-12-21T06:11:30.242132621Z [inf]  ✅ Loaded slash command: war
+2025-12-21T06:11:30.242138273Z [inf]  ✅ Loaded slash command: wheel
+2025-12-21T06:11:30.243097117Z [inf]  ✅ Loaded slash command: wheeloffortune
+2025-12-21T06:11:30.243106087Z [inf]  ✅ Loaded slash command: withdraw
+2025-12-21T06:11:30.243920329Z [inf]  ✅ Loaded prefix command: balance
+2025-12-21T06:11:30.243926953Z [inf]  ✅ Loaded prefix command: blackjack
+2025-12-21T06:11:30.243932936Z [inf]  ✅ Loaded prefix command: coinflip
+2025-12-21T06:11:30.243938399Z [inf]  ✅ Loaded prefix command: daily
+2025-12-21T06:11:30.244740838Z [inf]  ✅ Loaded prefix command: deposit
+2025-12-21T06:11:30.244749159Z [inf]  ✅ Loaded prefix command: dice
+2025-12-21T06:11:30.244755506Z [inf]  ✅ Loaded prefix command: gift
+2025-12-21T06:11:30.245577987Z [inf]  ✅ Loaded prefix command: help
+2025-12-21T06:11:30.245585729Z [inf]  ✅ Loaded prefix command: highlow
+2025-12-21T06:11:30.245597619Z [inf]  ✅ Loaded prefix command: inventory
+2025-12-21T06:11:30.245601800Z [inf]  ✅ Loaded prefix command: poker
+2025-12-21T06:11:30.245605798Z [inf]  ✅ Loaded prefix command: profile
+2025-12-21T06:11:30.246413424Z [inf]  ✅ Loaded prefix command: raffle
+2025-12-21T06:11:30.246419536Z [inf]  ✅ Loaded prefix command: roulette
+2025-12-21T06:11:30.246424728Z [inf]  ✅ Loaded prefix command: shop
+2025-12-21T06:11:30.247328286Z [inf]  ✅ Loaded prefix command: slots
+2025-12-21T06:11:30.247332793Z [inf]  ✅ Loaded prefix command: top
+2025-12-21T06:11:30.247336929Z [inf]  ✅ Loaded prefix command: war
+2025-12-21T06:11:30.247341225Z [inf]  ✅ Loaded prefix command: withdraw
+2025-12-21T06:11:30.248046148Z [inf]  ✅ Loaded button: baccarat
+2025-12-21T06:11:30.248050351Z [inf]  ✅ Loaded button: bj
+2025-12-21T06:11:30.249012299Z [inf]  ✅ Loaded button: coinflip
+2025-12-21T06:11:30.249017291Z [inf]  ✅ Loaded button: crash
+2025-12-21T06:11:30.249021220Z [inf]  ✅ Loaded button: cups
+2025-12-21T06:11:30.249899426Z [inf]  ✅ Loaded button: dice
+2025-12-21T06:11:30.249903972Z [inf]  ✅ Loaded button: hl
+2025-12-21T06:11:30.249908311Z [inf]  ✅ Loaded button: inventory
+2025-12-21T06:11:30.249912793Z [inf]  ✅ Loaded button: itemraffle
+2025-12-21T06:11:30.249916960Z [inf]  ✅ Loaded button: link_cancel
+2025-12-21T06:11:30.250799565Z [inf]  ✅ Loaded button: link_confirm
+2025-12-21T06:11:30.250807327Z [inf]  ✅ Loaded button: mines
+2025-12-21T06:11:30.250814039Z [inf]  ✅ Loaded button: poker
+2025-12-21T06:11:30.251737306Z [inf]  ✅ Loaded button: raffle
+2025-12-21T06:11:30.251743124Z [inf]  ✅ Loaded button: roulette
+2025-12-21T06:11:30.251748528Z [inf]  ✅ Loaded button: rps
+2025-12-21T06:11:30.252841803Z [inf]  ✅ Loaded button: rr
+2025-12-21T06:11:30.252856728Z [inf]  ✅ Loaded button: shop
+2025-12-21T06:11:30.252863059Z [inf]  ✅ Loaded button: slots
+2025-12-21T06:11:30.252870621Z [inf]  ✅ Loaded button: vp
+2025-12-21T06:11:30.253794378Z [inf]  ✅ Loaded button: war
+2025-12-21T06:11:30.253800449Z [inf]  ✅ Loaded event: guildMemberAdd
+2025-12-21T06:11:30.253805753Z [inf]  ✅ Loaded event: interactionCreate
+2025-12-21T06:11:30.253809938Z [inf]  ✅ Loaded event: inviteCreate
+2025-12-21T06:11:30.254519604Z [inf]  ✅ Loaded event: inviteDelete
+2025-12-21T06:11:30.254524526Z [inf]  ✅ Loaded event: ready
+2025-12-21T06:11:30.259915832Z [inf]  🔄 Self-ping loop started (every 4 minutes)
+2025-12-21T06:11:30.260811582Z [inf]  🌐 Uptime server running on port 8080
+2025-12-21T06:11:30.265762397Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:11:30.265771042Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:11:30.265777643Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:11:30.265783562Z [err]      at Server.<anonymous> (/app/utils/uptime.js:49:9)
+2025-12-21T06:11:30.265789911Z [err]      at Object.onceWrapper (node:events:632:28)
+2025-12-21T06:11:30.265795381Z [err]      at Server.emit (node:events:530:35)
+2025-12-21T06:11:30.265800836Z [err]      at emitListeningNT (node:net:1951:10)
+2025-12-21T06:11:30.265809451Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {
+2025-12-21T06:11:30.265814991Z [err]    errno: -2,
+2025-12-21T06:11:30.265821029Z [err]    code: 'ENOENT',
+2025-12-21T06:11:30.265826646Z [err]    syscall: 'open',
+2025-12-21T06:11:30.265836854Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:11:30.265842732Z [err]  }
+2025-12-21T06:11:31.138066517Z [inf]  
+2025-12-21T06:11:31.138075706Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:11:31.138082209Z [inf]     GemBot#1335 is now online!
+2025-12-21T06:11:31.138088014Z [inf]     Servers: 4
+2025-12-21T06:11:31.138094128Z [inf]     Users: 1
+2025-12-21T06:11:31.138101917Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:11:31.138107379Z [inf]  
+2025-12-21T06:11:31.138113135Z [inf]  📝 Performing startup command registration...
+2025-12-21T06:11:31.138119968Z [inf]  🔄 Registering 77 slash commands...
+2025-12-21T06:11:31.138126262Z [err]  (node:1) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+2025-12-21T06:11:31.138131909Z [err]  (Use `node --trace-deprecation ...` to show where the warning was created)
+2025-12-21T06:11:31.414217715Z [err]  (node:1) Warning: Supplying "ephemeral" for interaction response options is deprecated. Utilize flags instead.
+2025-12-21T06:11:31.566401995Z [inf]  📧 Cached 42 invites for Dark’s Community and Trading
+2025-12-21T06:11:31.626952493Z [inf]  ✅ Successfully registered 77 slash commands!
+2025-12-21T06:11:31.626959886Z [inf]  📋 Registered commands: addgems, admin, announce, baccarat, balance, bigwins, blackjack, canceldeposit, cancelwithdraw, chuckluck, coinflip, confirmdeposit, crash, cups, daily, debug, deposit, dice, doubleornothing, dragontiger, fantan, funevent, gift, help, highlow, hilostreak, horserace, houseprofit, interest, inventory, inviterewards, invites, itemraffle, jackpot, keno, limbo, link, lottery, luckybox, mines, mypending, numberguess, paigow, pendingtransactions, plinko, poker, processwithdraw, profile, raffle, reddog, removegems, requestdeposit, requestwithdraw, robloxinfo, rps, roulette, russianroulette, scratcher, serverboost, setadminrole, setdepositchannel, setlogs, setrtp, setwithdrawchannel, shop, sicbo, slots, fruitslots, toggledaily, top, tower, transactionhistory, videopoker, war, wheel, wheeloffortune, withdraw
+2025-12-21T06:11:31.763068096Z [inf]  📧 Cached 4 invites for Jalen's server
+2025-12-21T06:11:31.970422100Z [inf]  📧 Cached 0 invites for Roblox games
+2025-12-21T06:11:32.104514596Z [inf]  ⚠️ Could not fetch invites for BEAMS R US
+2025-12-21T06:11:37.505840228Z [err]  Error executing command: DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:11:37.505846267Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:11:37.505850443Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:11:37.505854525Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:11:37.505858658Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:11:37.505862980Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:11:37.505867230Z [err]      at async Object.execute (/app/events/interactionCreate.js:9:17) {
+2025-12-21T06:11:37.505872372Z [err]    requestBody: { files: [], json: { type: 4, data: [Object] } },
+2025-12-21T06:11:37.505876303Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:11:37.505880167Z [err]    code: 10062,
+2025-12-21T06:11:37.505885425Z [err]    status: 404,
+2025-12-21T06:11:37.505889671Z [err]    method: 'POST',
+2025-12-21T06:11:37.505893931Z [err]    url: 'https://discord.com/api/v10/interactions/1452181698853732482/aW50ZXJhY3Rpb246MTQ1MjE4MTY5ODg1MzczMjQ4MjpmeWRzVEl0M2VFUzBWNUVXQmFrYWduMXo0R01COFR4Y0M0OWtPelFqdXNwTXk0WnN5T1R4QndoVmtxWlh2NGVzeDUyRGNKMmdDb0EyY0x6Y3JONm1OVENmODFxZU9GYXBUTlEyeHpJdE5lQ21ncWUxZHNwdzFJbXphYkdyZjhieQ/callback?with_response=false'
+2025-12-21T06:11:37.505897756Z [err]  }
+2025-12-21T06:11:40.457143248Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:11:40.457143346Z [inf]  ✅ Self-ping #1 successful
+2025-12-21T06:11:40.457149933Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:11:40.457154154Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:11:40.457158068Z [err]      at Timeout.selfPing [as _onTimeout] (/app/utils/uptime.js:81:9)
+2025-12-21T06:11:40.457162401Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+2025-12-21T06:11:40.457166701Z [err]    errno: -2,
+2025-12-21T06:11:40.457170571Z [err]    code: 'ENOENT',
+2025-12-21T06:11:40.457174382Z [err]    syscall: 'open',
+2025-12-21T06:11:40.457178486Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:11:40.457182506Z [err]  }
+2025-12-21T06:12:00.462993131Z [err]  Error in setbet: DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:12:00.462998201Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:12:00.463003029Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:12:00.463008096Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:12:00.463012811Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:12:00.463017806Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:12:00.463021948Z [err]      at async Object.execute (/app/commands/admin.js:241:21)
+2025-12-21T06:12:00.463025850Z [err]      at async Client.<anonymous> (/app/index.js:157:13) {
+2025-12-21T06:12:00.463030285Z [err]    requestBody: { files: [], json: { type: 4, data: [Object] } },
+2025-12-21T06:12:00.463035145Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:12:00.463040933Z [err]    code: 10062,
+2025-12-21T06:12:00.463051251Z [err]    status: 404,
+2025-12-21T06:12:00.463056944Z [err]    method: 'POST',
+2025-12-21T06:12:00.463061113Z [err]    url: 'https://discord.com/api/v10/interactions/1452181772753174670/aW50ZXJhY3Rpb246MTQ1MjE4MTc3Mjc1MzE3NDY3MDpnTHhkT0Z3YVNmNHRBeG81RTlpTGJuNksxQ0thVkxraGZqN0ZOcXlSWWtJUUphZk9iTVN2RW1uN2tscEtVU1ZWd0JSZHZQZlFNVms0N3dlM0ZjZzJidWxsYjBzQzE3NlQ1SjM1WlNVYjJIekdKUkpzUnNNUWVyaDU1d1o4cWh5Sg/callback?with_response=false'
+2025-12-21T06:12:00.463065206Z [err]  }
+2025-12-21T06:12:00.463069321Z [err]  Error executing admin: DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:12:00.463073968Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:12:00.463077900Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:12:00.469386820Z [inf]  ✅ Loaded slash command: mines
+2025-12-21T06:12:00.469391235Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:12:00.469396900Z [inf]  ✅ Loaded slash command: mypending
+2025-12-21T06:12:00.469402430Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:12:00.469403252Z [inf]  ✅ Loaded slash command: numberguess
+2025-12-21T06:12:00.469408800Z [inf]  ✅ Loaded slash command: paigow
+2025-12-21T06:12:00.469410122Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:12:00.469413825Z [inf]  ✅ Loaded slash command: pendingtransactions
+2025-12-21T06:12:00.469418002Z [err]      at async Object.execute (/app/commands/admin.js:246:21)
+2025-12-21T06:12:00.469419398Z [inf]  ✅ Loaded slash command: plinko
+2025-12-21T06:12:00.469425069Z [inf]  ✅ Loaded slash command: poker
+2025-12-21T06:12:00.469425810Z [err]      at async Client.<anonymous> (/app/index.js:157:13) {
+2025-12-21T06:12:00.469430193Z [inf]  ✅ Loaded slash command: processwithdraw
+2025-12-21T06:12:00.469434230Z [err]    requestBody: { files: [], json: { type: 4, data: [Object] } },
+2025-12-21T06:12:00.469437091Z [inf]  ✅ Loaded slash command: profile
+2025-12-21T06:12:00.469442018Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:12:00.469442962Z [inf]  ✅ Loaded slash command: raffle
+2025-12-21T06:12:00.469449472Z [inf]  ✅ Loaded slash command: reddog
+2025-12-21T06:12:00.469450880Z [err]    code: 10062,
+2025-12-21T06:12:00.469451266Z [inf]  ✅ Loaded slash command: shop
+2025-12-21T06:12:00.469457605Z [inf]  ✅ Loaded slash command: removegems
+2025-12-21T06:12:00.469458848Z [err]    status: 404,
+2025-12-21T06:12:00.469465022Z [inf]  ✅ Loaded slash command: requestdeposit
+2025-12-21T06:12:00.469465238Z [inf]  ✅ Loaded slash command: top
+2025-12-21T06:12:00.469468109Z [err]    method: 'POST',
+2025-12-21T06:12:00.469469602Z [inf]  ✅ Loaded slash command: sicbo
+2025-12-21T06:12:00.469473165Z [inf]  ✅ Loaded slash command: requestwithdraw
+2025-12-21T06:12:00.469476196Z [inf]  ✅ Loaded slash command: tower
+2025-12-21T06:12:00.469477898Z [err]    url: 'https://discord.com/api/v10/interactions/1452181772753174670/aW50ZXJhY3Rpb246MTQ1MjE4MTc3Mjc1MzE3NDY3MDpnTHhkT0Z3YVNmNHRBeG81RTlpTGJuNksxQ0thVkxraGZqN0ZOcXlSWWtJUUphZk9iTVN2RW1uN2tscEtVU1ZWd0JSZHZQZlFNVms0N3dlM0ZjZzJidWxsYjBzQzE3NlQ1SjM1WlNVYjJIekdKUkpzUnNNUWVyaDU1d1o4cWh5Sg/callback?with_response=false'
+2025-12-21T06:12:00.469481337Z [inf]  ✅ Loaded slash command: robloxinfo
+2025-12-21T06:12:00.469485128Z [inf]  ✅ Loaded slash command: slots
+2025-12-21T06:12:00.469487400Z [inf]  ✅ Loaded slash command: transactionhistory
+2025-12-21T06:12:00.469488905Z [err]  }
+2025-12-21T06:12:00.469489726Z [inf]  ✅ Loaded slash command: rps
+2025-12-21T06:12:00.469499294Z [err]  node:events:496
+2025-12-21T06:12:00.469500071Z [inf]  ✅ Loaded slash command: videopoker
+2025-12-21T06:12:00.469500240Z [inf]  ✅ Loaded slash command: fruitslots
+2025-12-21T06:12:00.469500819Z [inf]  ✅ Loaded slash command: roulette
+2025-12-21T06:12:00.469502820Z [inf]  ✅ Loaded slash command: wheeloffortune
+2025-12-21T06:12:00.469511605Z [err]        throw er; // Unhandled 'error' event
+2025-12-21T06:12:00.469511606Z [inf]  ✅ Loaded slash command: war
+2025-12-21T06:12:00.469513111Z [inf]  ✅ Loaded slash command: toggledaily
+2025-12-21T06:12:00.469515482Z [inf]  ✅ Loaded slash command: russianroulette
+2025-12-21T06:12:00.469520681Z [inf]  ✅ Loaded slash command: withdraw
+2025-12-21T06:12:00.469523325Z [inf]  ✅ Loaded slash command: wheel
+2025-12-21T06:12:00.469525397Z [err]        ^
+2025-12-21T06:12:00.469531163Z [inf]  ✅ Loaded slash command: scratcher
+2025-12-21T06:12:00.469533612Z [inf]  ✅ Loaded prefix command: balance
+2025-12-21T06:12:00.469540737Z [err]  
+2025-12-21T06:12:00.469541577Z [inf]  ✅ Loaded prefix command: daily
+2025-12-21T06:12:00.469542318Z [inf]  ✅ Loaded slash command: serverboost
+2025-12-21T06:12:00.469544532Z [inf]  ✅ Loaded prefix command: blackjack
+2025-12-21T06:12:00.469553371Z [inf]  ✅ Loaded slash command: setadminrole
+2025-12-21T06:12:00.469555082Z [inf]  ✅ Loaded prefix command: deposit
+2025-12-21T06:12:00.469555171Z [inf]  ✅ Loaded prefix command: coinflip
+2025-12-21T06:12:00.469556036Z [err]  DiscordAPIError[40060]: Interaction has already been acknowledged.
+2025-12-21T06:12:00.469559590Z [inf]  ✅ Loaded prefix command: help
+2025-12-21T06:12:00.469563799Z [inf]  ✅ Loaded slash command: setdepositchannel
+2025-12-21T06:12:00.469565149Z [inf]  ✅ Loaded prefix command: dice
+2025-12-21T06:12:00.469571627Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:12:00.469572903Z [inf]  ✅ Loaded prefix command: highlow
+2025-12-21T06:12:00.469576058Z [inf]  ✅ Loaded prefix command: gift
+2025-12-21T06:12:00.469576952Z [inf]  ✅ Loaded slash command: setlogs
+2025-12-21T06:12:00.469585896Z [inf]  ✅ Loaded prefix command: inventory
+2025-12-21T06:12:00.469586902Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:12:00.469586950Z [inf]  ✅ Loaded slash command: setrtp
+2025-12-21T06:12:00.469594033Z [inf]  ✅ Loaded prefix command: poker
+2025-12-21T06:12:00.469598786Z [inf]  ✅ Loaded prefix command: profile
+2025-12-21T06:12:00.469601664Z [inf]  ✅ Loaded slash command: setwithdrawchannel
+2025-12-21T06:12:00.469609020Z [inf]  ✅ Loaded prefix command: raffle
+2025-12-21T06:12:00.469609773Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:12:00.469619665Z [inf]  ✅ Loaded prefix command: roulette
+2025-12-21T06:12:00.469625719Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:12:00.469630839Z [inf]  ✅ Loaded prefix command: shop
+2025-12-21T06:12:00.469638839Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:12:00.469645095Z [err]      at async Client.<anonymous> (/app/index.js:164:17)
+2025-12-21T06:12:00.469651418Z [err]  Emitted 'error' event on Client instance at:
+2025-12-21T06:12:00.469669211Z [err]      at emitUnhandledRejectionOrErr (node:events:401:10)
+2025-12-21T06:12:00.469677060Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:84:21) {
+2025-12-21T06:12:00.469683858Z [inf]  ✅ Loaded prefix command: slots
+2025-12-21T06:12:00.469687944Z [err]    requestBody: {
+2025-12-21T06:12:00.469698602Z [inf]  ✅ Loaded prefix command: top
+2025-12-21T06:12:00.469698673Z [err]      files: [],
+2025-12-21T06:12:00.469711412Z [inf]  ✅ Loaded prefix command: war
+2025-12-21T06:12:00.469711547Z [err]      json: {
+2025-12-21T06:12:00.469720603Z [err]        type: 4,
+2025-12-21T06:12:00.469726347Z [inf]  ✅ Loaded prefix command: withdraw
+2025-12-21T06:12:00.469730307Z [err]        data: {
+2025-12-21T06:12:00.469736945Z [inf]  ✅ Loaded button: baccarat
+2025-12-21T06:12:00.469739733Z [err]          content: '❌ An error occurred while executing this command!',
+2025-12-21T06:12:00.469744536Z [inf]  ✅ Loaded button: bj
+2025-12-21T06:12:00.469747602Z [err]          tts: false,
+2025-12-21T06:12:00.469752050Z [inf]  ✅ Loaded button: coinflip
+2025-12-21T06:12:00.469759102Z [inf]  ✅ Loaded button: crash
+2025-12-21T06:12:00.469763368Z [err]          nonce: undefined,
+2025-12-21T06:12:00.469765865Z [inf]  ✅ Loaded button: cups
+2025-12-21T06:12:00.469774080Z [err]          enforce_nonce: false,
+2025-12-21T06:12:00.469776249Z [inf]  ✅ Loaded button: dice
+2025-12-21T06:12:00.469784518Z [inf]  ✅ Loaded button: hl
+2025-12-21T06:12:00.469786004Z [err]          embeds: undefined,
+2025-12-21T06:12:00.469791132Z [inf]  ✅ Loaded button: inventory
+2025-12-21T06:12:00.469796141Z [err]          components: undefined,
+2025-12-21T06:12:00.469799796Z [inf]  ✅ Loaded button: itemraffle
+2025-12-21T06:12:00.469806832Z [err]          username: undefined,
+2025-12-21T06:12:00.469806991Z [inf]  ✅ Loaded button: link_cancel
+2025-12-21T06:12:00.469813917Z [inf]  ✅ Loaded button: link_confirm
+2025-12-21T06:12:00.469817572Z [err]          avatar_url: undefined,
+2025-12-21T06:12:00.469821197Z [inf]  ✅ Loaded button: mines
+2025-12-21T06:12:00.469829500Z [err]          allowed_mentions: undefined,
+2025-12-21T06:12:00.469829636Z [inf]  ✅ Loaded button: poker
+2025-12-21T06:12:00.469838379Z [inf]  ✅ Loaded button: raffle
+2025-12-21T06:12:00.469840845Z [err]          flags: 64,
+2025-12-21T06:12:00.469844646Z [inf]  ✅ Loaded button: roulette
+2025-12-21T06:12:00.469851385Z [err]          message_reference: undefined,
+2025-12-21T06:12:00.469852508Z [inf]  ✅ Loaded button: rps
+2025-12-21T06:12:00.469861583Z [err]          attachments: undefined,
+2025-12-21T06:12:00.469868255Z [inf]  ✅ Loaded button: rr
+2025-12-21T06:12:00.469870031Z [err]          sticker_ids: undefined,
+2025-12-21T06:12:00.469878838Z [inf]  ✅ Loaded button: shop
+2025-12-21T06:12:00.469879722Z [err]          thread_name: undefined,
+2025-12-21T06:12:00.469888748Z [inf]  ✅ Loaded button: slots
+2025-12-21T06:12:00.469889699Z [err]          applied_tags: undefined,
+2025-12-21T06:12:00.469898259Z [inf]  ✅ Loaded button: vp
+2025-12-21T06:12:00.469900062Z [err]          poll: undefined
+2025-12-21T06:12:00.469906232Z [err]        }
+2025-12-21T06:12:00.469911427Z [err]      }
+2025-12-21T06:12:00.469915718Z [err]    },
+2025-12-21T06:12:00.469919635Z [err]    rawError: {
+2025-12-21T06:12:00.469923483Z [err]      message: 'Interaction has already been acknowledged.',
+2025-12-21T06:12:00.469927342Z [err]      code: 40060
+2025-12-21T06:12:00.469931282Z [err]    },
+2025-12-21T06:12:00.469935019Z [err]    code: 40060,
+2025-12-21T06:12:00.469938960Z [err]    status: 400,
+2025-12-21T06:12:00.469943045Z [err]    method: 'POST',
+2025-12-21T06:12:00.469946732Z [err]    url: 'https://discord.com/api/v10/interactions/1452181772753174670/aW50ZXJhY3Rpb246MTQ1MjE4MTc3Mjc1MzE3NDY3MDpnTHhkT0Z3YVNmNHRBeG81RTlpTGJuNksxQ0thVkxraGZqN0ZOcXlSWWtJUUphZk9iTVN2RW1uN2tscEtVU1ZWd0JSZHZQZlFNVms0N3dlM0ZjZzJidWxsYjBzQzE3NlQ1SjM1WlNVYjJIekdKUkpzUnNNUWVyaDU1d1o4cWh5Sg/callback?with_response=false'
+2025-12-21T06:12:00.469950609Z [err]  }
+2025-12-21T06:12:00.469954951Z [err]  
+2025-12-21T06:12:00.469959190Z [err]  Node.js v20.18.1
+2025-12-21T06:12:00.469963361Z [inf]  ✅ Loaded slash command: addgems
+2025-12-21T06:12:00.469967535Z [inf]  ✅ Loaded slash command: admin
+2025-12-21T06:12:00.469971767Z [inf]  ✅ Loaded slash command: announce
+2025-12-21T06:12:00.469976165Z [inf]  ✅ Loaded slash command: baccarat
+2025-12-21T06:12:00.469981636Z [inf]  ✅ Loaded slash command: balance
+2025-12-21T06:12:00.469985841Z [inf]  ✅ Loaded slash command: bigwins
+2025-12-21T06:12:00.469989835Z [inf]  ✅ Loaded slash command: blackjack
+2025-12-21T06:12:00.469994780Z [inf]  ✅ Loaded slash command: canceldeposit
+2025-12-21T06:12:00.469998298Z [inf]  ✅ Loaded slash command: cancelwithdraw
+2025-12-21T06:12:00.470002770Z [inf]  ✅ Loaded slash command: chuckluck
+2025-12-21T06:12:00.470009216Z [inf]  ✅ Loaded slash command: coinflip
+2025-12-21T06:12:00.470014693Z [inf]  ✅ Loaded slash command: confirmdeposit
+2025-12-21T06:12:00.470018590Z [inf]  ✅ Loaded slash command: crash
+2025-12-21T06:12:00.470023110Z [inf]  ✅ Loaded slash command: cups
+2025-12-21T06:12:00.470027055Z [inf]  ✅ Loaded slash command: daily
+2025-12-21T06:12:00.470030807Z [inf]  ✅ Loaded slash command: debug
+2025-12-21T06:12:00.470035243Z [inf]  ✅ Loaded slash command: deposit
+2025-12-21T06:12:00.470039535Z [inf]  ✅ Loaded slash command: dice
+2025-12-21T06:12:00.470043148Z [inf]  ✅ Loaded slash command: doubleornothing
+2025-12-21T06:12:00.470047113Z [inf]  ✅ Loaded slash command: dragontiger
+2025-12-21T06:12:00.470055491Z [inf]  ✅ Loaded slash command: fantan
+2025-12-21T06:12:00.470059219Z [inf]  ✅ Loaded slash command: funevent
+2025-12-21T06:12:00.470062905Z [inf]  ✅ Loaded slash command: gift
+2025-12-21T06:12:00.470066978Z [inf]  ✅ Loaded slash command: help
+2025-12-21T06:12:00.470070677Z [inf]  ✅ Loaded slash command: highlow
+2025-12-21T06:12:00.470074320Z [inf]  ✅ Loaded slash command: hilostreak
+2025-12-21T06:12:00.470078271Z [inf]  ✅ Loaded slash command: horserace
+2025-12-21T06:12:00.470083479Z [inf]  ✅ Loaded slash command: houseprofit
+2025-12-21T06:12:00.470088849Z [inf]  ✅ Loaded slash command: interest
+2025-12-21T06:12:00.470093130Z [inf]  ✅ Loaded slash command: inventory
+2025-12-21T06:12:00.470097694Z [inf]  ✅ Loaded slash command: inviterewards
+2025-12-21T06:12:00.470101739Z [inf]  ✅ Loaded slash command: invites
+2025-12-21T06:12:00.470105570Z [inf]  ✅ Loaded slash command: itemraffle
+2025-12-21T06:12:00.470109448Z [inf]  ✅ Loaded slash command: jackpot
+2025-12-21T06:12:00.470113925Z [inf]  ✅ Loaded slash command: keno
+2025-12-21T06:12:00.470118360Z [inf]  ✅ Loaded slash command: limbo
+2025-12-21T06:12:00.470122597Z [inf]  ✅ Loaded slash command: link
+2025-12-21T06:12:00.470126552Z [inf]  ✅ Loaded slash command: lottery
+2025-12-21T06:12:00.470130133Z [inf]  ✅ Loaded slash command: luckybox
+2025-12-21T06:12:00.472655119Z [inf]  ✅ Loaded button: war
+2025-12-21T06:12:00.472664770Z [inf]  ✅ Loaded event: guildMemberAdd
+2025-12-21T06:12:00.472672062Z [inf]  ✅ Loaded event: interactionCreate
+2025-12-21T06:12:00.472678371Z [inf]  ✅ Loaded event: inviteCreate
+2025-12-21T06:12:00.472684432Z [inf]  ✅ Loaded event: inviteDelete
+2025-12-21T06:12:00.472688847Z [inf]  ✅ Loaded event: ready
+2025-12-21T06:12:00.472692914Z [inf]  🔄 Self-ping loop started (every 4 minutes)
+2025-12-21T06:12:00.472697228Z [inf]  🌐 Uptime server running on port 8080
+2025-12-21T06:12:00.472701077Z [err]  Error saving uptime data: Error: ENOENT: no such file or directory, open '/app/uptime/uptime.json'
+2025-12-21T06:12:00.472705082Z [err]      at Object.writeFileSync (node:fs:2367:20)
+2025-12-21T06:12:00.472708591Z [err]      at saveUptimeData (/app/utils/uptime.js:21:12)
+2025-12-21T06:12:00.472712120Z [err]      at Server.<anonymous> (/app/utils/uptime.js:49:9)
+2025-12-21T06:12:00.472715684Z [err]      at Object.onceWrapper (node:events:632:28)
+2025-12-21T06:12:00.472719970Z [err]      at Server.emit (node:events:530:35)
+2025-12-21T06:12:00.472723490Z [err]      at emitListeningNT (node:net:1951:10)
+2025-12-21T06:12:00.472727228Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {
+2025-12-21T06:12:00.472731982Z [err]    errno: -2,
+2025-12-21T06:12:00.472736047Z [err]    code: 'ENOENT',
+2025-12-21T06:12:00.472739722Z [err]    syscall: 'open',
+2025-12-21T06:12:00.472743379Z [err]    path: '/app/uptime/uptime.json'
+2025-12-21T06:12:00.472746817Z [err]  }
+2025-12-21T06:12:00.472750745Z [inf]  
+2025-12-21T06:12:00.472756095Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:12:00.472760291Z [inf]     GemBot#1335 is now online!
+2025-12-21T06:12:00.472764015Z [inf]     Servers: 4
+2025-12-21T06:12:00.472768559Z [inf]     Users: 1
+2025-12-21T06:12:00.472772424Z [inf]  🎰 ═══════════════════════════════════════
+2025-12-21T06:12:00.472776948Z [inf]  
+2025-12-21T06:12:00.472780653Z [inf]  📝 Performing startup command registration...
+2025-12-21T06:12:00.472784313Z [inf]  🔄 Registering 77 slash commands...
+2025-12-21T06:12:00.472788047Z [err]  (node:1) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+2025-12-21T06:12:00.472792092Z [err]  (Use `node --trace-deprecation ...` to show where the warning was created)
+2025-12-21T06:12:00.472796344Z [inf]  📧 Cached 42 invites for Dark’s Community and Trading
+2025-12-21T06:12:00.472800170Z [inf]  ✅ Successfully registered 77 slash commands!
+2025-12-21T06:12:00.472805797Z [inf]  📋 Registered commands: addgems, admin, announce, baccarat, balance, bigwins, blackjack, canceldeposit, cancelwithdraw, chuckluck, coinflip, confirmdeposit, crash, cups, daily, debug, deposit, dice, doubleornothing, dragontiger, fantan, funevent, gift, help, highlow, hilostreak, horserace, houseprofit, interest, inventory, inviterewards, invites, itemraffle, jackpot, keno, limbo, link, lottery, luckybox, mines, mypending, numberguess, paigow, pendingtransactions, plinko, poker, processwithdraw, profile, raffle, reddog, removegems, requestdeposit, requestwithdraw, robloxinfo, rps, roulette, russianroulette, scratcher, serverboost, setadminrole, setdepositchannel, setlogs, setrtp, setwithdrawchannel, shop, sicbo, slots, fruitslots, toggledaily, top, tower, transactionhistory, videopoker, war, wheel, wheeloffortune, withdraw
+2025-12-21T06:12:00.472809701Z [inf]  📧 Cached 4 invites for Jalen's server
+2025-12-21T06:12:00.472814347Z [inf]  📧 Cached 0 invites for Roblox games
+2025-12-21T06:12:00.472818068Z [inf]  ⚠️ Could not fetch invites for BEAMS R US
+2025-12-21T06:12:02.277609765Z [err]    code: 10062,
+2025-12-21T06:12:02.277617539Z [err]    status: 404,
+2025-12-21T06:12:02.277622427Z [err]    method: 'POST',
+2025-12-21T06:12:02.277633467Z [err]    url: 'https://discord.com/api/v10/interactions/1452181802574811198/aW50ZXJhY3Rpb246MTQ1MjE4MTgwMjU3NDgxMTE5ODp6Z2N0ek12SDI2Vm53MmRUM0daank3Qk9LTnBKdW5uYUsydjVDTmZxMUpudkJRRENrY2NFVUxFb0FUckJrTGkyRkhlR2k2SDNZOW5LZFhVbmNFQlhoTTBHdXZGQzlrVVNTd0ZTM2U0TzhjaDdRdWI3Tkt4VUdHV2I4QjJ4Vjd0bw/callback?with_response=false'
+2025-12-21T06:12:02.277638521Z [err]  }
+2025-12-21T06:12:02.277643644Z [err]  (node:1) Warning: Supplying "ephemeral" for interaction response options is deprecated. Utilize flags instead.
+2025-12-21T06:12:02.277649237Z [err]  Error executing luckybox: DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:12:02.277660868Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:12:02.277667423Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:12:02.277673965Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:12:02.277684883Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:12:02.277691371Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:12:02.277697182Z [err]      at async Object.execute (/app/commands/luckybox.js:63:9)
+2025-12-21T06:12:02.277703382Z [err]      at async Client.<anonymous> (/app/index.js:157:13) {
+2025-12-21T06:12:02.277709306Z [err]    requestBody: { files: [], json: { type: 4, data: [Object] } },
+2025-12-21T06:12:02.277715475Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:12:02.395034321Z [err]  node:events:496
+2025-12-21T06:12:02.395042824Z [err]        throw er; // Unhandled 'error' event
+2025-12-21T06:12:02.395050655Z [err]        ^
+2025-12-21T06:12:02.395057795Z [err]  
+2025-12-21T06:12:02.395062868Z [err]  DiscordAPIError[10062]: Unknown interaction
+2025-12-21T06:12:02.395069851Z [err]      at handleErrors (/app/node_modules/@discordjs/rest/dist/index.js:762:13)
+2025-12-21T06:12:02.395074773Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-21T06:12:02.395079176Z [err]      at async BurstHandler.runRequest (/app/node_modules/@discordjs/rest/dist/index.js:866:23)
+2025-12-21T06:12:02.395083585Z [err]      at async _REST.request (/app/node_modules/@discordjs/rest/dist/index.js:1307:22)
+2025-12-21T06:12:02.395088457Z [err]      at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:193:22)
+2025-12-21T06:12:02.395093101Z [err]      at async Client.<anonymous> (/app/index.js:164:17)
+2025-12-21T06:12:02.395097510Z [err]  Emitted 'error' event on Client instance at:
+2025-12-21T06:12:02.395102128Z [err]      at emitUnhandledRejectionOrErr (node:events:401:10)
+2025-12-21T06:12:02.395106401Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:84:21) {
+2025-12-21T06:12:02.395113088Z [err]    requestBody: {
+2025-12-21T06:12:02.395116899Z [err]      files: [],
+2025-12-21T06:12:02.395121271Z [err]      json: {
+2025-12-21T06:12:02.395129662Z [err]        type: 4,
+2025-12-21T06:12:02.395133886Z [err]        data: {
+2025-12-21T06:12:02.395138181Z [err]          content: '❌ An error occurred while executing this command!',
+2025-12-21T06:12:02.395142512Z [err]          tts: false,
+2025-12-21T06:12:02.395146398Z [err]          nonce: undefined,
+2025-12-21T06:12:02.395151499Z [err]          enforce_nonce: false,
+2025-12-21T06:12:02.395566335Z [err]          embeds: undefined,
+2025-12-21T06:12:02.395573991Z [err]          components: undefined,
+2025-12-21T06:12:02.395578700Z [err]          username: undefined,
+2025-12-21T06:12:02.395593116Z [err]          avatar_url: undefined,
+2025-12-21T06:12:02.395597915Z [err]          allowed_mentions: undefined,
+2025-12-21T06:12:02.395602051Z [err]          flags: 64,
+2025-12-21T06:12:02.395606195Z [err]          message_reference: undefined,
+2025-12-21T06:12:02.395610245Z [err]          attachments: undefined,
+2025-12-21T06:12:02.395614359Z [err]          sticker_ids: undefined,
+2025-12-21T06:12:02.395618072Z [err]          thread_name: undefined,
+2025-12-21T06:12:02.395621972Z [err]          applied_tags: undefined,
+2025-12-21T06:12:02.395627303Z [err]          poll: undefined
+2025-12-21T06:12:02.395631061Z [err]        }
+2025-12-21T06:12:02.395635528Z [err]      }
+2025-12-21T06:12:02.395639879Z [err]    },
+2025-12-21T06:12:02.395645186Z [err]    rawError: { message: 'Unknown interaction', code: 10062 },
+2025-12-21T06:12:02.395651755Z [err]    code: 10062,
+2025-12-21T06:12:02.395658094Z [err]    status: 404,
+2025-12-21T06:12:02.395665211Z [err]    method: 'POST',
+2025-12-21T06:12:02.395671845Z [err]    url: 'https://discord.com/api/v10/interactions/1452181802574811198/aW50ZXJhY3Rpb246MTQ1MjE4MTgwMjU3NDgxMTE5ODp6Z2N0ek12SDI2Vm53MmRUM0daank3Qk9LTnBKdW5uYUsydjVDTmZxMUpudkJRRENrY2NFVUxFb0FUckJrTGkyRkhlR2k2SDNZOW5LZFhVbmNFQlhoTTBHdXZGQzlrVVNTd0ZTM2U0TzhjaDdRdWI3Tkt4VUdHV2I4QjJ4Vjd0bw/callback?with_response=false'
+2025-12-21T06:12:02.395678533Z [err]  }
+2025-12-21T06:12:02.395686105Z [err]  
+2025-12-21T06:12:02.395693379Z [err]  Node.js v20.18.1

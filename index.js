@@ -158,10 +158,14 @@ client.on('interactionCreate', async (interaction) => {
         } catch (error) {
             console.error(`Error executing ${interaction.commandName}:`, error);
             const reply = { content: '❌ An error occurred while executing this command!', ephemeral: true };
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp(reply);
-            } else {
-                await interaction.reply(reply);
+            try {
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp(reply);
+                } else {
+                    await interaction.reply(reply);
+                }
+            } catch (replyError) {
+                console.error(`Failed to reply to error in ${interaction.commandName}:`, replyError.message);
             }
         }
     } else if (interaction.isButton()) {
@@ -173,6 +177,15 @@ client.on('interactionCreate', async (interaction) => {
                 await button.execute(interaction, client);
             } catch (error) {
                 console.error(`Error handling button ${buttonId}:`, error);
+                try {
+                    if (interaction.replied || interaction.deferred) {
+                        await interaction.followUp({ content: '❌ An error occurred!', ephemeral: true });
+                    } else {
+                        await interaction.reply({ content: '❌ An error occurred!', ephemeral: true });
+                    }
+                } catch (replyError) {
+                    console.error(`Failed to reply to button error:`, replyError.message);
+                }
             }
         }
     } else if (interaction.isStringSelectMenu()) {
@@ -184,6 +197,15 @@ client.on('interactionCreate', async (interaction) => {
                 await button.execute(interaction, client);
             } catch (error) {
                 console.error(`Error handling select menu ${buttonId}:`, error);
+                try {
+                    if (interaction.replied || interaction.deferred) {
+                        await interaction.followUp({ content: '❌ An error occurred!', ephemeral: true });
+                    } else {
+                        await interaction.reply({ content: '❌ An error occurred!', ephemeral: true });
+                    }
+                } catch (replyError) {
+                    console.error(`Failed to reply to select menu error:`, replyError.message);
+                }
             }
         }
     }
