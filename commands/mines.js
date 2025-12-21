@@ -129,11 +129,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('mines')
         .setDescription('Play Mines - reveal gems, avoid bombs!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addIntegerOption(option =>
             option.setName('mines')
                 .setDescription('Number of mines (1-15)')
@@ -147,7 +146,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Mines is currently disabled!')], ephemeral: true });
         }
         
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const mines = interaction.options.getInteger('mines');
         const user = db.getUser(interaction.user.id, interaction.user.username);
         

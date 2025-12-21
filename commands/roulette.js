@@ -112,11 +112,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('roulette')
         .setDescription('Play Roulette!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10))
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true))
         .addStringOption(option =>
             option.setName('type')
                 .setDescription('Type of bet')
@@ -145,7 +144,8 @@ module.exports = {
             return interaction.reply({ embeds: [createErrorEmbed('Roulette is currently disabled!')], ephemeral: true });
         }
         
-        let bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        let bet = parseGemAmount(betInput);
         const betType = interaction.options.getString('type');
         const specificNumber = interaction.options.getInteger('number');
         const user = db.getUser(interaction.user.id, interaction.user.username);

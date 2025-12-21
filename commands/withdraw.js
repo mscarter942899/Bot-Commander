@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const db = require('../database/db');
 const { createPS99Embed, PS99_COLORS, ICONS, createErrorEmbed, createPremiumEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,7 +20,7 @@ module.exports = {
         if (amountStr === 'all') {
             amount = user.bank;
         } else {
-            amount = parseInt(amountStr);
+            amount = parseGemAmount(amountStr);
         }
         
         if (isNaN(amount) || amount <= 0) {

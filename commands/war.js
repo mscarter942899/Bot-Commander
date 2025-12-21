@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const { PS99_COLORS, createErrorEmbed } = require('../utils/embedBuilder');
+const { parseGemAmount } = require('../utils/numberParser');
 const { createDeck, getCardEmoji, getSingleBigCard, compareCards } = require('../utils/cards');
 
 function createWarEmbed(playerCard, dealerCard, bet, status = 'playing', revealed = false) {
@@ -62,14 +63,14 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('war')
         .setDescription('Play War against the dealer!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10)),
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
     
     async execute(interaction, client) {
-        const bet = interaction.options.getInteger('bet');
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         if (user.balance < bet) {

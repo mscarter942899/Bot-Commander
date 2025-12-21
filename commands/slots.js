@@ -120,15 +120,14 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('slots')
         .setDescription('Play the slot machine!')
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('bet')
-                .setDescription('Amount to bet')
-                .setRequired(true)
-                .setMinValue(10)),
+                .setDescription('Amount to bet (e.g., 1000, 2.5m, 1b)')
+                .setRequired(true)),
     
     async execute(interaction, client) {
-        const betInput = interaction.options.getInteger('bet');
-        const bet = betInput;
+        const betInput = interaction.options.getString('bet');
+        const bet = parseGemAmount(betInput);
         const user = db.getUser(interaction.user.id, interaction.user.username);
         
         const gameSettings = db.getGameSettings('slots');
