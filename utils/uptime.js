@@ -18,6 +18,10 @@ function loadUptimeData() {
 
 function saveUptimeData() {
     try {
+        const dir = path.dirname(UPTIME_PATH);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
         fs.writeFileSync(UPTIME_PATH, JSON.stringify(uptimeData, null, 2));
     } catch (e) {
         console.error('Error saving uptime data:', e);
