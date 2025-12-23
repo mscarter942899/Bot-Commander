@@ -234,7 +234,23 @@ loadPrefixCommands();
 loadButtons();
 loadEvents();
 
-startUptimeServer();
+// Setup Dashboard
+const express = require('express');
+const bodyParser = require('body-parser');
+const dashboardRoutes = require('./dashboard/routes');
+const dashApp = express();
+
+dashApp.use(bodyParser.json());
+dashApp.use(bodyParser.urlencoded({ extended: true }));
+dashApp.use(express.static(path.join(__dirname, 'dashboard/public')));
+dashApp.use(dashboardRoutes);
+
+// Serve dashboard home
+dashApp.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dashboard/public/index.html'));
+});
+
+startUptimeServer(dashApp);
 startPingLoop();
 
 const token = process.env.DISCORD_TOKEN;

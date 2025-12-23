@@ -28,11 +28,11 @@ function saveUptimeData() {
     }
 }
 
-function startUptimeServer() {
-    const app = express();
+function startUptimeServer(dashboardApp) {
+    const app = dashboardApp || express();
     const PORT = process.env.PORT || 5000;
     
-    app.get('/', (req, res) => {
+    app.get('/api/uptime', (req, res) => {
         res.json({
             status: 'online',
             uptime: uptimeData.startTime ? Date.now() - uptimeData.startTime : 0,
