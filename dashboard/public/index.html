@@ -26,7 +26,6 @@
             --success: #10b981;
             --error: #ef4444;
             --warning: #f59e0b;
-            --accent: #6366f1;
         }
 
         body {
@@ -34,7 +33,6 @@
             background: linear-gradient(135deg, var(--bg) 0%, #0f1a3d 50%, var(--bg) 100%);
             color: var(--text);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .sidebar {
@@ -75,10 +73,9 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 0.95em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             text-align: left;
             position: relative;
-            overflow: hidden;
         }
 
         .nav-item::before {
@@ -90,7 +87,7 @@
             width: 3px;
             height: 0;
             background: var(--gold);
-            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: height 0.3s;
         }
 
         .nav-item:hover {
@@ -124,7 +121,12 @@
             font-size: 2.5em;
             font-weight: 900;
             font-family: 'Lexend Deca', sans-serif;
-            letter-spacing: -1px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
 
         .status-badge {
@@ -148,14 +150,46 @@
             animation: pulse 2s infinite;
         }
 
+        .autosave-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: #6366f1;
+        }
+
+        .autosave-indicator.saving::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #6366f1;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        .autosave-indicator.saved::before {
+            content: '✓';
+            color: var(--success);
+        }
+
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
 
+        @keyframes blink {
+            0%, 49%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
         .content {
             display: none;
-            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.5s;
         }
 
         .content.active {
@@ -163,14 +197,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .stats-grid {
@@ -187,24 +215,12 @@
             padding: 30px;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
+            transition: all 0.3s;
         }
 
         .stat-card:hover {
             border-color: rgba(255, 215, 0, 0.4);
             transform: translateY(-5px);
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(99, 102, 241, 0.1) 100%);
         }
 
         .stat-card h3 {
@@ -214,8 +230,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
         }
 
         .stat-card p {
@@ -225,8 +239,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            position: relative;
-            z-index: 1;
         }
 
         .section {
@@ -236,11 +248,6 @@
             padding: 40px;
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .section:hover {
-            border-color: rgba(255, 215, 0, 0.2);
         }
 
         .section h2 {
@@ -250,9 +257,9 @@
             font-family: 'Lexend Deca', sans-serif;
         }
 
-        .form-group {
+        .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
             margin-bottom: 25px;
         }
@@ -276,7 +283,7 @@
             color: var(--text);
             font-family: 'Inter', sans-serif;
             font-size: 0.95em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -284,50 +291,6 @@
             background: rgba(255, 215, 0, 0.1);
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-        }
-
-        button {
-            padding: 14px 32px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: var(--bg);
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.95em;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
         }
 
         .toggle {
@@ -348,7 +311,7 @@
             margin-bottom: 30px;
             display: none;
             font-weight: 600;
-            animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideDown 0.4s;
             border: 1px solid;
         }
 
@@ -368,21 +331,9 @@
             color: var(--error);
         }
 
-        .message.warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-color: var(--warning);
-            color: var(--warning);
-        }
-
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .game-grid {
@@ -396,7 +347,7 @@
             border: 1px solid rgba(255, 215, 0, 0.15);
             padding: 20px;
             border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
 
         .game-card:hover {
@@ -428,7 +379,6 @@
             font-weight: 700;
             text-transform: uppercase;
             font-size: 0.85em;
-            letter-spacing: 0.5px;
         }
 
         .table td {
@@ -438,55 +388,6 @@
 
         .table tr:hover {
             background: rgba(255, 215, 0, 0.05);
-        }
-
-        .diagnostic-item {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
-            border-left: 4px solid;
-            padding: 20px;
-            margin-bottom: 12px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .diagnostic-item.error {
-            border-left-color: var(--error);
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);
-        }
-
-        .diagnostic-item.warning {
-            border-left-color: var(--warning);
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, transparent 100%);
-        }
-
-        .diagnostic-item.success {
-            border-left-color: var(--success);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
-        }
-
-        .diagnostic-item:hover {
-            transform: translateX(5px);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-        }
-
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 215, 0, 0.2);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
@@ -500,7 +401,6 @@
                 gap: 10px;
                 overflow-x: auto;
                 padding: 15px;
-                z-index: 1000;
             }
 
             .main {
@@ -514,16 +414,9 @@
                 gap: 20px;
             }
 
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .stats-grid, .game-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 20px;
+            .header-right {
+                flex-direction: column;
+                width: 100%;
             }
         }
     </style>
@@ -532,11 +425,11 @@
     <div class="sidebar">
         <div class="logo">🎰</div>
         <button class="nav-item active" onclick="showTab('dashboard')">📊 Dashboard</button>
-        <button class="nav-item" onclick="showTab('general')">⚙️ General</button>
+        <button class="nav-item" onclick="showTab('economy')">💰 Economy</button>
         <button class="nav-item" onclick="showTab('channels')">📢 Channels</button>
         <button class="nav-item" onclick="showTab('features')">🎁 Features</button>
         <button class="nav-item" onclick="showTab('games')">🎮 Games</button>
-        <button class="nav-item" onclick="showTab('shop')">🛍️ Shop</button>
+        <button class="nav-item" onclick="showTab('admin')">👮 Admin</button>
         <button class="nav-item" onclick="showTab('diagnostics')">🔍 Diagnostics</button>
         <button class="nav-item" onclick="showTab('users')">👥 Users</button>
     </div>
@@ -544,7 +437,10 @@
     <div class="main">
         <div class="header">
             <h1>Casino Control</h1>
-            <div class="status-badge">Online</div>
+            <div class="header-right">
+                <div class="autosave-indicator" id="autosave">Saving...</div>
+                <div class="status-badge">Online</div>
+            </div>
         </div>
 
         <div id="message" class="message"></div>
@@ -575,7 +471,6 @@
                             <th>Player</th>
                             <th>Balance</th>
                             <th>Wins</th>
-                            <th>Games</th>
                         </tr>
                     </thead>
                     <tbody id="topUsers"></tbody>
@@ -583,42 +478,75 @@
             </div>
         </div>
 
-        <!-- General -->
-        <div id="general" class="content">
+        <!-- Economy -->
+        <div id="economy" class="content">
             <div class="section">
-                <h2>⚙️ General Settings</h2>
-                <div class="form-group">
+                <h2>💰 Economy Settings</h2>
+                <div class="form-row">
                     <div>
-                        <label>Daily Rewards</label>
+                        <label for="dailyAmount">Daily Reward Amount</label>
+                        <input type="number" id="dailyAmount" onchange="autoSave('general')" placeholder="1000">
+                    </div>
+                    <div>
+                        <label for="startingBalance">Starting Balance</label>
+                        <input type="number" id="startingBalance" onchange="autoSave('general')" placeholder="500">
+                    </div>
+                    <div>
+                        <label for="houseEdge">House Edge (%)</label>
+                        <input type="number" step="0.01" id="houseEdge" onchange="autoSave('general')" placeholder="5">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>Daily Rewards Enabled</label>
                         <div class="toggle">
-                            <input type="checkbox" id="dailyEnabled">
+                            <input type="checkbox" id="dailyEnabled" onchange="autoSave('general')">
                             <span style="color: var(--text-muted);">Enable daily rewards</span>
                         </div>
                     </div>
                     <div>
-                        <label for="dailyAmount">Reward Amount</label>
-                        <input type="number" id="dailyAmount" placeholder="1000">
+                        <label>Interest System</label>
+                        <div class="toggle">
+                            <input type="checkbox" id="interestEnabled" onchange="autoSave('interest')">
+                            <span style="color: var(--text-muted);">Enable bank interest</span>
+                        </div>
                     </div>
                 </div>
-                <button onclick="saveGeneralSettings()">Save Settings</button>
+                <div class="form-row">
+                    <div>
+                        <label for="interestRate">Interest Rate (%) per Period</label>
+                        <input type="number" step="0.01" id="interestRate" onchange="autoSave('interest')" placeholder="1">
+                    </div>
+                    <div>
+                        <label for="interestHours">Interest Period (Hours)</label>
+                        <input type="number" id="interestHours" onchange="autoSave('interest')" placeholder="24">
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Channels -->
         <div id="channels" class="content">
             <div class="section">
-                <h2>📢 Channel Settings</h2>
-                <div class="form-group">
+                <h2>📢 Channel Configuration</h2>
+                <div class="form-row">
                     <div>
                         <label for="depositChannel">Deposit Channel ID</label>
-                        <input type="text" id="depositChannel" placeholder="Channel ID...">
+                        <input type="text" id="depositChannel" onchange="autoSave('channels')" placeholder="Channel ID...">
                     </div>
                     <div>
                         <label for="withdrawChannel">Withdraw Channel ID</label>
-                        <input type="text" id="withdrawChannel" placeholder="Channel ID...">
+                        <input type="text" id="withdrawChannel" onchange="autoSave('channels')" placeholder="Channel ID...">
+                    </div>
+                    <div>
+                        <label for="bigWinsChannel">Big Wins Channel ID</label>
+                        <input type="text" id="bigWinsChannel" onchange="autoSave('bigwins')" placeholder="Channel ID...">
+                    </div>
+                    <div>
+                        <label for="logsChannel">Logs Channel ID</label>
+                        <input type="text" id="logsChannel" onchange="autoSave('channels')" placeholder="Channel ID...">
                     </div>
                 </div>
-                <button onclick="saveChannelSettings()">Save Channels</button>
             </div>
         </div>
 
@@ -626,20 +554,42 @@
         <div id="features" class="content">
             <div class="section">
                 <h2>🎁 Feature Management</h2>
-                <div class="form-group">
+                <div class="form-row">
                     <div>
                         <label for="adminRole">Admin Role ID</label>
-                        <input type="text" id="adminRole" placeholder="Role ID...">
+                        <input type="text" id="adminRole" onchange="autoSave('admin')" placeholder="Role ID...">
                     </div>
+                    <div>
+                        <label for="inviteAmount">Invite Reward Amount</label>
+                        <input type="number" id="inviteAmount" onchange="autoSave('invites')" placeholder="100">
+                    </div>
+                    <div>
+                        <label for="inviteMinAge">Min Account Age (Days)</label>
+                        <input type="number" id="inviteMinAge" onchange="autoSave('invites')" placeholder="60">
+                    </div>
+                </div>
+                <div class="form-row">
                     <div>
                         <label>Invite Rewards</label>
                         <div class="toggle">
-                            <input type="checkbox" id="inviteRewardsEnabled">
+                            <input type="checkbox" id="inviteRewardsEnabled" onchange="autoSave('invites')">
                             <span style="color: var(--text-muted);">Enable invite rewards</span>
                         </div>
                     </div>
+                    <div>
+                        <label>Big Wins Notifications</label>
+                        <div class="toggle">
+                            <input type="checkbox" id="bigWinsEnabled" onchange="autoSave('bigwins')">
+                            <span style="color: var(--text-muted);">Enable big wins announcements</span>
+                        </div>
+                    </div>
                 </div>
-                <button onclick="saveFeatureSettings()">Save Features</button>
+                <div class="form-row">
+                    <div>
+                        <label for="bigWinsThreshold">Big Wins Threshold</label>
+                        <input type="number" id="bigWinsThreshold" onchange="autoSave('bigwins')" placeholder="10000">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -651,12 +601,20 @@
             </div>
         </div>
 
-        <!-- Shop -->
-        <div id="shop" class="content">
+        <!-- Admin -->
+        <div id="admin" class="content">
             <div class="section">
-                <h2>🛍️ Shop Items</h2>
-                <button onclick="loadShop()" style="margin-bottom: 20px;">Load Shop</button>
-                <div id="shopList"></div>
+                <h2>👮 Admin Panel</h2>
+                <div class="form-row">
+                    <div>
+                        <label for="ownerID">Owner Discord ID</label>
+                        <input type="text" id="ownerID" onchange="autoSave('admin')" placeholder="User ID...">
+                    </div>
+                    <div>
+                        <label>Current House Profit</label>
+                        <input type="text" id="houseProfit" disabled placeholder="0">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -664,7 +622,7 @@
         <div id="diagnostics" class="content">
             <div class="section">
                 <h2>🔍 System Health</h2>
-                <button onclick="runDiagnostics()" style="margin-bottom: 20px;">Run Diagnostics</button>
+                <button onclick="runDiagnostics()" style="margin-bottom: 20px; padding: 12px 24px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--bg); border: none; border-radius: 12px; cursor: pointer; font-weight: 700; font-family: Inter, sans-serif;">Run Diagnostics</button>
                 <div id="diagnosticsResults"></div>
             </div>
         </div>
@@ -673,7 +631,6 @@
         <div id="users" class="content">
             <div class="section">
                 <h2>👥 User Management</h2>
-                <button onclick="loadUsers()" style="margin-bottom: 20px;">Load Users</button>
                 <table class="table">
                     <thead>
                         <tr>
@@ -691,81 +648,113 @@
     </div>
 
     <script>
+        let autoSaveTimeout;
+
         function showTab(tabName) {
             document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
+            
+            if (tabName === 'games') loadGames();
+            if (tabName === 'users') loadUsers();
+            if (tabName === 'dashboard') loadDashboard();
         }
 
-        function showMessage(text, type = 'success') {
-            const msg = document.getElementById('message');
-            msg.textContent = text;
-            msg.className = `message ${type} show`;
-            setTimeout(() => msg.classList.remove('show'), 4000);
+        function updateAutosaveIndicator(state) {
+            const indicator = document.getElementById('autosave');
+            indicator.className = 'autosave-indicator';
+            if (state === 'saving') {
+                indicator.className = 'autosave-indicator saving';
+                indicator.textContent = 'Saving...';
+            } else if (state === 'saved') {
+                indicator.className = 'autosave-indicator saved';
+                indicator.textContent = 'Saved';
+                setTimeout(() => {
+                    indicator.textContent = '';
+                }, 2000);
+            }
+        }
+
+        async function autoSave(type) {
+            updateAutosaveIndicator('saving');
+            clearTimeout(autoSaveTimeout);
+            
+            try {
+                let payload = {};
+                
+                if (type === 'general') {
+                    payload = {
+                        dailyEnabled: document.getElementById('dailyEnabled').checked,
+                        dailyAmount: parseInt(document.getElementById('dailyAmount').value) || 1000,
+                        startingBalance: parseInt(document.getElementById('startingBalance').value) || 500,
+                        houseEdge: parseFloat(document.getElementById('houseEdge').value) || 0.05
+                    };
+                    await fetch('/api/settings/general', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                } else if (type === 'channels') {
+                    payload = {
+                        depositChannel: document.getElementById('depositChannel').value || null,
+                        withdrawChannel: document.getElementById('withdrawChannel').value || null,
+                        logsChannel: document.getElementById('logsChannel').value || null
+                    };
+                    await fetch('/api/settings/channels', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                } else if (type === 'invites') {
+                    payload = {
+                        inviteRewardsEnabled: document.getElementById('inviteRewardsEnabled').checked,
+                        inviteAmount: parseInt(document.getElementById('inviteAmount').value) || 100,
+                        inviteMinAge: parseInt(document.getElementById('inviteMinAge').value) || 60
+                    };
+                    await fetch('/api/settings/invites', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                } else if (type === 'interest') {
+                    payload = {
+                        interestEnabled: document.getElementById('interestEnabled').checked,
+                        interestRate: parseFloat(document.getElementById('interestRate').value) || 0.01,
+                        interestHours: parseInt(document.getElementById('interestHours').value) || 24
+                    };
+                    await fetch('/api/settings/interest', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                } else if (type === 'bigwins') {
+                    payload = {
+                        bigWinsEnabled: document.getElementById('bigWinsEnabled').checked,
+                        bigWinsThreshold: parseInt(document.getElementById('bigWinsThreshold').value) || 10000,
+                        bigWinsChannel: document.getElementById('bigWinsChannel').value || null
+                    };
+                    await fetch('/api/settings/bigwins', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                } else if (type === 'admin') {
+                    payload = {
+                        adminRole: document.getElementById('adminRole').value || null,
+                        ownerID: document.getElementById('ownerID').value || null
+                    };
+                    await fetch('/api/settings/admin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                }
+                
+                autoSaveTimeout = setTimeout(() => updateAutosaveIndicator('saved'), 300);
+            } catch (error) {
+                console.error('Autosave error:', error);
+            }
         }
 
         async function loadSettings() {
             try {
                 const res = await fetch('/api/settings');
                 const data = await res.json();
+                
                 document.getElementById('dailyEnabled').checked = data.settings.dailyEnabled;
+                document.getElementById('dailyAmount').value = data.settings.dailyAmount || 1000;
                 document.getElementById('adminRole').value = data.settings.adminRoleId || '';
                 document.getElementById('depositChannel').value = data.settings.depositChannel || '';
                 document.getElementById('withdrawChannel').value = data.settings.withdrawChannel || '';
+                document.getElementById('inviteRewardsEnabled').checked = data.settings.inviteSettings?.enabled || false;
+                document.getElementById('inviteAmount').value = data.settings.inviteSettings?.amount || 100;
+                document.getElementById('inviteMinAge').value = data.settings.inviteSettings?.minAccountAge || 60;
+                document.getElementById('interestEnabled').checked = data.settings.interestSettings?.enabled || false;
+                document.getElementById('interestRate').value = (data.settings.interestSettings?.rate * 100) || 1;
+                document.getElementById('interestHours').value = data.settings.interestSettings?.intervalHours || 24;
+                document.getElementById('bigWinsEnabled').checked = data.settings.bigWinsSettings?.enabled || false;
+                document.getElementById('bigWinsChannel').value = data.settings.bigWinsSettings?.channelId || '';
+                document.getElementById('bigWinsThreshold').value = data.settings.bigWinsSettings?.threshold || 10000;
+                document.getElementById('houseProfit').value = (data.settings.houseProfit || 0).toLocaleString();
             } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        async function saveGeneralSettings() {
-            try {
-                const res = await fetch('/api/settings/general', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        dailyEnabled: document.getElementById('dailyEnabled').checked,
-                        dailyAmount: parseInt(document.getElementById('dailyAmount').value) || 1000
-                    })
-                });
-                if (res.ok) showMessage('✓ Saved!', 'success');
-                else showMessage('Error saving', 'error');
-            } catch (error) {
-                showMessage('Error: ' + error.message, 'error');
-            }
-        }
-
-        async function saveChannelSettings() {
-            try {
-                const res = await fetch('/api/settings/channels', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        depositChannel: document.getElementById('depositChannel').value || null,
-                        withdrawChannel: document.getElementById('withdrawChannel').value || null
-                    })
-                });
-                if (res.ok) showMessage('✓ Channels saved!', 'success');
-                else showMessage('Error saving', 'error');
-            } catch (error) {
-                showMessage('Error: ' + error.message, 'error');
-            }
-        }
-
-        async function saveFeatureSettings() {
-            try {
-                const res = await fetch('/api/settings/features', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        adminRoleId: document.getElementById('adminRole').value || null,
-                        inviteRewardsEnabled: document.getElementById('inviteRewardsEnabled').checked
-                    })
-                });
-                if (res.ok) showMessage('✓ Features saved!', 'success');
-                else showMessage('Error saving', 'error');
-            } catch (error) {
-                showMessage('Error: ' + error.message, 'error');
+                console.error('Error loading settings:', error);
             }
         }
 
@@ -775,22 +764,25 @@
                 const data = await res.json();
                 const list = document.getElementById('gamesList');
                 list.innerHTML = '';
+                
                 for (const [name, settings] of Object.entries(data.gameSettings)) {
                     const card = document.createElement('div');
                     card.className = 'game-card';
                     card.innerHTML = `
                         <h3>${name}</h3>
-                        <div class="toggle" style="margin-bottom: 10px;">
+                        <div class="toggle" style="margin-bottom: 10px; font-size: 0.85em;">
                             <input type="checkbox" ${settings.enabled ? 'checked' : ''}>
-                            <span style="font-size: 0.85em; color: var(--text-muted);">Enabled</span>
+                            <span style="color: var(--text-muted);">Enabled</span>
                         </div>
-                        <input type="number" value="${settings.minBet}" placeholder="Min" style="font-size: 0.85em; margin-bottom: 8px;">
-                        <input type="number" value="${settings.maxBet}" placeholder="Max" style="font-size: 0.85em;">
+                        <div style="font-size: 0.85em;">
+                            <input type="number" value="${settings.minBet}" placeholder="Min" style="margin-bottom: 6px;">
+                            <input type="number" value="${settings.maxBet}" placeholder="Max">
+                        </div>
                     `;
                     list.appendChild(card);
                 }
             } catch (error) {
-                showMessage('Error loading games', 'error');
+                console.error('Error loading games:', error);
             }
         }
 
@@ -808,13 +800,7 @@
                 tbody.innerHTML = '';
                 topUsers.forEach((user, idx) => {
                     const row = tbody.insertRow();
-                    row.innerHTML = `
-                        <td>#${idx + 1}</td>
-                        <td>${user.username}</td>
-                        <td>${user.balance.toLocaleString()}</td>
-                        <td>${user.wins}</td>
-                        <td>${user.totalGames}</td>
-                    `;
+                    row.innerHTML = `<td>#${idx + 1}</td><td>${user.username}</td><td>${user.balance.toLocaleString()}</td><td>${user.wins}</td>`;
                 });
             } catch (error) {
                 console.error('Error:', error);
@@ -823,19 +809,27 @@
 
         async function runDiagnostics() {
             const results = document.getElementById('diagnosticsResults');
-            results.innerHTML = '<div class="loading">Running</div>';
+            results.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted);">Running diagnostics...</div>';
             try {
                 const res = await fetch('/api/diagnostics');
                 const data = await res.json();
                 results.innerHTML = '';
                 data.diagnostics.forEach(diag => {
                     const div = document.createElement('div');
-                    div.className = `diagnostic-item ${diag.type}`;
-                    div.innerHTML = `<strong>${diag.message}</strong><br><small>${diag.details}</small>`;
+                    div.style.cssText = `background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, transparent); border-left: 4px solid; padding: 16px; margin-bottom: 12px; border-radius: 8px;`;
+                    if (diag.type === 'error') {
+                        div.style.borderLeftColor = 'var(--error)';
+                        div.style.background = 'linear-gradient(135deg, rgba(239,68,68,0.05) 0%, transparent)';
+                    } else if (diag.type === 'warning') {
+                        div.style.borderLeftColor = 'var(--warning)';
+                    } else {
+                        div.style.borderLeftColor = 'var(--success)';
+                    }
+                    div.innerHTML = `<strong style="color: var(--gold);">${diag.message}</strong><br><small style="color: var(--text-muted);">${diag.details}</small>`;
                     results.appendChild(div);
                 });
             } catch (error) {
-                results.innerHTML = '<div class="diagnostic-item error"><strong>Error:</strong> ' + error.message + '</div>';
+                results.innerHTML = '<div style="color: var(--error);">Error running diagnostics</div>';
             }
         }
 
@@ -847,43 +841,15 @@
                 tbody.innerHTML = '';
                 users.forEach(user => {
                     const row = tbody.insertRow();
-                    row.innerHTML = `
-                        <td>${user.username}</td>
-                        <td>${user.balance.toLocaleString()}</td>
-                        <td>${user.bank.toLocaleString()}</td>
-                        <td>${user.totalGames}</td>
-                        <td>${user.wins}</td>
-                    `;
+                    row.innerHTML = `<td>${user.username}</td><td>${user.balance.toLocaleString()}</td><td>${user.bank.toLocaleString()}</td><td>${user.totalGames}</td><td>${user.wins}</td>`;
                 });
             } catch (error) {
-                showMessage('Error loading users', 'error');
-            }
-        }
-
-        async function loadShop() {
-            try {
-                const res = await fetch('/api/shop');
-                const items = await res.json();
-                const list = document.getElementById('shopList');
-                list.innerHTML = '';
-                if (items.length === 0) {
-                    list.innerHTML = '<p style="color: var(--text-muted);">No shop items</p>';
-                    return;
-                }
-                items.forEach(item => {
-                    const div = document.createElement('div');
-                    div.style.cssText = 'padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 4px solid var(--gold); background: rgba(255, 215, 0, 0.05);';
-                    div.innerHTML = `<strong>${item.name}</strong> - ${item.price} 💎`;
-                    list.appendChild(div);
-                });
-            } catch (error) {
-                showMessage('Error loading shop', 'error');
+                console.error('Error:', error);
             }
         }
 
         loadSettings();
         loadDashboard();
-        loadGames();
     </script>
 </body>
 </html>
