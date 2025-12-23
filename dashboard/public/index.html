@@ -6,7 +6,7 @@
     <title>Casino Bot Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lexend+Deca:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,98 +16,114 @@
 
         :root {
             --gold: #FFD700;
-            --gold-light: #FFF44F;
-            --gold-dark: #FFC700;
-            --bg: #0a0e27;
-            --bg-light: #1a1f3a;
-            --bg-lighter: #252d47;
+            --gold-light: #FFF700;
+            --dark: #0d1117;
+            --darker: #010409;
+            --card: #1a1f2e;
+            --card-hover: #232b3d;
             --text: #ffffff;
-            --text-muted: #a8b2c1;
+            --text-secondary: #8b92a9;
             --success: #10b981;
             --error: #ef4444;
-            --warning: #f59e0b;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Sora', sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg) 0%, #0f1a3d 50%, var(--bg) 100%);
+            background: linear-gradient(135deg, #0d1117 0%, #1a1a2e 50%, #0d1117 100%);
             color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
             min-height: 100vh;
         }
 
+        /* Sidebar */
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
-            width: 280px;
+            width: 260px;
             height: 100vh;
-            background: linear-gradient(180deg, rgba(26, 31, 58, 0.95) 0%, rgba(15, 26, 61, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 215, 0, 0.1);
-            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(13, 17, 23, 0.98) 0%, rgba(10, 12, 20, 0.98) 100%);
+            border-right: 1px solid rgba(255, 215, 0, 0.08);
+            padding: 30px 20px;
             overflow-y: auto;
-            z-index: 100;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.3);
         }
 
         .logo {
-            font-size: 2em;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            font-size: 1.6em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700 0%, #FFF700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             text-align: center;
-            letter-spacing: -1px;
-            font-family: 'Lexend Deca', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.5px;
         }
 
         .nav-item {
             width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 8px;
+            padding: 12px 14px;
+            margin-bottom: 6px;
             background: transparent;
             border: none;
-            border-radius: 12px;
-            color: var(--text-muted);
+            border-radius: 10px;
+            color: var(--text-secondary);
             cursor: pointer;
             font-weight: 500;
             font-size: 0.95em;
-            transition: all 0.3s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: left;
             position: relative;
-        }
-
-        .nav-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 0;
-            background: var(--gold);
-            transition: height 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-item:hover {
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.08);
             color: var(--gold);
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
             color: var(--gold);
+            box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
-        .nav-item.active::before {
-            height: 24px;
-        }
-
+        /* Main Content */
         .main {
-            margin-left: 280px;
+            margin-left: 260px;
             padding: 40px;
-            min-height: 100vh;
+            background: linear-gradient(180deg, transparent 0%, rgba(255, 215, 0, 0.02) 100%);
         }
 
         .header {
@@ -117,15 +133,16 @@
             margin-bottom: 50px;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            font-weight: 900;
-            font-family: 'Lexend Deca', sans-serif;
+        .header-left h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.5px;
         }
 
         .header-right {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
         }
 
@@ -133,12 +150,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--success);
+            padding: 10px 16px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.9em;
+            color: var(--success);
         }
 
         .status-badge::before {
@@ -147,23 +165,30 @@
             height: 8px;
             background: var(--success);
             border-radius: 50%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
             animation: pulse 2s infinite;
         }
 
-        .autosave-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .autosave {
+            padding: 10px 16px;
             background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.2);
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.9em;
             color: #6366f1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 110px;
         }
 
-        .autosave-indicator.saving::before {
+        .autosave.saving::before {
             content: '';
             width: 6px;
             height: 6px;
@@ -172,188 +197,233 @@
             animation: blink 1s infinite;
         }
 
-        .autosave-indicator.saved::before {
-            content: '✓';
-            color: var(--success);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
         @keyframes blink {
-            0%, 49%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            0%, 50%, 100% { opacity: 1; }
+            25% { opacity: 0.4; }
         }
 
         .content {
             display: none;
-            animation: fadeIn 0.5s;
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
             margin-bottom: 40px;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 20px;
-            padding: 30px;
             position: relative;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.04) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .stat-card:hover {
             border-color: rgba(255, 215, 0, 0.4);
-            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18) 0%, rgba(255, 215, 0, 0.08) 100%);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .stat-card-content {
+            position: relative;
+            z-index: 1;
         }
 
         .stat-card h3 {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.85em;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
         }
 
         .stat-card p {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #FFD700 0%, #FFF700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .section {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(37, 45, 71, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.7) 0%, rgba(26, 31, 46, 0.4) 100%);
             border: 1px solid rgba(255, 215, 0, 0.1);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 40px;
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: rgba(255, 215, 0, 0.15);
         }
 
         .section h2 {
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: 700;
             margin-bottom: 30px;
-            font-family: 'Lexend Deca', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .form-row {
+        .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         label {
             display: block;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
             margin-bottom: 10px;
             font-size: 0.9em;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 10px;
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-size: 0.95em;
-            transition: all 0.3s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input::placeholder, select::placeholder {
+            color: var(--text-secondary);
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.08);
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1), inset 0 0 20px rgba(255, 215, 0, 0.05);
         }
 
-        .toggle {
+        .toggle-switch {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .toggle input[type="checkbox"] {
+        .toggle-switch input[type="checkbox"] {
             width: auto;
             cursor: pointer;
             accent-color: var(--gold);
+            transform: scale(1.2);
         }
 
-        .message {
-            padding: 16px 24px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            display: none;
-            font-weight: 600;
-            animation: slideDown 0.4s;
-            border: 1px solid;
+        .toggle-switch span {
+            color: var(--text-secondary);
         }
 
-        .message.show {
-            display: block;
+        .btn {
+            padding: 13px 28px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            color: #0d1117;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95em;
+            font-family: 'Sora', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .message.success {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--success);
-            color: var(--success);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .message.error {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--error);
-            color: var(--error);
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.25);
         }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
         }
 
-        .game-grid {
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
         }
 
         .game-card {
-            background: rgba(255, 215, 0, 0.05);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.02) 100%);
             border: 1px solid rgba(255, 215, 0, 0.15);
             padding: 20px;
-            border-radius: 16px;
-            transition: all 0.3s;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .game-card:hover {
             border-color: var(--gold);
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
         }
 
         .game-card h3 {
@@ -364,6 +434,11 @@
             font-weight: 700;
         }
 
+        .game-card input {
+            font-size: 0.85em;
+            margin-bottom: 8px;
+        }
+
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -371,41 +446,109 @@
         }
 
         .table th {
-            background: rgba(255, 215, 0, 0.1);
-            padding: 16px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.05) 100%);
+            padding: 16px 20px;
             text-align: left;
             border-bottom: 2px solid rgba(255, 215, 0, 0.2);
             color: var(--gold);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.85em;
+            font-size: 0.8em;
+            letter-spacing: 1px;
         }
 
         .table td {
-            padding: 16px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
         }
 
         .table tr:hover {
-            background: rgba(255, 215, 0, 0.05);
+            background: rgba(255, 215, 0, 0.08);
+        }
+
+        .diagnostic-item {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+            border-left: 4px solid rgba(255, 215, 0, 0.3);
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .diagnostic-item.error {
+            border-left-color: var(--error);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, transparent 100%);
+        }
+
+        .diagnostic-item.success {
+            border-left-color: var(--success);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%);
+        }
+
+        .diagnostic-item:hover {
+            transform: translateX(5px);
+        }
+
+        .message {
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: none;
+            font-weight: 600;
+            animation: slideDown 0.3s ease;
+            border: 1px solid;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.04) 100%);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: var(--success);
+        }
+
+        .message.error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.04) 100%);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--error);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
             .sidebar {
-                position: absolute;
+                position: fixed;
+                bottom: 0;
+                left: 0;
                 width: 100%;
                 height: auto;
                 border-right: none;
-                border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+                border-top: 1px solid rgba(255, 215, 0, 0.1);
+                padding: 15px;
                 display: flex;
                 gap: 10px;
                 overflow-x: auto;
-                padding: 15px;
+                z-index: 999;
             }
 
             .main {
                 margin-left: 0;
-                margin-top: 120px;
+                margin-bottom: 80px;
                 padding: 20px;
             }
 
@@ -414,235 +557,248 @@
                 gap: 20px;
             }
 
-            .header-right {
-                flex-direction: column;
-                width: 100%;
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">🎰</div>
-        <button class="nav-item active" onclick="showTab('dashboard')">📊 Dashboard</button>
-        <button class="nav-item" onclick="showTab('economy')">💰 Economy</button>
-        <button class="nav-item" onclick="showTab('channels')">📢 Channels</button>
-        <button class="nav-item" onclick="showTab('features')">🎁 Features</button>
-        <button class="nav-item" onclick="showTab('games')">🎮 Games</button>
-        <button class="nav-item" onclick="showTab('admin')">👮 Admin</button>
-        <button class="nav-item" onclick="showTab('diagnostics')">🔍 Diagnostics</button>
-        <button class="nav-item" onclick="showTab('users')">👥 Users</button>
-    </div>
-
-    <div class="main">
-        <div class="header">
-            <h1>Casino Control</h1>
-            <div class="header-right">
-                <div class="autosave-indicator" id="autosave">Saving...</div>
-                <div class="status-badge">Online</div>
-            </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">🎰</div>
+            <button class="nav-item active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="nav-item" onclick="showTab('economy')">💰 Economy</button>
+            <button class="nav-item" onclick="showTab('channels')">📢 Channels</button>
+            <button class="nav-item" onclick="showTab('features')">🎁 Features</button>
+            <button class="nav-item" onclick="showTab('games')">🎮 Games</button>
+            <button class="nav-item" onclick="showTab('admin')">👮 Admin</button>
+            <button class="nav-item" onclick="showTab('diagnostics')">🔍 Diag</button>
+            <button class="nav-item" onclick="showTab('users')">👥 Users</button>
         </div>
 
-        <div id="message" class="message"></div>
-
-        <!-- Dashboard -->
-        <div id="dashboard" class="content active">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Users</h3>
-                    <p id="stat-users">0</p>
+        <div class="main">
+            <div class="header">
+                <div class="header-left">
+                    <h1>Control Panel</h1>
                 </div>
-                <div class="stat-card">
-                    <h3>Games Played</h3>
-                    <p id="stat-games">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>House Profit</h3>
-                    <p id="stat-profit">0</p>
+                <div class="header-right">
+                    <div class="autosave saving" id="autosave">Saving...</div>
+                    <div class="status-badge">Online</div>
                 </div>
             </div>
 
-            <div class="section">
-                <h2>🏆 Top Players</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Player</th>
-                            <th>Balance</th>
-                            <th>Wins</th>
-                        </tr>
-                    </thead>
-                    <tbody id="topUsers"></tbody>
-                </table>
-            </div>
-        </div>
+            <div id="message" class="message"></div>
 
-        <!-- Economy -->
-        <div id="economy" class="content">
-            <div class="section">
-                <h2>💰 Economy Settings</h2>
-                <div class="form-row">
-                    <div>
-                        <label for="dailyAmount">Daily Reward Amount</label>
-                        <input type="number" id="dailyAmount" onchange="autoSave('general')" placeholder="1000">
-                    </div>
-                    <div>
-                        <label for="startingBalance">Starting Balance</label>
-                        <input type="number" id="startingBalance" onchange="autoSave('general')" placeholder="500">
-                    </div>
-                    <div>
-                        <label for="houseEdge">House Edge (%)</label>
-                        <input type="number" step="0.01" id="houseEdge" onchange="autoSave('general')" placeholder="5">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div>
-                        <label>Daily Rewards Enabled</label>
-                        <div class="toggle">
-                            <input type="checkbox" id="dailyEnabled" onchange="autoSave('general')">
-                            <span style="color: var(--text-muted);">Enable daily rewards</span>
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-content">
+                            <h3>Total Users</h3>
+                            <p id="stat-users">0</p>
                         </div>
                     </div>
-                    <div>
-                        <label>Interest System</label>
-                        <div class="toggle">
-                            <input type="checkbox" id="interestEnabled" onchange="autoSave('interest')">
-                            <span style="color: var(--text-muted);">Enable bank interest</span>
+                    <div class="stat-card">
+                        <div class="stat-card-content">
+                            <h3>Games Played</h3>
+                            <p id="stat-games">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-content">
+                            <h3>House Profit</h3>
+                            <p id="stat-profit">0</p>
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div>
-                        <label for="interestRate">Interest Rate (%) per Period</label>
-                        <input type="number" step="0.01" id="interestRate" onchange="autoSave('interest')" placeholder="1">
-                    </div>
-                    <div>
-                        <label for="interestHours">Interest Period (Hours)</label>
-                        <input type="number" id="interestHours" onchange="autoSave('interest')" placeholder="24">
-                    </div>
+
+                <div class="section">
+                    <h2>🏆 Top Players</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Balance</th>
+                                <th>Wins</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topUsers"></tbody>
+                    </table>
                 </div>
             </div>
-        </div>
 
-        <!-- Channels -->
-        <div id="channels" class="content">
-            <div class="section">
-                <h2>📢 Channel Configuration</h2>
-                <div class="form-row">
-                    <div>
-                        <label for="depositChannel">Deposit Channel ID</label>
-                        <input type="text" id="depositChannel" onchange="autoSave('channels')" placeholder="Channel ID...">
-                    </div>
-                    <div>
-                        <label for="withdrawChannel">Withdraw Channel ID</label>
-                        <input type="text" id="withdrawChannel" onchange="autoSave('channels')" placeholder="Channel ID...">
-                    </div>
-                    <div>
-                        <label for="bigWinsChannel">Big Wins Channel ID</label>
-                        <input type="text" id="bigWinsChannel" onchange="autoSave('bigwins')" placeholder="Channel ID...">
-                    </div>
-                    <div>
-                        <label for="logsChannel">Logs Channel ID</label>
-                        <input type="text" id="logsChannel" onchange="autoSave('channels')" placeholder="Channel ID...">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Features -->
-        <div id="features" class="content">
-            <div class="section">
-                <h2>🎁 Feature Management</h2>
-                <div class="form-row">
-                    <div>
-                        <label for="adminRole">Admin Role ID</label>
-                        <input type="text" id="adminRole" onchange="autoSave('admin')" placeholder="Role ID...">
-                    </div>
-                    <div>
-                        <label for="inviteAmount">Invite Reward Amount</label>
-                        <input type="number" id="inviteAmount" onchange="autoSave('invites')" placeholder="100">
-                    </div>
-                    <div>
-                        <label for="inviteMinAge">Min Account Age (Days)</label>
-                        <input type="number" id="inviteMinAge" onchange="autoSave('invites')" placeholder="60">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div>
-                        <label>Invite Rewards</label>
-                        <div class="toggle">
-                            <input type="checkbox" id="inviteRewardsEnabled" onchange="autoSave('invites')">
-                            <span style="color: var(--text-muted);">Enable invite rewards</span>
+            <!-- Economy Tab -->
+            <div id="economy" class="content">
+                <div class="section">
+                    <h2>💰 Economy Settings</h2>
+                    <div class="form-grid">
+                        <div>
+                            <label for="dailyAmount">Daily Reward</label>
+                            <input type="number" id="dailyAmount" onchange="autoSave('general')" placeholder="1000">
+                        </div>
+                        <div>
+                            <label for="startingBalance">Starting Balance</label>
+                            <input type="number" id="startingBalance" onchange="autoSave('general')" placeholder="500">
+                        </div>
+                        <div>
+                            <label for="houseEdge">House Edge (%)</label>
+                            <input type="number" step="0.01" id="houseEdge" onchange="autoSave('general')" placeholder="5">
                         </div>
                     </div>
-                    <div>
-                        <label>Big Wins Notifications</label>
-                        <div class="toggle">
-                            <input type="checkbox" id="bigWinsEnabled" onchange="autoSave('bigwins')">
-                            <span style="color: var(--text-muted);">Enable big wins announcements</span>
+                    <div class="form-grid">
+                        <div>
+                            <label>Daily Rewards</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="dailyEnabled" onchange="autoSave('general')">
+                                <span>Enable</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Bank Interest</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="interestEnabled" onchange="autoSave('interest')">
+                                <span>Enable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div>
+                            <label for="interestRate">Interest Rate (%)</label>
+                            <input type="number" step="0.01" id="interestRate" onchange="autoSave('interest')" placeholder="1">
+                        </div>
+                        <div>
+                            <label for="interestHours">Period (Hours)</label>
+                            <input type="number" id="interestHours" onchange="autoSave('interest')" placeholder="24">
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div>
-                        <label for="bigWinsThreshold">Big Wins Threshold</label>
-                        <input type="number" id="bigWinsThreshold" onchange="autoSave('bigwins')" placeholder="10000">
+            </div>
+
+            <!-- Channels Tab -->
+            <div id="channels" class="content">
+                <div class="section">
+                    <h2>📢 Channel Configuration</h2>
+                    <div class="form-grid">
+                        <div>
+                            <label for="depositChannel">Deposit Channel</label>
+                            <input type="text" id="depositChannel" onchange="autoSave('channels')" placeholder="ID...">
+                        </div>
+                        <div>
+                            <label for="withdrawChannel">Withdraw Channel</label>
+                            <input type="text" id="withdrawChannel" onchange="autoSave('channels')" placeholder="ID...">
+                        </div>
+                        <div>
+                            <label for="bigWinsChannel">Big Wins Channel</label>
+                            <input type="text" id="bigWinsChannel" onchange="autoSave('bigwins')" placeholder="ID...">
+                        </div>
+                        <div>
+                            <label for="logsChannel">Logs Channel</label>
+                            <input type="text" id="logsChannel" onchange="autoSave('channels')" placeholder="ID...">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Games -->
-        <div id="games" class="content">
-            <div class="section">
-                <h2>🎮 Game Settings</h2>
-                <div class="game-grid" id="gamesList"></div>
-            </div>
-        </div>
-
-        <!-- Admin -->
-        <div id="admin" class="content">
-            <div class="section">
-                <h2>👮 Admin Panel</h2>
-                <div class="form-row">
-                    <div>
-                        <label for="ownerID">Owner Discord ID</label>
-                        <input type="text" id="ownerID" onchange="autoSave('admin')" placeholder="User ID...">
+            <!-- Features Tab -->
+            <div id="features" class="content">
+                <div class="section">
+                    <h2>🎁 Feature Management</h2>
+                    <div class="form-grid">
+                        <div>
+                            <label for="adminRole">Admin Role ID</label>
+                            <input type="text" id="adminRole" onchange="autoSave('admin')" placeholder="Role ID...">
+                        </div>
+                        <div>
+                            <label for="inviteAmount">Invite Reward</label>
+                            <input type="number" id="inviteAmount" onchange="autoSave('invites')" placeholder="100">
+                        </div>
+                        <div>
+                            <label for="inviteMinAge">Min Account Age (Days)</label>
+                            <input type="number" id="inviteMinAge" onchange="autoSave('invites')" placeholder="60">
+                        </div>
                     </div>
-                    <div>
-                        <label>Current House Profit</label>
-                        <input type="text" id="houseProfit" disabled placeholder="0">
+                    <div class="form-grid">
+                        <div>
+                            <label>Invite Rewards</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="inviteRewardsEnabled" onchange="autoSave('invites')">
+                                <span>Enable</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Big Wins Notifications</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="bigWinsEnabled" onchange="autoSave('bigwins')">
+                                <span>Enable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div>
+                            <label for="bigWinsThreshold">Big Wins Threshold</label>
+                            <input type="number" id="bigWinsThreshold" onchange="autoSave('bigwins')" placeholder="10000">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Diagnostics -->
-        <div id="diagnostics" class="content">
-            <div class="section">
-                <h2>🔍 System Health</h2>
-                <button onclick="runDiagnostics()" style="margin-bottom: 20px; padding: 12px 24px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--bg); border: none; border-radius: 12px; cursor: pointer; font-weight: 700; font-family: Inter, sans-serif;">Run Diagnostics</button>
-                <div id="diagnosticsResults"></div>
+            <!-- Games Tab -->
+            <div id="games" class="content">
+                <div class="section">
+                    <h2>🎮 Game Settings</h2>
+                    <div class="games-grid" id="gamesList"></div>
+                </div>
             </div>
-        </div>
 
-        <!-- Users -->
-        <div id="users" class="content">
-            <div class="section">
-                <h2>👥 User Management</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Balance</th>
-                            <th>Bank</th>
-                            <th>Games</th>
-                            <th>Wins</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersList"></tbody>
-                </table>
+            <!-- Admin Tab -->
+            <div id="admin" class="content">
+                <div class="section">
+                    <h2>👮 Admin Panel</h2>
+                    <div class="form-grid">
+                        <div>
+                            <label for="ownerID">Owner Discord ID</label>
+                            <input type="text" id="ownerID" onchange="autoSave('admin')" placeholder="User ID...">
+                        </div>
+                        <div>
+                            <label>House Profit</label>
+                            <input type="text" id="houseProfit" disabled placeholder="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagnostics Tab -->
+            <div id="diagnostics" class="content">
+                <div class="section">
+                    <h2>🔍 System Health</h2>
+                    <button class="btn" onclick="runDiagnostics()" style="margin-bottom: 20px;">Run Diagnostics</button>
+                    <div id="diagnosticsResults"></div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users" class="content">
+                <div class="section">
+                    <h2>👥 User Management</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Balance</th>
+                                <th>Bank</th>
+                                <th>Games</th>
+                                <th>Wins</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersList"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -655,7 +811,6 @@
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
-            
             if (tabName === 'games') loadGames();
             if (tabName === 'users') loadUsers();
             if (tabName === 'dashboard') loadDashboard();
@@ -663,26 +818,22 @@
 
         function updateAutosaveIndicator(state) {
             const indicator = document.getElementById('autosave');
-            indicator.className = 'autosave-indicator';
+            indicator.className = 'autosave';
             if (state === 'saving') {
-                indicator.className = 'autosave-indicator saving';
+                indicator.className = 'autosave saving';
                 indicator.textContent = 'Saving...';
             } else if (state === 'saved') {
-                indicator.className = 'autosave-indicator saved';
-                indicator.textContent = 'Saved';
-                setTimeout(() => {
-                    indicator.textContent = '';
-                }, 2000);
+                indicator.className = 'autosave';
+                indicator.textContent = '✓ Saved';
+                setTimeout(() => indicator.textContent = '', 1500);
             }
         }
 
         async function autoSave(type) {
             updateAutosaveIndicator('saving');
             clearTimeout(autoSaveTimeout);
-            
             try {
                 let payload = {};
-                
                 if (type === 'general') {
                     payload = {
                         dailyEnabled: document.getElementById('dailyEnabled').checked,
@@ -726,7 +877,6 @@
                     };
                     await fetch('/api/settings/admin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 }
-                
                 autoSaveTimeout = setTimeout(() => updateAutosaveIndicator('saved'), 300);
             } catch (error) {
                 console.error('Autosave error:', error);
@@ -737,7 +887,6 @@
             try {
                 const res = await fetch('/api/settings');
                 const data = await res.json();
-                
                 document.getElementById('dailyEnabled').checked = data.settings.dailyEnabled;
                 document.getElementById('dailyAmount').value = data.settings.dailyAmount || 1000;
                 document.getElementById('adminRole').value = data.settings.adminRoleId || '';
@@ -764,20 +913,17 @@
                 const data = await res.json();
                 const list = document.getElementById('gamesList');
                 list.innerHTML = '';
-                
                 for (const [name, settings] of Object.entries(data.gameSettings)) {
                     const card = document.createElement('div');
                     card.className = 'game-card';
                     card.innerHTML = `
                         <h3>${name}</h3>
-                        <div class="toggle" style="margin-bottom: 10px; font-size: 0.85em;">
+                        <div class="toggle-switch" style="margin-bottom: 10px;">
                             <input type="checkbox" ${settings.enabled ? 'checked' : ''}>
-                            <span style="color: var(--text-muted);">Enabled</span>
+                            <span style="font-size: 0.8em;">Enabled</span>
                         </div>
-                        <div style="font-size: 0.85em;">
-                            <input type="number" value="${settings.minBet}" placeholder="Min" style="margin-bottom: 6px;">
-                            <input type="number" value="${settings.maxBet}" placeholder="Max">
-                        </div>
+                        <input type="number" value="${settings.minBet}" placeholder="Min" style="margin-bottom: 6px;">
+                        <input type="number" value="${settings.maxBet}" placeholder="Max">
                     `;
                     list.appendChild(card);
                 }
@@ -809,27 +955,19 @@
 
         async function runDiagnostics() {
             const results = document.getElementById('diagnosticsResults');
-            results.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted);">Running diagnostics...</div>';
+            results.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">Running...</div>';
             try {
                 const res = await fetch('/api/diagnostics');
                 const data = await res.json();
                 results.innerHTML = '';
                 data.diagnostics.forEach(diag => {
                     const div = document.createElement('div');
-                    div.style.cssText = `background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, transparent); border-left: 4px solid; padding: 16px; margin-bottom: 12px; border-radius: 8px;`;
-                    if (diag.type === 'error') {
-                        div.style.borderLeftColor = 'var(--error)';
-                        div.style.background = 'linear-gradient(135deg, rgba(239,68,68,0.05) 0%, transparent)';
-                    } else if (diag.type === 'warning') {
-                        div.style.borderLeftColor = 'var(--warning)';
-                    } else {
-                        div.style.borderLeftColor = 'var(--success)';
-                    }
-                    div.innerHTML = `<strong style="color: var(--gold);">${diag.message}</strong><br><small style="color: var(--text-muted);">${diag.details}</small>`;
+                    div.className = `diagnostic-item ${diag.type}`;
+                    div.innerHTML = `<strong>${diag.message}</strong><br><small style="color: var(--text-secondary);">${diag.details}</small>`;
                     results.appendChild(div);
                 });
             } catch (error) {
-                results.innerHTML = '<div style="color: var(--error);">Error running diagnostics</div>';
+                results.innerHTML = '<div class="diagnostic-item error"><strong>Error:</strong> Failed to run</div>';
             }
         }
 
