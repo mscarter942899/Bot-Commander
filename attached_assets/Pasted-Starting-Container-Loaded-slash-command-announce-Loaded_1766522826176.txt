@@ -1,0 +1,122 @@
+Starting Container
+✅ Loaded slash command: announce
+✅ Loaded slash command: baccarat
+✅ Loaded slash command: balance
+✅ Loaded slash command: bigwins
+✅ Loaded slash command: blackjack
+✅ Loaded slash command: canceldeposit
+✅ Loaded slash command: cancelwithdraw
+✅ Loaded slash command: chuckluck
+✅ Loaded slash command: coinflip
+✅ Loaded slash command: confirmdeposit
+✅ Loaded slash command: crash
+✅ Loaded slash command: cups
+✅ Loaded slash command: daily
+✅ Loaded slash command: debug
+✅ Loaded slash command: deposit
+✅ Loaded slash command: dice
+✅ Loaded slash command: addgems
+✅ Loaded slash command: doubleornothing
+✅ Loaded slash command: admin
+✅ Loaded slash command: dragontiger
+✅ Loaded slash command: fantan
+✅ Loaded slash command: funevent
+✅ Loaded slash command: gift
+✅ Loaded slash command: help
+✅ Loaded slash command: highlow
+✅ Loaded slash command: hilostreak
+✅ Loaded slash command: numberguess
+✅ Loaded slash command: paigow
+✅ Loaded slash command: pendingtransactions
+✅ Loaded slash command: plinko
+✅ Loaded slash command: poker
+✅ Loaded slash command: processwithdraw
+✅ Loaded slash command: profile
+✅ Loaded slash command: raffle
+✅ Loaded slash command: reddog
+✅ Loaded slash command: removegems
+✅ Loaded slash command: requestdeposit
+✅ Loaded slash command: horserace
+✅ Loaded slash command: houseprofit
+✅ Loaded slash command: interest
+✅ Loaded slash command: inventory
+✅ Loaded slash command: inviterewards
+✅ Loaded slash command: invites
+✅ Loaded slash command: itemraffle
+✅ Loaded slash command: jackpot
+✅ Loaded slash command: keno
+✅ Loaded slash command: limbo
+✅ Loaded slash command: link
+✅ Loaded slash command: lottery
+✅ Loaded slash command: luckybox
+✅ Loaded slash command: mines
+✅ Loaded slash command: mypending
+✅ Loaded slash command: withdraw
+✅ Loaded prefix command: balance
+✅ Loaded slash command: fruitslots
+✅ Loaded slash command: toggledaily
+✅ Loaded slash command: top
+✅ Loaded slash command: tower
+✅ Loaded slash command: transactionhistory
+✅ Loaded slash command: videopoker
+✅ Loaded slash command: war
+✅ Loaded slash command: wheel
+✅ Loaded slash command: wheeloffortune
+✅ Loaded slash command: requestwithdraw
+✅ Loaded slash command: robloxinfo
+✅ Loaded slash command: rps
+✅ Loaded slash command: roulette
+✅ Loaded slash command: russianroulette
+✅ Loaded slash command: scratcher
+✅ Loaded slash command: serverboost
+✅ Loaded slash command: setadminrole
+✅ Loaded slash command: setdepositchannel
+✅ Loaded slash command: setlogs
+✅ Loaded slash command: setrtp
+✅ Loaded slash command: setwithdrawchannel
+✅ Loaded slash command: shop
+✅ Loaded slash command: sicbo
+✅ Loaded slash command: slots
+✅ Loaded prefix command: blackjack
+✅ Loaded prefix command: coinflip
+✅ Loaded prefix command: daily
+✅ Loaded prefix command: deposit
+✅ Loaded prefix command: dice
+✅ Loaded prefix command: gift
+✅ Loaded prefix command: help
+✅ Loaded prefix command: highlow
+✅ Loaded prefix command: inventory
+✅ Loaded prefix command: poker
+✅ Loaded prefix command: profile
+✅ Loaded prefix command: raffle
+✅ Loaded prefix command: roulette
+✅ Loaded prefix command: shop
+✅ Loaded prefix command: slots
+✅ Loaded prefix command: top
+✅ Loaded prefix command: war
+✅ Loaded prefix command: withdraw
+✅ Loaded button: baccarat
+✅ Loaded button: bj
+✅ Loaded button: coinflip
+✅ Loaded button: crash
+✅ Loaded button: cups
+✅ Loaded button: dice
+✅ Loaded button: hl
+✅ Loaded button: inventory
+✅ Loaded button: itemraffle
+✅ Loaded button: mines
+✅ Loaded button: poker
+✅ Loaded button: raffle
+  syscall: 'open',
+✅ Loaded button: roulette
+    at saveUptimeData (/app/utils/uptime.js:21:12)
+✅ Loaded button: rps
+✅ Loaded event: ready
+✅ Loaded button: rr
+🔄 Self-ping loop started (every 4 minutes)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {
+    at Server.<anonymous> (/app/utils/uptime.js:49:9)
+✅ Loaded button: shop
+🌐 Uptime server running on port 8080
+✅ Loaded button: slots
+  errno: -2,
